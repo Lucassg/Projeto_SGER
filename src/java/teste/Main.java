@@ -2,113 +2,110 @@ package teste;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.maps.DistanceMatrixApi;
-import com.google.maps.GeoApiContext;
-import com.google.maps.model.DistanceMatrix;
-import com.google.maps.model.Unit;
-import dao.DaoPedido;
-import dao.DaoSger;
+import com.google.gson.JsonElement;
+import dao.DaoFuncionario;
+import dao.DaoRelatorio;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.Writer;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
+import model.Funcionario;
 import model.Pedido;
-import model.RotaTemp;
-import model.Sger;
 
 public class Main {
 
-    public static long consulta_maps(GeoApiContext geoApiContext, String origem, String destinos) {
+    static class pedidosEntregues{
+        private String mes;
+        private Long quantidade;
 
-        try {
-            DistanceMatrix distanceMatrix = DistanceMatrixApi.newRequest(geoApiContext)
-                    .origins(origem)
-                    .destinations(destinos)
-                    .units(Unit.METRIC)
-                    .await();
+        /**
+         * @return the mes
+         */
+        public String getMes() {
+            return mes;
+        }
 
-            return distanceMatrix.rows[0].elements[0].duration.inSeconds;
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        /**
+         * @param mes the mes to set
+         */
+        public void setMes(String mes) {
+            this.mes = mes;
+        }
+
+        /**
+         * @return the quantidade
+         */
+        public Long getQuantidade() {
+            return quantidade;
+        }
+
+        /**
+         * @param quantidade the quantidade to set
+         */
+        public void setQuantidade(Long quantidade) {
+            this.quantidade = quantidade;
         }
     }
 
     public static void main(String[] args) throws Exception {
 
-        DaoPedido acessohibernatepedido;
-        acessohibernatepedido = new DaoPedido();
-        DaoSger acessohibernatesger = new DaoSger();
-        Sger sger = new Sger();
-        List<RotaTemp> ListaRotas = new ArrayList<>();
+        DaoRelatorio acessohibernaterelatorio = new DaoRelatorio();
+        DaoFuncionario acessohibernatefuncionario = new DaoFuncionario();
+        Date datainicio = new Date();
+        Date datafinal = new Date();
+        String data = "2017-01-01 00:00:00";
+        String data1 = "2017-03-01 00:00:00";
 
-        List<Pedido> ListaPedidos;
-        ListaPedidos = (List<Pedido>) acessohibernatepedido.carregarPedidosAguardandoEntrega(Pedido.class);
-        sger = (Sger) acessohibernatesger.carregaSger();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat mes = new SimpleDateFormat("MMMMM");
+        datainicio = fmt.parse(data);
+        datafinal = fmt.parse(data1);
 
-        try (Writer writer = new FileWriter("./web/JSON/teste.json")) {
-            Gson gson = new GsonBuilder().create();
-            gson.toJson(ListaPedidos, writer);
+        //datainicio = (Date) data;
+        List<Pedido> ListaRelatorio = new ArrayList<>();
+        List<Funcionario> ListaEntregador = new ArrayList<>();
+        ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosEntregues(Pedido.class, datainicio, datafinal);
+        ListaEntregador = (List<Funcionario>) acessohibernatefuncionario.consultaEntregador();
+
+//        ListaRelatorio.forEach(a -> System.out.println("Id: " + a.getId() + ", Data pedido: " + fmt.format(a.getData_hora_pedido())));
+//        ListaRelatorio.forEach(a -> System.out.println("Id: " + a.getId() + ", Mes pedido: " + mes.format(a.getData_hora_pedido())));
+        ListaEntregador.forEach(a -> System.out.println("Id: " + a.getId() + ", Nome: " + a.getNome()));
+
+        List<String> ListaMeses = new ArrayList<>();
+
+        ListaRelatorio.forEach(l -> ListaMeses.add(mes.format(l.getData_hora_pedido())));
+
+        Map<String, Long> counts = ListaMeses.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+
+//        System.out.println("counts" + counts);
+
+        Main.pedidosEntregues PedidosEntregues = new Main.pedidosEntregues();
+        List<Main.pedidosEntregues> ListaPedidosEntregues;
+        ListaPedidosEntregues = new ArrayList<>();
+        
+        for(Map.Entry<String, Long> count : counts.entrySet()){
+            PedidosEntregues.setMes(count.getKey());
+            PedidosEntregues.setQuantidade(count.getValue());
+            ListaPedidosEntregues.add(PedidosEntregues);
+            PedidosEntregues = new pedidosEntregues();
+        }
+
+        Gson gson = new Gson();
+        JsonElement json = gson.fromJson(new FileReader("./web/Relatorio/relatorio.json"), JsonElement.class);
+        String result = gson.toJson(json);
+
+//        System.out.println(result);
+
+        try (Writer writer = new FileWriter("./web/Relatorio/counts.json")) {
+            gson = new GsonBuilder().create();
+            gson.toJson(ListaPedidosEntregues, writer);
             System.out.println("Arquivo JSON criado com sucesso.");
         }
-
-        GeoApiContext geoApiContext = new GeoApiContext().setApiKey("AIzaSyBNPdACkvr_g58Dy19fyguF14u5ZExDIyM");
-
-        int a = 1;
-        for (int i = 0; i < ListaPedidos.size(); i++) {
-            for (int k = i + 1; k < ListaPedidos.size(); k++) {
-
-                RotaTemp ParEnderecos = new RotaTemp();
-
-//                ParEnderecos.setId(a);
-//                ParEnderecos.setPedido1(ListaPedidos.get(i).getId());
-//                ParEnderecos.setPedido2(ListaPedidos.get(k).getId());
-//                ParEnderecos.setEnd1(ListaPedidos.get(i).getCliente().enderecoToString());
-//                ParEnderecos.setEnd2(ListaPedidos.get(k).getCliente().enderecoToString());
-//                ParEnderecos.setDistancia(consulta_maps(geoApiContext, ListaPedidos.get(i).getCliente().enderecoToString(), ListaPedidos.get(k).getCliente().enderecoToString()));
-
-                ListaRotas.add(ParEnderecos);
-
-                a++;
-            }
-        }
-
-        try (Writer writer = new FileWriter("./web/JSON/teste.json")) {
-            Gson gson = new GsonBuilder().create();
-            gson.toJson(ListaRotas, writer);
-            System.out.println("Arquivo JSON criado com sucesso.");
-        }
-
-        long[][] matriz = new long[ListaPedidos.size()][ListaPedidos.size()];
-        int linha, coluna, in = 0;
-        
-        for (linha = 0; linha < ListaPedidos.size(); linha++) {
-            for (coluna = 0; coluna < ListaPedidos.size(); coluna++) {
-                matriz[linha][coluna] = -1;
-            }
-        }
-        
-        for (linha = 0; linha < ListaPedidos.size(); linha++) {
-            for (coluna = 0; coluna < ListaPedidos.size(); coluna++) {
-                if (linha == coluna) {
-                    matriz[linha][coluna] = 0;
-                } else {
-                    if (matriz[linha][coluna] == -1) {
-                        matriz[linha][coluna] = ListaRotas.get(in).getDistancia();
-                        matriz[coluna][linha] = ListaRotas.get(in).getDistancia();
-                        in++;
-                    }
-                }
-            }
-        }
-
-        for (linha = 0; linha < ListaPedidos.size(); linha++) {
-            for (coluna = 0; coluna < ListaPedidos.size(); coluna++) {
-                System.out.printf("\t %d \t", matriz[linha][coluna]);
-            }
-            System.out.println("\n");
-        }
-        System.out.println("teste");
-        System.out.println("size: " + ListaRotas.size());
         System.exit(0);
     }
 }
