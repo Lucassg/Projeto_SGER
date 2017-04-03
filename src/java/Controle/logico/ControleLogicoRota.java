@@ -519,14 +519,13 @@ public class ControleLogicoRota implements ControleLogico {
             ListaRota = new ArrayList<>();
         }
 
-        for (int i = 0; i < ListaRotaFinal.size(); i++) {
-            try (Writer writer = new FileWriter("./web/JSON/listarotafinal" + i + ".json")) {
-                Gson gson = new GsonBuilder().create();
-                gson.toJson(ListaRotaFinal.get(i), writer);
-                System.out.println("Arquivo JSON criado com sucesso.");
-            }
-        }
-        System.exit(0);
+//        for (int i = 0; i < ListaRotaFinal.size(); i++) {
+//            try (Writer writer = new FileWriter("./web/JSON/listarotafinal" + i + ".json")) {
+//                Gson gson = new GsonBuilder().create();
+//                gson.toJson(ListaRotaFinal.get(i), writer);
+//                System.out.println("Arquivo JSON criado com sucesso.");
+//            }
+//        }
         // colocando a lista na sessão
         request.getSession().setAttribute("ListaRotaFinal", ListaRotaFinal);
         entregador_rota(ListaRotaFinal.size(), request, response);
@@ -537,18 +536,18 @@ public class ControleLogicoRota implements ControleLogico {
         List<List<Pedido>> ListaRotaFinal;
         ListaRotaFinal = (List<List<Pedido>>) request.getSession().getAttribute("ListaRotaFinal");
 
-        for (Integer i = 1; i <= ListaRotaFinal.size(); i++) {
-            entregadorRota = String.valueOf(i);
+        for (Integer i = 0; i <= ListaRotaFinal.size() - 1; i++) {
+            entregadorRota = String.valueOf(i + 1);
             if (request.getParameter(entregadorRota) != null) {
                 this.funcionario = (Funcionario) acessohibernatefuncionario.consultaEntregador(request.getParameter(entregadorRota), Funcionario.class);
                 this.rota.setFuncionario(this.funcionario);
                 this.rota.setStatus("Rota Gerada");
                 this.rota.setData_hora_rota((java.util.Date) new Date());
                 this.rota = (Rota) acessohibernaterota.gravarRota(this.rota);
+                
+                for (Integer k = 0; k <= ListaRotaFinal.get(i).size() - 1; k++) {
 
-                for (Integer k = 0; k <= ListaRotaFinal.size(); k++) {
-
-                    this.pedido = ListaRotaFinal.get(i - 1).get(k);
+                    this.pedido = ListaRotaFinal.get(i).get(k);
                     this.pedido.setStatus("Entrega em Andamento");
                     this.pedido.setRota(this.rota);
                     acessohibernatepedido.alterar(this.pedido);
