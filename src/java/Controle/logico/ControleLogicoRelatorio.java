@@ -46,7 +46,7 @@ public class ControleLogicoRelatorio implements ControleLogico {
         Date datafinal = new Date();
         String data = "01/01/2017";
         String data1 = "01/03/2017";
-
+ 
         //datainicio = (Date) data;
         List<Pedido> ListaRelatorio = new ArrayList<>();
         //ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosEntregues(Pedido.class, data, data1);

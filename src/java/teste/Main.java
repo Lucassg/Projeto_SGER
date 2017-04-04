@@ -6,7 +6,7 @@ import com.google.gson.JsonElement;
 import dao.DaoFuncionario;
 import dao.DaoRelatorio;
 import java.io.FileReader;
-import java.io.FileWriter;
+import java.io.FileWriter; 
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

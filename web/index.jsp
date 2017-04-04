@@ -12,7 +12,7 @@
             </ul>
             <ul class="nav nav-sidebar">
                 <li><a href="Controle?classe=ControleLogicoCliente&acao=listar_cliente">CLIENTES</a></li>
-            </ul>
+            </ul> 
             <ul class="nav nav-sidebar">
                 <li><a href="Controle?classe=ControleLogicoRota&acao=listar_pedido_entregar">ENTREGAS</a></li>
             </ul>
