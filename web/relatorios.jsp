@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="CSSProjeto/jquery.datetimepicker.css">
 
 <div class="container-fluid">
     <div class="row">
@@ -48,16 +49,20 @@
                         <br>
                         <br>
                         <div id="data" style="display: none;">
-                            <p >Data Inicial: <input type="text" id="datainicial"/></p>
-                            <p >Data Final: <input type="text" id="datafinal"/></p>
+                            <form name="datas" action="Controle?classe=ControleLogicoRelatorio&acao=gera_relatorio" method="POST">
+                                <p >Data Inicial: <input type="text" id="datainicial" name="datainicial"/></p>
+                                <p >Data Final: <input type="text" id="datafinal" name="datafinal"/></p>
+                                &nbsp; <a href="#"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
+                            </form>
                         </div>
 
                         <div id="entregadores" style="display: none;">
-                            <select>
+                            <select name="nomeEntregador">
                                 <c:forEach items="${ListaEntregadores}" var="Entregador">
                                     <option>${Entregador.nome}</option>
                                 </c:forEach>
                             </select>
+                            &nbsp; <a href="Controle?classe=ControleLogicoRelatorio&acao=relatorio_entregador&id=${Entregador.id}"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
                         </div>
                     </div>
                     </tr>
@@ -71,6 +76,8 @@
 </div>
 <script type="text/javascript" src="JSProjeto/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="JSProjeto/jquery-ui.min.js"></script>
+<script type="text/javascript" src="JSProjeto/jquery.datetimepicker.min.js"></script>
+<script type="text/javascript" src="JSProjeto/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="JSProjeto/relatorios.js"></script>
 </body>

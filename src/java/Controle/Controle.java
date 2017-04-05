@@ -1,7 +1,9 @@
 package Controle;
 
 import Controle.logico.*;
+import java.io.File;
 import java.io.IOException;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -21,16 +23,16 @@ public class Controle extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            
+
             Class classe = Class.forName("Controle.logico." + request.getParameter("classe"));
-            
+
             ControleLogico controle = (ControleLogico) classe.newInstance();
-           
+
             controle.executar(request, response);
-            
+
         } catch (Exception ex) {
             log(ex.getMessage());
-        } 
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

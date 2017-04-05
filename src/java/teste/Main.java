@@ -66,23 +66,15 @@ public class Main {
         datainicio = fmt.parse(data);
         datafinal = fmt.parse(data1);
 
-        //datainicio = (Date) data;
         List<Pedido> ListaRelatorio = new ArrayList<>();
         List<Funcionario> ListaEntregador = new ArrayList<>();
         ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosEntregues(Pedido.class, datainicio, datafinal);
-        ListaEntregador = (List<Funcionario>) acessohibernatefuncionario.consultaEntregador();
-
-//        ListaRelatorio.forEach(a -> System.out.println("Id: " + a.getId() + ", Data pedido: " + fmt.format(a.getData_hora_pedido())));
-//        ListaRelatorio.forEach(a -> System.out.println("Id: " + a.getId() + ", Mes pedido: " + mes.format(a.getData_hora_pedido())));
-        ListaEntregador.forEach(a -> System.out.println("Id: " + a.getId() + ", Nome: " + a.getNome()));
+        ListaEntregador = (List<Funcionario>) acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
 
         List<String> ListaMeses = new ArrayList<>();
 
         ListaRelatorio.forEach(l -> ListaMeses.add(mes.format(l.getData_hora_pedido())));
-
         Map<String, Long> counts = ListaMeses.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-
-//        System.out.println("counts" + counts);
 
         Main.pedidosEntregues PedidosEntregues = new Main.pedidosEntregues();
         List<Main.pedidosEntregues> ListaPedidosEntregues;
@@ -96,10 +88,6 @@ public class Main {
         }
 
         Gson gson = new Gson();
-        JsonElement json = gson.fromJson(new FileReader("./web/Relatorio/relatorio.json"), JsonElement.class);
-        String result = gson.toJson(json);
-
-//        System.out.println(result);
 
         try (Writer writer = new FileWriter("./web/Relatorio/counts.json")) {
             gson = new GsonBuilder().create();

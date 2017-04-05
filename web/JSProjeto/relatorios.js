@@ -22,7 +22,6 @@ function drawChart() {
         title: 'Entregas (30 min)'
     };
 
-    // Instantiate and draw the chart.
     var chart = new google.visualization.ColumnChart(document.getElementById('container'));
     chart.draw(data, options);
 }
@@ -45,22 +44,149 @@ function pedidosJSON() {
     return arrayJSON;
 }
 
-$(function () {
-    $("#datainicial").datepicker();
+$('#datainicial').datetimepicker({
+    inline: true,
+    lang: 'pt-BR',
+
+    format: 'Y-m-d H:i:s',
+
+    startDate: false, // new Date(), '1986/12/08', '-1970/01/05','-1970/01/05', 
+
+    step: 60,
+    monthChangeSpinner: true,
+    closeOnDateSelect: false,
+    closeOnWithoutClick: true,
+    closeOnInputClick: true,
+
+    timepicker: true,
+    datepicker: true,
+
+    defaultTime: false, // use formatTime format (ex. '10:00' for formatTime:	'H:i')
+    defaultDate: false, // use formatDate format (ex new Date() or '1986/12/08' or '-1970/01/05' or '-1970/01/05')
+
+    minDate: false,
+    maxDate: false,
+    minTime: false,
+    maxTime: false,
+
+    opened: false,
+    initTime: true,
+    inline: false,
+
+    withoutCopyright: true,
+
+    inverseButton: false,
+    hours12: false,
+    next: 'xdsoft_next',
+    prev: 'xdsoft_prev',
+    dayOfWeekStart: 0,
+
+    timeHeightInTimePicker: 25,
+
+    todayButton: true, // 2.1.0
+    defaultSelect: true, // 2.1.0
+
+    scrollMonth: true,
+    scrollTime: true,
+    scrollInput: true,
+
+    lazyInit: false,
+
+    mask: false,
+    validateOnBlur: true,
+    allowBlank: true,
+
+    yearStart: 1950,
+    yearEnd: 2050,
+
+    style: '',
+    id: '',
+
+    fixed: false,
+
+    roundTime: 'ceil', // ceil, floor
+    className: '',
+
+    yearOffset: 0,
+    beforeShowDay: null
 });
-$(function () {
-    $("#datafinal").datepicker();
+
+$('#datafinal').datetimepicker({
+    inline: true,
+    lang: 'pt-BR',
+
+    format: 'Y-m-d H:i:s',
+
+    startDate: false, // new Date(), '1986/12/08', '-1970/01/05','-1970/01/05', 
+
+    step: 60,
+    monthChangeSpinner: true,
+    closeOnDateSelect: false,
+    closeOnWithoutClick: true,
+    closeOnInputClick: true,
+
+    timepicker: true,
+    datepicker: true,
+
+    defaultTime: false, // use formatTime format (ex. '10:00' for formatTime:	'H:i')
+    defaultDate: false, // use formatDate format (ex new Date() or '1986/12/08' or '-1970/01/05' or '-1970/01/05')
+
+    minDate: false,
+    maxDate: false,
+    minTime: false,
+    maxTime: false,
+
+    opened: false,
+    initTime: true,
+    inline: false,
+
+    withoutCopyright: true,
+
+    inverseButton: false,
+    hours12: false,
+    next: 'xdsoft_next',
+    prev: 'xdsoft_prev',
+    dayOfWeekStart: 0,
+
+    timeHeightInTimePicker: 25,
+
+    todayButton: true, // 2.1.0
+    defaultSelect: true, // 2.1.0
+
+    scrollMonth: true,
+    scrollTime: true,
+    scrollInput: true,
+
+    lazyInit: false,
+
+    mask: false,
+    validateOnBlur: true,
+    allowBlank: true,
+
+    yearStart: 1950,
+    yearEnd: 2050,
+
+    style: '',
+    id: '',
+
+    fixed: false,
+
+    roundTime: 'ceil', // ceil, floor
+    className: '',
+
+    yearOffset: 0,
+    beforeShowDay: null
 });
 
 $(document).ready(function () {
     $('#tiposrelatorios').change(function () {
-        
+
         if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues' || $('#tiposrelatorios').val() == 'Pedidos Entregues') {
             $('#data').show();
         } else {
             $('#data').hide();
         }
-        
+
         if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador') {
             $('#entregadores').show();
         } else {

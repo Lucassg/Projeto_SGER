@@ -19,6 +19,7 @@ import dao.DaoItens_Pedido;
 import dao.DaoPedido_Rota;
 import dao.DaoRota;
 import dao.DaoSger;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
 import java.text.Normalizer;
@@ -26,6 +27,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import javax.servlet.http.HttpServlet;
 import model.Funcionario;
 import model.Pedido_Rota;
 import model.Rota;
@@ -544,7 +546,7 @@ public class ControleLogicoRota implements ControleLogico {
                 this.rota.setStatus("Rota Gerada");
                 this.rota.setData_hora_rota((java.util.Date) new Date());
                 this.rota = (Rota) acessohibernaterota.gravarRota(this.rota);
-                
+
                 for (Integer k = 0; k <= ListaRotaFinal.get(i).size() - 1; k++) {
 
                     this.pedido = ListaRotaFinal.get(i).get(k);
@@ -579,12 +581,31 @@ public class ControleLogicoRota implements ControleLogico {
         request.getRequestDispatcher("rota_pedidos_gerados").forward(request, response);
     }
 
+    public class PathServlet extends HttpServlet {
+
+        public String getPath() {
+            return getServletContext().getContextPath();
+        }
+    }
+
     public void cria_json_rota(List<Pedido_Rota> PedidosRota) throws IOException {
         ArrayList<String> enderecos = new ArrayList<>();
 
         for (int k = 0; k < PedidosRota.size(); k++) {
             enderecos.add(removerAcentos(PedidosRota.get(k).getPedido().getCliente().enderecoToString()));
         }
+//        PathServlet pathserv = new PathServlet();
+//        String path = pathserv.getPath();
+//        
+//        System.out.println("path: " + path);
+        
+//        try {
+//            System.out.println("/  -> " + new File("/").getCanonicalPath());
+//            System.out.println(".. -> " + new File("..").getCanonicalPath());
+//            System.out.println(".  -> " + new File(".").getCanonicalPath());
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
 
         try (Writer writer = new FileWriter("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\enderecos_multiplos_pontos.json")) {
             Gson gson = new GsonBuilder().create();
@@ -596,7 +617,9 @@ public class ControleLogicoRota implements ControleLogico {
     public void entregador_rota(int qtderotas, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Funcionario> ListaEntregares;
-        ListaEntregares = acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
+        ListaEntregares
+                = acessohibernatefuncionario.consultaEntregadores(Funcionario.class
+                );
 
         request.getServletContext().setAttribute("ListaEntregares", ListaEntregares);
         request.getServletContext().setAttribute("qtderotas", qtderotas);
@@ -606,10 +629,14 @@ public class ControleLogicoRota implements ControleLogico {
 
     public void rota_andamento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pedido> PedidosRota;
-        this.rota = (Rota) acessohibernaterota.carregarUm(Integer.parseInt(request.getParameter("rota")), Rota.class);
+
+        this.rota = (Rota) acessohibernaterota.carregarUm(Integer.parseInt(request.getParameter("rota")), Rota.class
+        );
         this.rota.setStatus("Rota em Andamento");
         acessohibernaterota.alterar(this.rota);
-        PedidosRota = acessohibernatepedido.carregarPedidosRotas(this.rota, Pedido.class);
+        PedidosRota
+                = acessohibernatepedido.carregarPedidosRotas(this.rota, Pedido.class
+                );
         for (Pedido pedido : PedidosRota) {
 
             pedido.setStatus("Entrega em Andamento");
@@ -620,6 +647,7 @@ public class ControleLogicoRota implements ControleLogico {
 
     public static String removerAcentos(String str) {
         return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+
     }
 
     public class comparadorInicio implements Comparator<RotaInicial> {

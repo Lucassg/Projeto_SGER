@@ -39,7 +39,7 @@ public class DaoFuncionario extends DaoGenerico {
     public List consultaEntregadores(Class clas) throws HibernateException {
         Session session = hibernateConfiguracao.openSession();
         Criteria criteria = session.createCriteria(clas);
-        criteria.add(Restrictions.eq("funcao", "entregador"));
+        criteria.add(Restrictions.and(Restrictions.eq("funcao", "Entregador"), Restrictions.eq("ativo", "sim")));
         List lista = criteria.list();
         session.close();
         return lista;
@@ -54,14 +54,5 @@ public class DaoFuncionario extends DaoGenerico {
         transaction.commit();
         session.close();
         return obj;
-    }
-
-    public List consultaEntregador() throws HibernateException {
-        Session session = hibernateConfiguracao.openSession();
-        Criteria criteria = session.createCriteria(Funcionario.class);
-        criteria.add(Restrictions.and(Restrictions.eq("funcao", "Entregador"), Restrictions.eq("ativo", "sim")));
-        List lista = criteria.list();
-        session.close();
-        return lista;
     }
 }

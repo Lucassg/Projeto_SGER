@@ -1,6 +1,7 @@
 package dao;
 
 import java.util.List;
+import model.Funcionario;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -29,4 +30,15 @@ public class DaoRota extends DaoGenerico {
         session.close();
         return lista;
     }    
+    
+    public List consultaRotaEntregador(Class clas, Funcionario funcionario) throws HibernateException {
+        Session session = hibernateConfiguracao.openSession();
+        Criteria criteria = session.createCriteria(clas);
+        criteria.add(Restrictions.eq("funcionario_id", funcionario));
+        List lista = criteria.list();
+        session.close();
+        return lista;
+    }    
+    
+    
 }

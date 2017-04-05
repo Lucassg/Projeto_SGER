@@ -1,26 +1,39 @@
 package Controle.logico;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import dao.DaoFuncionario;
 import dao.DaoRelatorio;
+import dao.DaoRota;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Writer;
+import static java.lang.Integer.parseInt;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Funcionario;
 import model.Pedido;
+import model.Rota;
 
 public class ControleLogicoRelatorio implements ControleLogico {
 
     DaoRelatorio acessohibernaterelatorio;
     DaoFuncionario acessohibernatefuncionario;
-    
+    DaoRota acessohibernaterota;
+    Funcionario funcionario;
+
     public ControleLogicoRelatorio() {
 
         acessohibernaterelatorio = new DaoRelatorio();
         acessohibernatefuncionario = new DaoFuncionario();
+        funcionario = new Funcionario();
     }
 
     @Override
@@ -29,11 +42,14 @@ public class ControleLogicoRelatorio implements ControleLogico {
         String acao = request.getParameter("acao");
 
         switch (acao) {
-            case "listar_pedido_entregar":
+            case "gera_relatorio":
                 gera_relatorio(request, response);
                 break;
             case "consulta_entregador":
-                consulta_entregador(request,response);
+                consulta_entregador(request, response);
+                break;
+            case "relatorio_entregador":
+                relatorio_entregador(request, response);
                 break;
             default:
                 break;
@@ -44,20 +60,106 @@ public class ControleLogicoRelatorio implements ControleLogico {
 
         Date datainicio = new Date();
         Date datafinal = new Date();
-        String data = "01/01/2017";
-        String data1 = "01/03/2017";
- 
-        //datainicio = (Date) data;
+        String data_inicial = request.getParameter("datainicial");
+        String data_final = request.getParameter("datafinal");
+        
+
+        //  SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat mes = new SimpleDateFormat("MMMMM");
+        
+//        try {
+//            datainicio = fmt.parse(data_inicial);
+//            datafinal = fmt.parse(data_final);
+//        } catch (ParseException ex) {
+//            Logger.getLogger(ControleLogicoRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+        
+        System.out.println("data inicial: " + data_inicial);
+        System.out.println("data final: " + data_final);
+
         List<Pedido> ListaRelatorio = new ArrayList<>();
-        //ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosEntregues(Pedido.class, data, data1);
+        List<Funcionario> ListaEntregador = new ArrayList<>();
+        ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosEntregues(Pedido.class, datainicio, datafinal);
+        ListaEntregador = (List<Funcionario>) acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
+
+        List<String> ListaMeses = new ArrayList<>();
+
+        ListaRelatorio.forEach(l -> ListaMeses.add(mes.format(l.getData_hora_pedido())));
+        Map<String, Long> counts = ListaMeses.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+
+        ControleLogicoRelatorio.pedidosEntregues PedidosEntregues = new ControleLogicoRelatorio.pedidosEntregues();
+        List<ControleLogicoRelatorio.pedidosEntregues> ListaPedidosEntregues;
+        ListaPedidosEntregues = new ArrayList<>();
+
+        for (Map.Entry<String, Long> count : counts.entrySet()) {
+            PedidosEntregues.setMes(count.getKey());
+            PedidosEntregues.setQuantidade(count.getValue());
+            ListaPedidosEntregues.add(PedidosEntregues);
+            PedidosEntregues = new ControleLogicoRelatorio.pedidosEntregues();
+        }
+
+        Gson gson = new Gson();
+
+        try (Writer writer = new FileWriter("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts.json")) {
+            gson = new GsonBuilder().create();
+            gson.toJson(ListaPedidosEntregues, writer);
+            System.out.println("Arquivo JSON criado com sucesso.");
+        }
+        
+                request.getRequestDispatcher("relatorios").forward(request, response);
     }
 
     public void consulta_entregador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Funcionario> ListaEntregadores;
-        ListaEntregadores = (List<Funcionario>) acessohibernatefuncionario.consultaEntregador();
+        ListaEntregadores = (List<Funcionario>) acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
         request.setAttribute("ListaEntregadores", ListaEntregadores);
         request.getRequestDispatcher("relatorios").forward(request, response);
+    }
+
+    public void relatorio_entregador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        int id = parseInt(request.getParameter("id"));
+        this.funcionario = (Funcionario) acessohibernatefuncionario.carregarUm(id, Funcionario.class);
+        List<Rota> ListaRotas = acessohibernaterota.consultaRotaEntregador(Rota.class, funcionario);
+        
+        ListaRotas.forEach(l -> System.out.println("Rota id: " + l.getId() + "Ent nome: " + l.getFuncionario().getNome()));
+        //request.setAttribute("ListaEntregadores", ListaEntregadores);
+        //request.getRequestDispatcher("relatorios").forward(request, response);
+    }
+
+
+    static class pedidosEntregues {
+
+        private String mes;
+        private Long quantidade;
+
+        /**
+         * @return the mes
+         */
+        public String getMes() {
+            return mes;
+        }
+
+        /**
+         * @param mes the mes to set
+         */
+        public void setMes(String mes) {
+            this.mes = mes;
+        }
+
+        /**
+         * @return the quantidade
+         */
+        public Long getQuantidade() {
+            return quantidade;
+        }
+
+        /**
+         * @param quantidade the quantidade to set
+         */
+        public void setQuantidade(Long quantidade) {
+            this.quantidade = quantidade;
+        }
     }
 
 }
