@@ -41,8 +41,8 @@ public class DaoPedido extends DaoGenerico {
 
     public List carregaItensPedido(Pedido pedido, Class clas) throws HibernateException {
         Session session = hibernateConfiguracao.openSession();
-        Criteria criteria = session.createCriteria(clas);
-        criteria.add(Restrictions.eq("pedido_id", pedido));
+        Criteria criteria = session.createCriteria(clas); //itens_pedido
+        criteria.add(Restrictions.eq("pedido_id", pedido)); 
         List lista = criteria.list();
         session.close();
         return lista;

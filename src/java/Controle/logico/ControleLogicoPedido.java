@@ -25,12 +25,13 @@ public class ControleLogicoPedido implements ControleLogico {
 
     public ControleLogicoPedido() {
 
-        acessohibernatecliente = new DaoCliente();
-        acessohibernatepedido = new DaoPedido();
-        acessohibernateproduto = new DaoProduto();
+        acessohibernatecliente      = new DaoCliente();
+        acessohibernatepedido       = new DaoPedido();
+        acessohibernateproduto      = new DaoProduto();
         acessohibernateitens_pedido = new DaoItens_Pedido();
-        item_pedido = new Itens_Pedido();
-        pedido = new Pedido();
+        item_pedido                 = new Itens_Pedido();
+        pedido                      = new Pedido();
+        cliente                     = new Cliente();
     }
 
     @Override
@@ -85,9 +86,9 @@ public class ControleLogicoPedido implements ControleLogico {
         String busca;
         busca = request.getParameter("pesquisa");
 
-        cliente = (Cliente) acessohibernatecliente.verificaUmCliente(busca, Cliente.class);
+        this.cliente = (Cliente) acessohibernatecliente.verificaUmCliente(busca, Cliente.class);
 
-        request.setAttribute("cliente", cliente);
+        request.setAttribute("cliente", this.cliente);
         request.getRequestDispatcher("pedidos_cadastro").forward(request, response);
     }
 
@@ -102,27 +103,24 @@ public class ControleLogicoPedido implements ControleLogico {
 
     public void verifcar_cadastrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        Cliente cliente = new Cliente();
+        this.cliente.setId(Integer.parseInt(request.getParameter("id")));
+        this.cliente.setNome(request.getParameter("nome"));
+        this.cliente.setCpf(request.getParameter("cpf"));
+        this.cliente.setCelular(request.getParameter("celular"));
+        this.cliente.setTelefone(request.getParameter("telefone"));
+        this.cliente.setEmail(request.getParameter("email"));
+        this.cliente.setRua(request.getParameter("rua"));
+        this.cliente.setNumero(request.getParameter("numero"));
+        this.cliente.setBairro(request.getParameter("bairro"));
+        this.cliente.setPonto_ref(request.getParameter("pontoref"));
+        this.cliente.setCidade(request.getParameter("cidade"));
+        this.cliente.setUf(request.getParameter("uf"));
+        this.cliente.setCep(request.getParameter("cep"));
+        this.cliente.setData_atualizacao((java.util.Date) new Date());
+        this.cliente.setAtivo("sim");
 
-        cliente.setId(Integer.parseInt(request.getParameter("id")));
-        cliente.setNome(request.getParameter("nome"));
-        cliente.setCpf(request.getParameter("cpf"));
-        cliente.setCelular(request.getParameter("celular"));
-        cliente.setTelefone(request.getParameter("telefone"));
-        cliente.setEmail(request.getParameter("email"));
-        cliente.setRua(request.getParameter("rua"));
-        cliente.setNumero(request.getParameter("numero"));
-        cliente.setBairro(request.getParameter("bairro"));
-        cliente.setPonto_ref(request.getParameter("pontoref"));
-        cliente.setCidade(request.getParameter("cidade"));
-        cliente.setUf(request.getParameter("uf"));
-        cliente.setCep(request.getParameter("cep"));
-        cliente.setData_atualizacao((java.util.Date) new Date());
-        cliente.setAtivo("sim");
-        setCliente(cliente);
-
-        cliente = (Cliente) acessohibernatecliente.salvaOuAltera(getCliente());
-        request.getSession().setAttribute("cliente", cliente);
+        cliente = (Cliente) acessohibernatecliente.salvaOuAltera(this.cliente);
+        request.getSession().setAttribute("cliente", this.cliente);
         listar_produto(request, response);
     }
 
@@ -221,8 +219,6 @@ public class ControleLogicoPedido implements ControleLogico {
         ListaPedidos = (List<Pedido>) acessohibernatepedido.carregarUltimos(Pedido.class, "data_hora_pedido");
         request.setAttribute("ListaPedidos", ListaPedidos);
         request.getRequestDispatcher("pedidos").forward(request, response);
-        System.out.println("Mostrar pedidos dentro listar_pedido: ");
-        System.out.println(ListaPedidos);
         
     }
     
@@ -270,18 +266,11 @@ public class ControleLogicoPedido implements ControleLogico {
     public void cancelar_pedido(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     
         this.pedido = (Pedido) acessohibernatepedido.carregarUm(Integer.parseInt(request.getParameter("pedido")), Pedido.class);
+        this.pedido.setJustificativa(request.getParameter("motivo"));
         this.pedido.setStatus("Cancelado");
         this.pedido.setData_hora_pedido((java.util.Date) new Date());
         acessohibernatepedido.alterar(this.pedido);
         listar_pedido(request, response);
       
-    }
-            
-    public Cliente getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
     }
 }

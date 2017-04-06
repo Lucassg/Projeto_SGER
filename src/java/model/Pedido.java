@@ -32,6 +32,7 @@ public class Pedido implements Serializable {
     @JoinColumn(name="funcionario_id")
     private Funcionario funcionario;
     private Float peso;
+    private String justificativa;
 
 public Pedido(){
 
@@ -151,5 +152,19 @@ public Pedido(){
      */
     public void setPeso(Float peso) {
         this.peso = peso;
+    }
+
+    /**
+     * @return the justificativa
+     */
+    public String getJustificativa() {
+        return justificativa;
+    }
+
+    /**
+     * @param justificativa the justificativa to set
+     */
+    public void setJustificativa(String justificativa) {
+        this.justificativa = justificativa;
     }
 }

@@ -63,7 +63,7 @@
                     </tbody>
                 </table>    
             </div>
-            <input class="btn btn-primary" type="submit" value="Salvar"></a>
+            <input class="btn btn-primary" type="submit" value="Salvar">
             </form> 
         </div>
     </div>

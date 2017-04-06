@@ -31,13 +31,14 @@ function pedidosJSON() {
 
     var arrayJSON = [];
     $.ajax({
-        url: 'JSON/counts.json',
+        url: './JSON/counts.json',
         type: 'get',
         dataType: 'json',
         async: false,
         success: function (json) {
             $.each(json, function (index, pedido) {
                 arrayJSON[index] = pedido;
+                console.log(arrayJSON[index]);
             });
         }
     });

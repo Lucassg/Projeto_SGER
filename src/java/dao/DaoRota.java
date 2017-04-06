@@ -9,10 +9,10 @@ import org.hibernate.Transaction;
 import org.hibernate.criterion.Restrictions;
 
 public class DaoRota extends DaoGenerico {
-    
-    public DaoRota(){
+
+    public DaoRota() {
     }
-    
+
     public Object gravarRota(Object obj) throws HibernateException {
         Session session = hibernateConfiguracao.openSession();
         Transaction transaction = session.beginTransaction();
@@ -21,7 +21,7 @@ public class DaoRota extends DaoGenerico {
         session.close();
         return obj;
     }
-    
+
     public List carregarRotasGeradas(Class clas) throws HibernateException {
         Session session = hibernateConfiguracao.openSession();
         Criteria criteria = session.createCriteria(clas);
@@ -29,16 +29,23 @@ public class DaoRota extends DaoGenerico {
         List lista = criteria.list();
         session.close();
         return lista;
-    }    
-    
+    }
+
     public List consultaRotaEntregador(Class clas, Funcionario funcionario) throws HibernateException {
         Session session = hibernateConfiguracao.openSession();
         Criteria criteria = session.createCriteria(clas);
-        criteria.add(Restrictions.eq("funcionario_id", funcionario));
+        criteria.add(Restrictions.eq("funcionario", funcionario));
         List lista = criteria.list();
         session.close();
         return lista;
-    }    
-    
-    
+    }
+
+    public List carregarRotasStatus(String status, Class clas) throws HibernateException {
+        Session session = hibernateConfiguracao.openSession();
+        Criteria criteria = session.createCriteria(clas);
+        criteria.add(Restrictions.eq("status", status));
+        List lista = criteria.list();
+        session.close();
+        return lista;
+    }
 }

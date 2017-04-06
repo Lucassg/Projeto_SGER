@@ -89,7 +89,7 @@ public class Main {
 
         Gson gson = new Gson();
 
-        try (Writer writer = new FileWriter("./web/Relatorio/counts.json")) {
+        try (Writer writer = new FileWriter("./web/JSON/counts.json")) {
             gson = new GsonBuilder().create();
             gson.toJson(ListaPedidosEntregues, writer);
             System.out.println("Arquivo JSON criado com sucesso.");

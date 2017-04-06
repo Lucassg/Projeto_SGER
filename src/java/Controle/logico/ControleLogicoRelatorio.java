@@ -8,7 +8,6 @@ import dao.DaoRota;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
-import static java.lang.Integer.parseInt;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -101,7 +100,7 @@ public class ControleLogicoRelatorio implements ControleLogico {
 
         Gson gson = new Gson();
 
-        try (Writer writer = new FileWriter("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts.json")) {
+        try (Writer writer = new FileWriter("C:\\Users\\Lucas Garcia\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts.json")) {
             gson = new GsonBuilder().create();
             gson.toJson(ListaPedidosEntregues, writer);
             System.out.println("Arquivo JSON criado com sucesso.");

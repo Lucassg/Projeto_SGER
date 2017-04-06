@@ -35,45 +35,13 @@
             </div>
             <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                 <h1 class="page-header"> <center> <b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
+                <div>
+                    <a href="Controle?classe=ControleLogicoRedirecionamento&page=rotas_googlemaps"><input class="btn btn-primary" type="button" value="Google Maps"></a>
+                    <a href="Controle?classe=ControleLogicoRota&acao=listar_rotas_geradas"><input class="btn btn-primary" type="button" value="Rotas Geradas"></a>     
+                    <a href="Controle?classe=ControleLogicoRota&acao=listar_rotas_andamento"><input class="btn btn-primary" type="button" value="Rotas em Andamento"></a>     
+                </div>
             </div>
         </div>
     </div>
-    </br>
-    </br>
-    </br>
-    <table cellspacing="10">
-        <tr>
-            <td>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <div id="map_container">
-                    </br>
-                    </br>
-                    <input id="pac-input" class="controls" type="text"
-                           placeholder="Informe a localização">
-                    <div id="type-selector" class="controls">
-                        <input type="radio" name="type" id="changetype-all" checked="checked">
-                        <label for="changetype-all">Todos</label>
 
-                        <input type="radio" name="type" id="changetype-establishment">
-                        <label for="changetype-establishment">Estabelecimentos</label>
-
-                        <input type="radio" name="type" id="changetype-address">
-                        <label for="changetype-address">Endereços</label>
-
-                        <input type="radio" name="type" id="changetype-geocode">
-                        <label for="changetype-geocode">Coordenadas Geograficas</label>
-                    </div>
-                    <div id="map">
-                    </div>
-                </div>
-            </td>
-        </tr>
-    </table>
-    <script type="text/javascript" src="JSProjeto/janela_popup.js" async="true"></script>
-    <script type="text/javascript" src="JSProjeto/mapa.js" async="true"></script>
-    <!-- Chave para executar via servidor  -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj0AreC_ic-Nrs3BBrPuNmBaaTeaGr-eQ&signed_in=true&libraries=places&callback=initMap" async defer></script>
 <jsp:include page="footer.jsp"/>

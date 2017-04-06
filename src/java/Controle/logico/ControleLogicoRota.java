@@ -26,7 +26,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
-import javax.servlet.http.HttpServlet;
 import model.Funcionario;
 import model.Pedido_Rota;
 import model.Rota;
@@ -53,16 +52,16 @@ public class ControleLogicoRota implements ControleLogico {
 
     public ControleLogicoRota() {
 
-        acessohibernatepedido = new DaoPedido();
-        acessohibernaterota = new DaoRota();
-        acessohibernatepedidorota = new DaoPedido_Rota();
+        acessohibernatepedido      = new DaoPedido();
+        acessohibernaterota        = new DaoRota();
+        acessohibernatepedidorota  = new DaoPedido_Rota();
         acessohibernatefuncionario = new DaoFuncionario();
         acessohibernateitenspedido = new DaoItens_Pedido();
-        acessohibernatesger = new DaoSger();
-        pedido = new Pedido();
-        rota = new Rota();
-        pedido_rota = new Pedido_Rota();
-        funcionario = new Funcionario();
+        acessohibernatesger        = new DaoSger();
+        pedido                     = new Pedido();
+        rota                       = new Rota();
+        pedido_rota                = new Pedido_Rota();
+        funcionario                = new Funcionario();
     }
 
     @Override
@@ -89,6 +88,15 @@ public class ControleLogicoRota implements ControleLogico {
             case "rota_andamento":
                 rota_andamento(request, response);
                 break;
+            case "listar_rotas_andamento":
+                listar_rotas_andamento(request, response);
+                break;
+            case "listar_pedidos_rota":
+                listar_pedidos_rota(request, response);
+                break;
+            case "rota_entregue":
+                rota_entregue(request, response);
+                break;
             default:
                 break;
         }
@@ -112,7 +120,7 @@ public class ControleLogicoRota implements ControleLogico {
         Acessando o banco de dados por meio de Hibernate.
         - 'ListaPedidos' receberá todos os pedidos em status "Aguardando Entrega"
         - 'sger' receberá os dados do estabelecimento
-         */
+        */
         List<Pedido> ListaPedidos = (List<Pedido>) acessohibernatepedido.carregarPedidosAguardandoEntrega(Pedido.class);
         sger = (Sger) acessohibernatesger.carregaSger();
 
@@ -307,9 +315,10 @@ public class ControleLogicoRota implements ControleLogico {
             quantidade máxima de pontos de parada são 25 contando com o destino 
             e a origem. Portanto, devemos limitar cada rota a 23 pedidos.
          */
- /*
+        
+        /*
         Ordena ListaParesPedidos de acordo com o tempo entre cada ponto
-         */
+        */
         Collections.sort(ListaParesPedidos, new comparadorParesPedidos());
 
         /*
@@ -317,14 +326,14 @@ public class ControleLogicoRota implements ControleLogico {
         
         remove_pedido e pedido_final são variáveis utilizadas para remover da
         ListaParesPedidos o último pedido associado a uma rota.
-         */
+        */
         List<List<Pedido>> ListaRotaFinal = new ArrayList<List<Pedido>>();
         Pedido remove_pedido = new Pedido();
         boolean pedido_final = false;
 
         /*
         Loop para percorrer toda a ListaParesPedidos enquanto for diferente de vazio
-         */
+        */
         while (!ListaParesPedidos.isEmpty()) {
 
             RotaTemp rota_temp = new RotaTemp();
@@ -332,7 +341,7 @@ public class ControleLogicoRota implements ControleLogico {
             /*
             Condição para remover da ListaParesPedidos o último pedido associado
             a uma rota.
-             */
+            */
             if (pedido_final == true) {
                 rota_temp.setPedido1(remove_pedido);
 
@@ -351,7 +360,7 @@ public class ControleLogicoRota implements ControleLogico {
             
             As variáveis qtde_enderecos, tempo e peso são utilizadas para garantir que
             as rotas não estrapolem as condições estabelecidas.
-             */
+            */
             List<Pedido> ListaRota = new ArrayList<>();
             int qtde_enderecos = 0;
             long tempo;
@@ -361,7 +370,7 @@ public class ControleLogicoRota implements ControleLogico {
             Adiciona o primeiro ponto de parada a ListaRota, bem como atribiu
             o valor do tempo gasto, peso do pedido e incrementa o contador 
             qdte_enderecos. 
-             */
+            */
             ListaRota.add(ListaInicio.get(0).getPedido());
             tempo = ListaInicio.get(0).getDistancia();
             qtde_enderecos++;
@@ -370,19 +379,19 @@ public class ControleLogicoRota implements ControleLogico {
             /*
             Remove o pedido adicionado a ListaRota da ListaInicio para que não
             seja utilizado novamente.
-             */
+            */
             ListaInicio.remove(0);
 
             /*
             'pares_pedidos' é utilizada para controlar a entrada em ListaParesPedidos.
             
-             */
+            */
             int pares_pedidos = 0;
             /*
             Loop para adicionar adicionar os demais pedidos em ListaRota.
-             */
+            */
             while (pares_pedidos < ListaParesPedidos.size()) {
-
+                
                 /*
                 As condições abaixo são usadas para e garantir que as regras estabelecidas
                 sejam atendidas. Antes que um pedido que esteja em ListaParesPedidos
@@ -399,7 +408,7 @@ public class ControleLogicoRota implements ControleLogico {
                 a distancia que tanto a distância do 'pedido1' para 'pedido2' e 
                 vice-versa são iguais. Por esse motivo existem dois 'If' para checar 
                 os dois pedidos de cada posição da ListaParesPedidos.
-                 */
+                */
                 if (ListaRota.get(ListaRota.size() - 1).getId() == ListaParesPedidos.get(pares_pedidos).getPedido1().getId()
                         && ((peso + ListaParesPedidos.get(pares_pedidos).getPedido2().getPeso()) <= 10)
                         && ((tempo + ListaParesPedidos.get(pares_pedidos).getDistancia()) <= 1800)
@@ -416,7 +425,7 @@ public class ControleLogicoRota implements ControleLogico {
                     Isso significa que o valor comparado já existe em ListaRota e
                     próximo valor deve ser o 'pedido2' contido naquela posição de
                     ListaParesPedidos.
-                     */
+                    */
                     ListaRota.add(ListaParesPedidos.get(pares_pedidos).getPedido2());
                     tempo = tempo + ListaParesPedidos.get(pares_pedidos).getDistancia();
                     qtde_enderecos++;
@@ -426,7 +435,7 @@ public class ControleLogicoRota implements ControleLogico {
                     Quando um pedido é atribuído a uma rota o mesmo deve ser removido
                     da ListaInicio, evitando que seja usado novamente ao determinar
                     o primeiro ponto de entrega de uma nova rota.
-                     */
+                    */
                     RotaInicial rota_inicial = new RotaInicial();
                     rota_inicial.setPedido(ListaParesPedidos.get(pares_pedidos).getPedido2());
                     ListaInicio.removeIf(i -> {
@@ -437,7 +446,7 @@ public class ControleLogicoRota implements ControleLogico {
                     O código abaixo remove de ListaParesPedidos todas as possibilidades 
                     contendo a penúltimo pedido adicionado a ListaRota, não permitindo
                     que o mesmo seja utilizado novamente.
-                     */
+                    */
                     rota_temp.setPedido1(ListaRota.get(ListaRota.size() - 2));
 
                     ListaParesPedidos.removeIf(i -> {
@@ -450,7 +459,7 @@ public class ControleLogicoRota implements ControleLogico {
                     /*
                     Seta pares_pedidos novamente para zero, permitindo que ListaParesPedidos
                     seja percorrida a partir da posição inicial na próxima iteração.
-                     */
+                    */
                     pares_pedidos = 0;
                     continue;
                 }
@@ -460,7 +469,7 @@ public class ControleLogicoRota implements ControleLogico {
                 do código é semelhante a condição 'If' a cima, mudando apenas o 
                 'pedido2' é comparado e o 'pedido1' é removido caso todas as condições
                 são atendidas.
-                 */
+                */
                 if (ListaRota.get(ListaRota.size() - 1).getId() == ListaParesPedidos.get(pares_pedidos).getPedido2().getId()
                         && ((peso + ListaParesPedidos.get(pares_pedidos).getPedido1().getPeso()) <= 10)
                         && ((tempo + ListaParesPedidos.get(pares_pedidos).getDistancia()) <= 1800)
@@ -492,7 +501,7 @@ public class ControleLogicoRota implements ControleLogico {
                 /*
                 Caso nenhuma das condições sejam verdadeiras adiciona-se +1 a 
                 pares_pedidos.
-                 */
+                */
                 pares_pedidos++;
             }
             /*
@@ -508,46 +517,47 @@ public class ControleLogicoRota implements ControleLogico {
             O pedido só pode ser removido na próxima iteração, pois o controle 
             de entrada do primeiro loop depende de ListaParesPedidos ser diferente
             de vazio.
-             */
+            */
             remove_pedido = ListaRota.get(ListaRota.size() - 1);
             pedido_final = true;
-
+            
             /*
             Adiciona-se ListaRota a ListaRotaFinal.
             ListaRota é instanciada novamente para uma nova rota.
-             */
+            */
             ListaRotaFinal.add(ListaRota);
             ListaRota = new ArrayList<>();
         }
 
-//        for (int i = 0; i < ListaRotaFinal.size(); i++) {
-//            try (Writer writer = new FileWriter("./web/JSON/listarotafinal" + i + ".json")) {
-//                Gson gson = new GsonBuilder().create();
-//                gson.toJson(ListaRotaFinal.get(i), writer);
-//                System.out.println("Arquivo JSON criado com sucesso.");
-//            }
-//        }
+        for (int i = 0; i < ListaRotaFinal.size(); i++) {
+            try (Writer writer = new FileWriter("./web/JSON/listarotafinal" + i + ".json")) {
+                Gson gson = new GsonBuilder().create();
+                gson.toJson(ListaRotaFinal.get(i), writer);
+                System.out.println("Arquivo JSON criado com sucesso.");
+            }
+        }
+        System.exit(0);
         // colocando a lista na sessão
         request.getSession().setAttribute("ListaRotaFinal", ListaRotaFinal);
         entregador_rota(ListaRotaFinal.size(), request, response);
     }
-
+        
     public void gravar_rota(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String entregadorRota;
         List<List<Pedido>> ListaRotaFinal;
         ListaRotaFinal = (List<List<Pedido>>) request.getSession().getAttribute("ListaRotaFinal");
-
-        for (Integer i = 0; i <= ListaRotaFinal.size() - 1; i++) {
+        
+        for(Integer i = 0; i <= ListaRotaFinal.size() - 1; i++) {
             entregadorRota = String.valueOf(i + 1);
-            if (request.getParameter(entregadorRota) != null) {
+            if (request.getParameter(entregadorRota) != null){
                 this.funcionario = (Funcionario) acessohibernatefuncionario.consultaEntregador(request.getParameter(entregadorRota), Funcionario.class);
                 this.rota.setFuncionario(this.funcionario);
                 this.rota.setStatus("Rota Gerada");
                 this.rota.setData_hora_rota((java.util.Date) new Date());
                 this.rota = (Rota) acessohibernaterota.gravarRota(this.rota);
-
-                for (Integer k = 0; k <= ListaRotaFinal.get(i).size() - 1; k++) {
-
+                
+                for(Integer k = 0; k <= ListaRotaFinal.get(i).size() - 1; k++){
+                
                     this.pedido = ListaRotaFinal.get(i).get(k);
                     this.pedido.setStatus("Entrega em Andamento");
                     this.pedido.setRota(this.rota);
@@ -556,7 +566,7 @@ public class ControleLogicoRota implements ControleLogico {
                     this.pedido_rota.setRota(this.rota);
                     acessohibernatepedidorota.gravar(this.pedido_rota);
                 }
-            }
+            } 
         }
         listar_rotas_geradas(request, response);
     }
@@ -564,7 +574,7 @@ public class ControleLogicoRota implements ControleLogico {
     public void listar_rotas_geradas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Rota> ListaRotas;
-        ListaRotas = acessohibernaterota.carregarRotasGeradas(Rota.class);
+        ListaRotas = acessohibernaterota.carregarRotasStatus("Rota Gerada", Rota.class);
         request.setAttribute("ListaRotas", ListaRotas);
         request.getRequestDispatcher("rotas_geradas").forward(request, response);
 
@@ -580,33 +590,14 @@ public class ControleLogicoRota implements ControleLogico {
         request.getRequestDispatcher("rota_pedidos_gerados").forward(request, response);
     }
 
-    public class PathServlet extends HttpServlet {
-
-        public String getPath() {
-            return getServletContext().getContextPath();
-        }
-    }
-
     public void cria_json_rota(List<Pedido_Rota> PedidosRota) throws IOException {
         ArrayList<String> enderecos = new ArrayList<>();
 
         for (int k = 0; k < PedidosRota.size(); k++) {
             enderecos.add(removerAcentos(PedidosRota.get(k).getPedido().getCliente().enderecoToString()));
         }
-//        PathServlet pathserv = new PathServlet();
-//        String path = pathserv.getPath();
-//        
-//        System.out.println("path: " + path);
-        
-//        try {
-//            System.out.println("/  -> " + new File("/").getCanonicalPath());
-//            System.out.println(".. -> " + new File("..").getCanonicalPath());
-//            System.out.println(".  -> " + new File(".").getCanonicalPath());
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
 
-        try (Writer writer = new FileWriter("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\enderecos_multiplos_pontos.json")) {
+        try (Writer writer = new FileWriter("C:\\Users\\Lucas Garcia\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\enderecos_multiplos_pontos.json")) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(enderecos, writer);
             System.out.println("Arquivo JSON criado com sucesso.");
@@ -616,37 +607,75 @@ public class ControleLogicoRota implements ControleLogico {
     public void entregador_rota(int qtderotas, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Funcionario> ListaEntregares;
-        ListaEntregares
-                = acessohibernatefuncionario.consultaEntregadores(Funcionario.class
-                );
+        ListaEntregares = acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
 
         request.getServletContext().setAttribute("ListaEntregares", ListaEntregares);
         request.getServletContext().setAttribute("qtderotas", qtderotas);
         request.getRequestDispatcher("rotas_inf_entregador").forward(request, response);
 
     }
-
+    
     public void rota_andamento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pedido> PedidosRota;
-
-        this.rota = (Rota) acessohibernaterota.carregarUm(Integer.parseInt(request.getParameter("rota")), Rota.class
-        );
+        this.rota = (Rota) acessohibernaterota.carregarUm(Integer.parseInt(request.getParameter("rota")), Rota.class);
         this.rota.setStatus("Rota em Andamento");
         acessohibernaterota.alterar(this.rota);
-        PedidosRota
-                = acessohibernatepedido.carregarPedidosRotas(this.rota, Pedido.class
-                );
-        for (Pedido pedido : PedidosRota) {
-
+        PedidosRota = acessohibernatepedido.carregarPedidosRotas(this.rota, Pedido.class);
+        for (Pedido pedido : PedidosRota){
+        
             pedido.setStatus("Entrega em Andamento");
             acessohibernatepedido.alterar(pedido);
         }
         listar_rotas_geradas(request, response);
+    } 
+    
+    public void listar_rotas_andamento(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        
+        List<Rota> ListaRotas;
+        ListaRotas = acessohibernaterota.carregarRotasStatus("Rota em Andamento", Rota.class);
+        request.setAttribute("ListaRotas", ListaRotas);
+        request.getRequestDispatcher("rotas_andamento").forward(request, response);
+     
     }
+    
+    public void listar_pedidos_rota(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+        List<Pedido> PedidosRota;
+        this.rota = (Rota) acessohibernaterota.carregarUm(Integer.parseInt(request.getParameter("rota")), Rota.class);
+        PedidosRota = acessohibernatepedido.carregarPedidosRotas(this.rota, Pedido.class);
+        request.setAttribute("Rota", this.rota);
+        request.getSession().setAttribute("PedidosRota", PedidosRota);
+        request.getRequestDispatcher("rota_pedidos").forward(request, response);
+    }
+    
+    public void rota_entregue(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    
+        List<Pedido> PedidosRota;
+        String justficativaPedido;
+        PedidosRota = (List<Pedido>) request.getSession().getAttribute("PedidosRota");
+        this.rota = (Rota) acessohibernaterota.carregarUm(Integer.parseInt(request.getParameter("rota")), Rota.class);
+        this.rota.setStatus("Rota Concluída");
+        acessohibernaterota.alterar(this.rota);
+        
+        for(Integer i = 0; i < PedidosRota.size(); i++){
+            justficativaPedido = String.valueOf(i + 1);
+            this.pedido = PedidosRota.get(i);
+            
+            if(request.getParameter(justficativaPedido).equals("entregue")){
+                this.pedido.setStatus("Entregue");
+                acessohibernatepedido.alterar(this.pedido);
+            } else{
+                this.pedido.setStatus("Não Entregue");
+                this.pedido.setJustificativa(request.getParameter(justficativaPedido));
+                acessohibernatepedido.alterar(this.pedido);
+            }    
+        }
+        listar_rotas_andamento(request, response);
+    } 
+    
 
     public static String removerAcentos(String str) {
         return Normalizer.normalize(str, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
-
     }
 
     public class comparadorInicio implements Comparator<RotaInicial> {
@@ -662,7 +691,7 @@ public class ControleLogicoRota implements ControleLogico {
             }
         }
     }
-
+    
     public static class comparadorParesPedidos implements Comparator<RotaTemp> {
 
         @Override

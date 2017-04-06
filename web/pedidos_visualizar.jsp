@@ -39,6 +39,7 @@
                 <table class="table table-striped">
                     <fieldset>
                         <h4><b>Pedido: ${Pedido.id}</b></h4> 
+                        <h4>Status: ${Pedido.status}</h4> 
                         <table cellspacing="10">
                             <tr>
                                 <td>
@@ -174,13 +175,13 @@
                             <dl><label for="atendente">Atendente:&nbsp;&nbsp;</label></dl>
                         </td>
                         <td align="left">
-                            <!--<dl><input type="text" name="atendente" size="30" value="${Pedido.funcionario.nome}" readonly></dl>-->
+                            <dl><input type="text" name="atendente" size="30" value="${Pedido.funcionario.nome}" readonly></dl>
                         </td>
                         <td>
                             <dl><label for="entregador">&nbsp;Entregador:&nbsp;&nbsp;</label></dl>
                         </td>
                         <td align="left">
-                            <dl><input type="text" name="entregador" size="30" value="${Pedido.rota.funcionario}" readonly></dl>
+                            <dl><input type="text" name="entregador" size="30" value="${Pedido.rota.funcionario.nome}" readonly></dl>
                         </td>
                         <td>
                             <dl><label for="rota">&nbsp;Rota:&nbsp;&nbsp;</label></dl>
@@ -189,9 +190,49 @@
                             <dl><input type="text" name="rota" size="4" value="${Pedido.rota.id}" readonly></dl>
                         </td>
                     </tr>
+                    <c:if test="${Pedido.status == 'Não Entregue'}">
+                        <tr>
+                            <td>
+                                <dl><label for="justificativa">Justificativa: &nbsp;&nbsp;</label></dl>
+                            </td>
+                            <td align="left">
+                                <dl><input type="text" name="justificativa" size="30" value="${Pedido.justificativa}" readonly></dl>
+                            </td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${Pedido.status == 'Cancelado'}">
+                        <tr>
+                            <td>
+                                <dl><label for="justificativa">Motivo Cancelamento: &nbsp;&nbsp;</label></dl>
+                            </td>
+                            <td align="left">
+                                <dl><input type="text" name="motivocancelamento" size="30" value="${Pedido.justificativa}" readonly></dl>
+                            </td>
+                        </tr>
+                    </c:if>
+                    <c:if test="${Pedido.status != 'Não Entregue' and Pedido.status != 'Entregue' and Pedido.status != 'Cancelado'}">
+                        <tr>
+                        <form name="formcancela" action="Controle?classe=ControleLogicoPedido&acao=cancelar_pedido&pedido=${Pedido.id}" method="POST">
+                            <td>
+                                <dl><label for="motivocancel">Motivo Cancelamento:&nbsp;</label></dl>
+                            </td>
+                            <td align="left">
+                                <dl><select name="motivo" >
+                                        <option value="pedido aberto errado">Pedido Aberto Errado</option> 
+                                        <option value="cancelado pelo cliente">Cancelado Pelo Cliente</option> 
+                                        <option value="alteração do pedido">Alteração Do Pedido</option> 
+                                    </select>
+                                </dl>
+                            </td>
+                            <td>
+                                <input class="btn btn-danger" type="submit" value="Cancelar Pedido">    
+                            </td>
+                        </form>
+                        </tr>
+                    </c:if>
                 </table>
                 <a href="Controle?classe=ControleLogicoPedido&acao=listar_pedido"> <input type="button" class="btn btn-primary" value="Voltar"></a>
-                <a href="Controle?classe=ControleLogicoPedido&acao=cancelar_pedido&pedido=${Pedido.id}"> <input type="button" class="btn btn-danger" onclick="confirm('Deseja realmente Carcelar o Pedido?')" value="Cancelar Pedido"></a>
+                <!--<a href="#"><input type="submit" class="btn btn-danger" onclick="confirm('Deseja realmente Carcelar o Pedido?')" value="Cancelar Pedido"></a>-->
             </div>	  
         </div>
     </div>
