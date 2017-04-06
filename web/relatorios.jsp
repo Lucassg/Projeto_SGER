@@ -57,12 +57,15 @@
                         </div>
 
                         <div id="entregadores" style="display: none;">
-                            <select name="nomeEntregador">
-                                <c:forEach items="${ListaEntregadores}" var="Entregador">
-                                    <option>${Entregador.nome}</option>
-                                </c:forEach>
-                            </select>
-                            &nbsp; <a href="Controle?classe=ControleLogicoRelatorio&acao=relatorio_entregador&id=${Entregador.id}"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
+                            <form name="datas" action="Controle?classe=ControleLogicoRelatorio&acao=relatorio_entregador" method="POST">
+                                <select name="entregador">
+                                    <option value="null"></option>
+                                    <c:forEach items="${ListaEntregadores}" var="Entregador">
+                                        <option value="${Entregador.id}">${Entregador.nome}</option>
+                                    </c:forEach>
+                                </select>
+                                &nbsp; <a href="#"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
+                            </form>
                         </div>
                     </div>
                     </tr>

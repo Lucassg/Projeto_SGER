@@ -1,9 +1,7 @@
 package Controle;
 
 import Controle.logico.*;
-import java.io.File;
 import java.io.IOException;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;

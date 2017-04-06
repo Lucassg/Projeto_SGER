@@ -33,6 +33,7 @@ public class ControleLogicoRelatorio implements ControleLogico {
 
         acessohibernaterelatorio = new DaoRelatorio();
         acessohibernatefuncionario = new DaoFuncionario();
+        acessohibernaterota = new DaoRota();
         funcionario = new Funcionario();
     }
 
@@ -118,7 +119,7 @@ public class ControleLogicoRelatorio implements ControleLogico {
     }
 
     public void relatorio_entregador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        int id = parseInt(request.getParameter("id"));
+        int id = Integer.parseInt(request.getParameter("entregador"));
         this.funcionario = (Funcionario) acessohibernatefuncionario.carregarUm(id, Funcionario.class);
         List<Rota> ListaRotas = acessohibernaterota.consultaRotaEntregador(Rota.class, funcionario);
         

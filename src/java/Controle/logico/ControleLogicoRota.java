@@ -19,7 +19,6 @@ import dao.DaoItens_Pedido;
 import dao.DaoPedido_Rota;
 import dao.DaoRota;
 import dao.DaoSger;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.Writer;
 import java.text.Normalizer;
