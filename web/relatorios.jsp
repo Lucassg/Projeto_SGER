@@ -64,10 +64,11 @@
                                         <option value="${Entregador.id}">${Entregador.nome}</option>
                                     </c:forEach>
                                 </select>
-                                &nbsp; <a href="#"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
+                                &nbsp; <a href="#"><input id="Buscar" class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
                             </form>
                         </div>
                     </div>
+                    <input id="Buscar1" class="btn btn-primary btn-xs" type="submit" value="Buscar1" name="buscar1" onclick="drawChart()"/>
                     </tr>
                     <tr>
                     <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>

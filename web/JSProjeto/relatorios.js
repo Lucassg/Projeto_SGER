@@ -1,6 +1,8 @@
 google.charts.load('current', {packages: ['corechart']});
 var point1, point2, dataArray = [];
 
+document.getElementById("Buscar1").onclick = drawChart;
+
 function drawChart() {
 
     var teste = pedidosJSON();
@@ -31,7 +33,9 @@ function pedidosJSON() {
 
     var arrayJSON = [];
     $.ajax({
-        url: './JSON/counts.json',
+        //url: './JSON/counts.json',
+        url: 'jsonServlet',
+        data: {datainicial : $('#datainicial').val(), datafinal : $('#datafinal').val()},
         type: 'get',
         dataType: 'json',
         async: false,

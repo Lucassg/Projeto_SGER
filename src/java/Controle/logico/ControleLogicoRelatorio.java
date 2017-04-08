@@ -5,14 +5,20 @@ import com.google.gson.GsonBuilder;
 import dao.DaoFuncionario;
 import dao.DaoRelatorio;
 import dao.DaoRota;
-import java.io.FileWriter;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.Writer;
+import java.io.OutputStreamWriter;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -62,20 +68,20 @@ public class ControleLogicoRelatorio implements ControleLogico {
         Date datafinal = new Date();
         String data_inicial = request.getParameter("datainicial");
         String data_final = request.getParameter("datafinal");
-        
 
-        //  SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.US);
         SimpleDateFormat mes = new SimpleDateFormat("MMMMM");
-        
-//        try {
-//            datainicio = fmt.parse(data_inicial);
-//            datafinal = fmt.parse(data_final);
-//        } catch (ParseException ex) {
-//            Logger.getLogger(ControleLogicoRelatorio.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-        
-        System.out.println("data inicial: " + data_inicial);
-        System.out.println("data final: " + data_final);
+
+        try {
+            fmt.setLenient(false);
+            datainicio = fmt.parse(data_inicial);
+            datafinal = fmt.parse(data_final);
+        } catch (ParseException ex) {
+            Logger.getLogger(ControleLogicoRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        System.out.println("data inicial controlelogico: " + datainicio);
+        System.out.println("data final controlelogico: " + datafinal);
 
         List<Pedido> ListaRelatorio = new ArrayList<>();
         List<Funcionario> ListaEntregador = new ArrayList<>();
@@ -100,13 +106,12 @@ public class ControleLogicoRelatorio implements ControleLogico {
 
         Gson gson = new Gson();
 
-        try (Writer writer = new FileWriter("C:\\Users\\Lucas Garcia\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts.json")) {
+        //try (Writer writer = new FileWriter("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts.json")) {
+        try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts.json", false), "UTF-8"))) {
             gson = new GsonBuilder().create();
-            gson.toJson(ListaPedidosEntregues, writer);
+            gson.toJson(ListaPedidosEntregues, out);
             System.out.println("Arquivo JSON criado com sucesso.");
         }
-        
-                request.getRequestDispatcher("relatorios").forward(request, response);
     }
 
     public void consulta_entregador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -121,12 +126,11 @@ public class ControleLogicoRelatorio implements ControleLogico {
         int id = Integer.parseInt(request.getParameter("entregador"));
         this.funcionario = (Funcionario) acessohibernatefuncionario.carregarUm(id, Funcionario.class);
         List<Rota> ListaRotas = acessohibernaterota.consultaRotaEntregador(Rota.class, funcionario);
-        
+
         ListaRotas.forEach(l -> System.out.println("Rota id: " + l.getId() + "Ent nome: " + l.getFuncionario().getNome()));
         //request.setAttribute("ListaEntregadores", ListaEntregadores);
         //request.getRequestDispatcher("relatorios").forward(request, response);
     }
-
 
     static class pedidosEntregues {
 
@@ -161,5 +165,4 @@ public class ControleLogicoRelatorio implements ControleLogico {
             this.quantidade = quantidade;
         }
     }
-
 }
