@@ -71,7 +71,7 @@
                     <input id="Buscar1" class="btn btn-primary btn-xs" type="submit" value="Buscar1" name="buscar1" onclick="drawChart()"/>
                     </tr>
                     <tr>
-                    <div id="container" style="width: 550px; height: 400px; margin: 0 auto"></div>
+                    <div id="container" style="width: 1000px; height: 600px; margin: 0 auto"></div>
                     </tr>
                 </table>
             </div>

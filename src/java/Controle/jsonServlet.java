@@ -50,8 +50,7 @@ public class jsonServlet extends HttpServlet {
         String data_final = request.getParameter("datafinal");
 
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat mes = new SimpleDateFormat("MMMMM-yyyy");
-        SimpleDateFormat mes_numerico = new SimpleDateFormat("MMMM-yyyy", Locale.US);
+        SimpleDateFormat mes = new SimpleDateFormat("MMMMM yyyy");
 
         try {
             fmt.setLenient(false);
@@ -67,6 +66,8 @@ public class jsonServlet extends HttpServlet {
         List<Funcionario> ListaEntregador = new ArrayList<>();
         ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosEntregues(Pedido.class, datainicio, datafinal);
         ListaEntregador = (List<Funcionario>) acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
+        
+        ListaRelatorio.forEach(l -> System.out.println("id: " + l.getId() + " data: " + l.getData_hora_pedido()));
 
         List<String> ListaMeses = new ArrayList<>();
 
@@ -80,41 +81,41 @@ public class jsonServlet extends HttpServlet {
         for (Map.Entry<String, Long> count : counts.entrySet()) {
             PedidosEntregues.setMes(count.getKey());
             PedidosEntregues.setQuantidade(count.getValue());
-            String[] split_data = PedidosEntregues.getMes().split("-");
-            if (split_data[0] == "Janeiro") {
+            String[] split_data = PedidosEntregues.getMes().split(" ");
+            if ("Janeiro".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(1);
             }
-            if (split_data[0] == "Fevereiro") {
+            if ("Fevereiro".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(2);
             }
-            if (split_data[0] == "Março") {
+            if ("Março".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(3);
             }
-            if (split_data[0] == "Abril") {
+            if ("Abril".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(4);
             }
-            if (split_data[0] == "Maio") {
+            if ("Maio".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(5);
             }
-            if (split_data[0] == "Junho") {
+            if ("Junho".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(6);
             }
-            if (split_data[0] == "Julho") {
+            if ("Julho".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(7);
             }
-            if (split_data[0] == "Agosto") {
+            if ("Agosto".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(8);
             }
-            if (split_data[0] == "Setembro") {
+            if ("Setembro".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(9);
             }
-            if (split_data[0] == "Outubro") {
+            if ("Outubro".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(10);
             }
-            if (split_data[0] == "Novembro") {
+            if ("Novembro".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(11);
             }
-            if (split_data[0] == "Dezembro") {
+            if ("Dezembro".equals(split_data[0])) {
                 PedidosEntregues.setMes_numero(12);
             }
             PedidosEntregues.setAno(Integer.parseInt(split_data[1]));
@@ -122,7 +123,8 @@ public class jsonServlet extends HttpServlet {
             PedidosEntregues = new jsonServlet.pedidosEntregues();
         }
 
-        Collections.sort(ListaPedidosEntregues, new jsonServlet.comparadorDatas());
+        //Collections.sort(ListaPedidosEntregues, new jsonServlet.comparadorDatas());
+        Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
 
         String json;
         Gson gson = new Gson();
@@ -294,9 +296,9 @@ public class jsonServlet extends HttpServlet {
 
         @Override
         public int compare(pedidosEntregues p1, pedidosEntregues p2) {
-            if (p1.getMes_numero() < p2.getMes_numero()) {
+            if (p1.getAno() < p2.getAno() || p1.getMes_numero() < p2.getMes_numero()) {
                 return -1;
-            } else if (p1.getMes_numero() > p2.getMes_numero()) {
+            } else if (p1.getAno() > p2.getAno() || p1.getMes_numero() > p2.getMes_numero()) {
                 return +1;
             } else {
                 return 0;
@@ -304,4 +306,17 @@ public class jsonServlet extends HttpServlet {
         }
     }
 
+    public static class datasComparador implements Comparator<pedidosEntregues> {
+
+        @Override
+        public int compare(pedidosEntregues s1, pedidosEntregues s2) {
+            Integer comparar_data = s1.getAno();
+            comparar_data = comparar_data.compareTo(s2.getAno());
+            if (comparar_data != 0) {
+                return comparar_data;
+            }
+            return Integer.compare(s1.getMes_numero(), s2.getMes_numero());
+        }
+
+    }
 }
