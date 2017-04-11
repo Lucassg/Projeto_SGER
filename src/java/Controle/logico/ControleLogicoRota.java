@@ -16,7 +16,6 @@ import com.google.maps.model.DistanceMatrix;
 import com.google.maps.model.Unit;
 import dao.DaoFuncionario;
 import dao.DaoItens_Pedido;
-import dao.DaoPedido_Rota;
 import dao.DaoRota;
 import dao.DaoSger;
 import java.io.File;
@@ -28,7 +27,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import model.Funcionario;
-import model.Pedido_Rota;
 import model.Rota;
 import model.RotaInicial;
 import model.Sger;
@@ -37,13 +35,11 @@ public class ControleLogicoRota implements ControleLogico {
 
     DaoPedido acessohibernatepedido;
     DaoRota acessohibernaterota;
-    DaoPedido_Rota acessohibernatepedidorota;
     DaoFuncionario acessohibernatefuncionario;
     DaoItens_Pedido acessohibernateitenspedido;
     DaoSger acessohibernatesger;
     private Pedido pedido;
     private Rota rota;
-    private Pedido_Rota pedido_rota;
     private Funcionario funcionario;
     int id;
     int pedido1;
@@ -55,13 +51,11 @@ public class ControleLogicoRota implements ControleLogico {
 
         acessohibernatepedido = new DaoPedido();
         acessohibernaterota = new DaoRota();
-        acessohibernatepedidorota = new DaoPedido_Rota();
         acessohibernatefuncionario = new DaoFuncionario();
         acessohibernateitenspedido = new DaoItens_Pedido();
         acessohibernatesger = new DaoSger();
         pedido = new Pedido();
         rota = new Rota();
-        pedido_rota = new Pedido_Rota();
         funcionario = new Funcionario();
     }
 
@@ -547,7 +541,7 @@ public class ControleLogicoRota implements ControleLogico {
         List<List<Pedido>> ListaRotaFinal;
         ListaRotaFinal = (List<List<Pedido>>) request.getSession().getAttribute("ListaRotaFinal");
 
-        for (Integer i = 0; i <= ListaRotaFinal.size() - 1; i++) {
+        for (Integer i = 0; i < ListaRotaFinal.size(); i++) {
             entregadorRota = String.valueOf(i + 1);
             if (request.getParameter(entregadorRota) != null) {
                 this.funcionario = (Funcionario) acessohibernatefuncionario.consultaEntregador(request.getParameter(entregadorRota), Funcionario.class);
@@ -556,15 +550,11 @@ public class ControleLogicoRota implements ControleLogico {
                 this.rota.setData_hora_rota((java.util.Date) new Date());
                 this.rota = (Rota) acessohibernaterota.gravarRota(this.rota);
 
-                for (Integer k = 0; k <= ListaRotaFinal.get(i).size() - 1; k++) {
-
+                for (Integer k = 0; k < ListaRotaFinal.get(i).size(); k++) {
                     this.pedido = ListaRotaFinal.get(i).get(k);
                     this.pedido.setStatus("Entrega em Andamento");
                     this.pedido.setRota(this.rota);
                     acessohibernatepedido.alterar(this.pedido);
-                    this.pedido_rota.setPedido(this.pedido);
-                    this.pedido_rota.setRota(this.rota);
-                    acessohibernatepedidorota.gravar(this.pedido_rota);
                 }
             }
         }
@@ -581,20 +571,21 @@ public class ControleLogicoRota implements ControleLogico {
     }
 
     public void exibe_pedidos_rota(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        List<Pedido_Rota> PedidosRota;
+        List<Pedido> PedidosRota;
         this.rota = (Rota) acessohibernaterota.carregarUm(Integer.parseInt(request.getParameter("rota")), Rota.class);
-        PedidosRota = acessohibernatepedidorota.carregaPedidosRota(this.rota, Pedido_Rota.class);
+        
+        PedidosRota = acessohibernatepedido.carregarPedidosRotas(rota, Pedido.class);
         cria_json_rota(PedidosRota);
         request.setAttribute("Rota", this.rota);
         request.setAttribute("PedidosRota", PedidosRota);
         request.getRequestDispatcher("rota_pedidos_gerados").forward(request, response);
     }
 
-    public void cria_json_rota(List<Pedido_Rota> PedidosRota) throws IOException {
+    public void cria_json_rota(List<Pedido> PedidosRota) throws IOException {
         ArrayList<String> enderecos = new ArrayList<>();
 
         for (int k = 0; k < PedidosRota.size(); k++) {
-            enderecos.add(removerAcentos(PedidosRota.get(k).getPedido().getCliente().enderecoToString()));
+            enderecos.add(removerAcentos(PedidosRota.get(k).getCliente().enderecoToString()));
         }
 
         try {

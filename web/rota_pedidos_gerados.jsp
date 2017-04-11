@@ -31,7 +31,7 @@
                 </ul>
             </c:if>
         </div>
-        <jsp:useBean id="Pedido_Rota" scope="request" class="model.Pedido_Rota"/>
+        <jsp:useBean id="Pedido" scope="request" class="model.Pedido"/>
         <jsp:useBean id="Rota" scope="request" class="model.Rota"/>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"> <center> <b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
@@ -54,13 +54,13 @@
                     </thead>
                     <tbody>
                         <c:set var="cont" value="0"/>
-                        <c:forEach items="${PedidosRota}" var="Pedido_Rota">
+                        <c:forEach items="${PedidosRota}" var="Pedido">
                             <tr>
                                 <td>${cont = cont + 1}</td>
-                                <td>${Pedido_Rota.pedido.id}</td>
-                                <td>${Pedido_Rota.pedido.status}</td>
-                                <td>${Pedido_Rota.pedido.cliente.nome}</td>
-                                <td>${Pedido_Rota.pedido.cliente.rua}, ${Pedido_Rota.pedido.cliente.numero}</td>
+                                <td>${Pedido.id}</td>
+                                <td>${Pedido.status}</td>
+                                <td>${Pedido.cliente.nome}</td>
+                                <td>${Pedido.cliente.rua}, ${Pedido.cliente.numero}</td>
                             </tr>
                         </c:forEach>
                     </tbody>
