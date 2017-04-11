@@ -18,7 +18,7 @@ public class ControleLogicoCliente implements ControleLogico {
         
        acessohibernatecliente = new DaoCliente();
        cliente                = new Cliente();
-       
+       int i;
     }
     
     @Override
