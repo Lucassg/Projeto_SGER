@@ -20,9 +20,14 @@ public class ControleLogicoCliente implements ControleLogico {
        cliente                = new Cliente();
        
        
+
        //teste do git 2
        
        //esse é meu lfm
+
+        //teste do git 2
+        //conmentario 222
+
     }
     
     @Override
