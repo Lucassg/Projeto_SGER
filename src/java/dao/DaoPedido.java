@@ -84,6 +84,4 @@ public class DaoPedido extends DaoGenerico {
         session.close();
         return lista;
     }
-    
-
 }

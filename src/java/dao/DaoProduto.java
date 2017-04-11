@@ -23,5 +23,4 @@ public class DaoProduto extends DaoGenerico {
         session.close();
         return lista;
     }
-
 }
