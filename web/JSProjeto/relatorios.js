@@ -5,20 +5,18 @@ document.getElementById("Buscar1").onclick = drawChart;
 
 function drawChart() {
 
-    var teste = pedidosJSON();
-    var teste2 = [];
+    var grafico_json = pedidosJSON();
+    var grafico_formatado = [];
 
-    $.each(teste, function (i, obj) {
-        teste2.push([obj.mes, obj.quantidade]);
+    $.each(grafico_json, function (i, obj) {
+        grafico_formatado.push([obj.mes, obj.quantidade]);
     });
-
-    console.log(teste2);
 
     var data = new google.visualization.DataTable();
 
     data.addColumn('string', 'Mês');
     data.addColumn('number', 'Quantidade');
-    data.addRows(teste2);
+    data.addRows(grafico_formatado);
 
     var options = {
         title: 'Entregas (30 min)'
@@ -33,7 +31,6 @@ function pedidosJSON() {
 
     var arrayJSON = [];
     $.ajax({
-        //url: './JSON/counts.json',
         url: 'jsonServlet',
         data: {datainicial : $('#datainicial').val(), datafinal : $('#datafinal').val()},
         type: 'get',
@@ -55,7 +52,7 @@ $('#datainicial').datetimepicker({
 
     format: 'Y-m-d H:i:s',
 
-    startDate: false, // new Date(), '1986/12/08', '-1970/01/05','-1970/01/05', 
+    startDate: false, 
 
     step: 60,
     monthChangeSpinner: true,
@@ -66,8 +63,8 @@ $('#datainicial').datetimepicker({
     timepicker: true,
     datepicker: true,
 
-    defaultTime: false, // use formatTime format (ex. '10:00' for formatTime:	'H:i')
-    defaultDate: false, // use formatDate format (ex new Date() or '1986/12/08' or '-1970/01/05' or '-1970/01/05')
+    defaultTime: false,
+    defaultDate: false,
 
     minDate: false,
     maxDate: false,
@@ -122,7 +119,7 @@ $('#datafinal').datetimepicker({
 
     format: 'Y-m-d H:i:s',
 
-    startDate: false, // new Date(), '1986/12/08', '-1970/01/05','-1970/01/05', 
+    startDate: false, 
 
     step: 60,
     monthChangeSpinner: true,
@@ -133,8 +130,8 @@ $('#datafinal').datetimepicker({
     timepicker: true,
     datepicker: true,
 
-    defaultTime: false, // use formatTime format (ex. '10:00' for formatTime:	'H:i')
-    defaultDate: false, // use formatDate format (ex new Date() or '1986/12/08' or '-1970/01/05' or '-1970/01/05')
+    defaultTime: false, 
+    defaultDate: false, 
 
     minDate: false,
     maxDate: false,
@@ -155,8 +152,8 @@ $('#datafinal').datetimepicker({
 
     timeHeightInTimePicker: 25,
 
-    todayButton: true, // 2.1.0
-    defaultSelect: true, // 2.1.0
+    todayButton: true, 
+    defaultSelect: true, 
 
     scrollMonth: true,
     scrollTime: true,
@@ -176,7 +173,7 @@ $('#datafinal').datetimepicker({
 
     fixed: false,
 
-    roundTime: 'ceil', // ceil, floor
+    roundTime: 'ceil',
     className: '',
 
     yearOffset: 0,
