@@ -18,6 +18,8 @@ public class ControleLogicoCliente implements ControleLogico {
         
        acessohibernatecliente = new DaoCliente();
        cliente                = new Cliente();
+       
+       // teste do git
     }
     
     @Override
