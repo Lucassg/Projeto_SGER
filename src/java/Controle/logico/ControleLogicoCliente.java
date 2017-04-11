@@ -20,6 +20,7 @@ public class ControleLogicoCliente implements ControleLogico {
        cliente                = new Cliente();
        
        // teste do git
+        //teste do git 2
     }
     
     @Override
