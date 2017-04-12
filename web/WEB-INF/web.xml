@@ -125,16 +125,16 @@
         <jsp-file>/rotas_andamento.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>rota_pedidos</servlet-name>
-        <jsp-file>/rota_pedidos.jsp</jsp-file>
-    </servlet>
-    <servlet>
         <servlet-name>rotas_googlemaps</servlet-name>
         <jsp-file>/rotas_googlemaps.jsp</jsp-file>
     </servlet>
     <servlet>
         <servlet-name>jsonServlet</servlet-name>
         <servlet-class>Controle.jsonServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>rota_pedidos</servlet-name>
+        <jsp-file>/rota_pedidos.jsp</jsp-file>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controle</servlet-name>
@@ -261,16 +261,16 @@
         <url-pattern>/rotas_andamento</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>rota_pedidos</servlet-name>
-        <url-pattern>/rotas_pedidos</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>rotas_googlemaps</servlet-name>
         <url-pattern>/rotas_googlemaps</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>jsonServlet</servlet-name>
         <url-pattern>/jsonServlet</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>rota_pedidos</servlet-name>
+        <url-pattern>/rota_pedidos</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>60</session-timeout>

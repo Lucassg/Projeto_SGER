@@ -65,7 +65,6 @@
                     </tbody>
                 </table>
                 <a href="Controle?classe=ControleLogicoRota&acao=gerar_rotas"><input class="btn btn-primary" type="button" value="Gerar Rotas"></a>       
-                <a href="Controle?classe=ControleLogicoRota&acao=listar_rotas_geradas"><input class="btn btn-primary" type="button" value="Rotas Geradas"></a>
             </div>
         </div>
     </div>

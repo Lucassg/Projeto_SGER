@@ -31,7 +31,6 @@ public class HibernateConfiguracao {
         configuration.addAnnotatedClass(Pedido.class);
         configuration.addAnnotatedClass(Rota.class);
         configuration.addAnnotatedClass(Sger.class);
-        configuration.addAnnotatedClass(Pedido_Rota.class);
         ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(configuration.getProperties()).build();
         sessionFactory = configuration.buildSessionFactory(serviceRegistry);
 
