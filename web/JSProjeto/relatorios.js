@@ -11,7 +11,7 @@ function drawChart() {
     $.each(grafico_json, function (i, obj) {
         grafico_formatado.push([obj.mes, obj.quantidade]);
     });
-
+    
     var data = new google.visualization.DataTable();
 
     data.addColumn('string', 'Mês');
