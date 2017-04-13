@@ -18,9 +18,9 @@ import dao.DaoFuncionario;
 import dao.DaoItens_Pedido;
 import dao.DaoRota;
 import dao.DaoSger;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.Writer;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
+import java.io.OutputStreamWriter;
 import java.text.Normalizer;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -522,15 +522,7 @@ public class ControleLogicoRota implements ControleLogico {
             ListaRotaFinal.add(ListaRota);
             ListaRota = new ArrayList<>();
         }
-//
-//        for (int i = 0; i < ListaRotaFinal.size(); i++) {
-//            try (Writer writer = new FileWriter("./web/JSON/listarotafinal" + i + ".json")) {
-//                Gson gson = new GsonBuilder().create();
-//                gson.toJson(ListaRotaFinal.get(i), writer);
-//                System.out.println("Arquivo JSON criado com sucesso.");
-//            }
-//        }
-//        System.exit(0);
+
         // colocando a lista na sessão
         request.getSession().setAttribute("ListaRotaFinal", ListaRotaFinal);
         entregador_rota(ListaRotaFinal.size(), request, response);
@@ -573,7 +565,7 @@ public class ControleLogicoRota implements ControleLogico {
     public void exibe_pedidos_rota(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<Pedido> PedidosRota;
         this.rota = (Rota) acessohibernaterota.carregarUm(Integer.parseInt(request.getParameter("rota")), Rota.class);
-        
+
         PedidosRota = acessohibernatepedido.carregarPedidosRotas(rota, Pedido.class);
         cria_json_rota(PedidosRota);
         request.setAttribute("Rota", this.rota);
@@ -584,22 +576,13 @@ public class ControleLogicoRota implements ControleLogico {
     public void cria_json_rota(List<Pedido> PedidosRota) throws IOException {
         ArrayList<String> enderecos = new ArrayList<>();
 
-        for (int k = 0; k < PedidosRota.size(); k++) {
-            enderecos.add(removerAcentos(PedidosRota.get(k).getCliente().enderecoToString()));
-        }
+//        for (int k = 0; k < PedidosRota.size(); k++) {
+//            enderecos.add(removerAcentos(PedidosRota.get(k).getCliente().enderecoToString()));
+//        }
 
-        try {
-            System.out.println("/  -> " + new File("/").getCanonicalPath());
-            System.out.println(".. -> " + new File("..").getCanonicalPath());
-            System.out.println(".  -> " + new File(".").getCanonicalPath());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        try (Writer writer = new FileWriter("C:\\Users\\Lucas Garcia\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\enderecos_multiplos_pontos.json")) {
+        try (BufferedWriter buff_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Lucas Garcia\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\enderecos_multiplos_pontos.json", false), "UTF-8"))) {
             Gson gson = new GsonBuilder().create();
-            gson.toJson(enderecos, writer);
-            System.out.println("Arquivo JSON criado com sucesso.");
+            gson.toJson(enderecos, buff_writer);
         }
     }
 
