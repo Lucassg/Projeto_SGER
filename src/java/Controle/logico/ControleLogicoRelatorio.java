@@ -80,9 +80,6 @@ public class ControleLogicoRelatorio implements ControleLogico {
             Logger.getLogger(ControleLogicoRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        System.out.println("data inicial controlelogico: " + datainicio);
-        System.out.println("data final controlelogico: " + datafinal);
-
         List<Pedido> ListaRelatorio = new ArrayList<>();
         List<Funcionario> ListaEntregador = new ArrayList<>();
         ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosEntregues(Pedido.class, datainicio, datafinal);
@@ -106,11 +103,9 @@ public class ControleLogicoRelatorio implements ControleLogico {
 
         Gson gson = new Gson();
 
-        //try (Writer writer = new FileWriter("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts.json")) {
         try (BufferedWriter out = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts.json", false), "UTF-8"))) {
             gson = new GsonBuilder().create();
             gson.toJson(ListaPedidosEntregues, out);
-            System.out.println("Arquivo JSON criado com sucesso.");
         }
     }
 
@@ -126,10 +121,6 @@ public class ControleLogicoRelatorio implements ControleLogico {
         int id = Integer.parseInt(request.getParameter("entregador"));
         this.funcionario = (Funcionario) acessohibernatefuncionario.carregarUm(id, Funcionario.class);
         List<Rota> ListaRotas = acessohibernaterota.consultaRotaEntregador(Rota.class, funcionario);
-
-        ListaRotas.forEach(l -> System.out.println("Rota id: " + l.getId() + "Ent nome: " + l.getFuncionario().getNome()));
-        //request.setAttribute("ListaEntregadores", ListaEntregadores);
-        //request.getRequestDispatcher("relatorios").forward(request, response);
     }
 
     static class pedidosEntregues {
