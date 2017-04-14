@@ -34,17 +34,15 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"><center><b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
         </div>
-        <div class="section">
-            <div class="sectionright">
-                <form name="fomularioPesquisa" action="Controle?classe=ControleLogicoCliente&acao=buscar_cliente" method="POST" >
-                    <b>Pesquisar: &nbsp;</b>
-                    <input type="search" placeholder="Nome, CPF, Telefone" name="pesquisa" size="20" title="Informe Nome, CPF, Celular ou Telefone" autofocus required>
-                    <input type="submit" class="btn btn-primary btn-sm" value="Buscar" name="buscar"/>
-                </form>
-            </div>
-        </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">        
             <div class="table-responsive">
+                <div class="sectionright">
+                    <form name="fomularioPesquisa" action="Controle?classe=ControleLogicoCliente&acao=buscar_cliente" method="POST" >
+                        <b>Pesquisar: &nbsp;</b>
+                        <input type="search" placeholder="Nome, CPF, Telefone" name="pesquisa" size="20" title="Informe Nome, CPF, Celular ou Telefone" autofocus required>
+                        <input type="submit" class="btn btn-primary btn-sm" value="Buscar" name="buscar"/>
+                    </form>
+                </div>
                 <div class="sectionleft">
                     <b id="nametable">Clientes</b>
                 </div>
