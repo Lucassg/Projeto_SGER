@@ -88,6 +88,14 @@
                                 <ul/>
                                 <tr>
                                     <td>
+                                        <dl><label for="cep">CEP: </label></dl>
+                                    </td>
+                                    <td align="left">
+                                        <dl><input type="text" name="cep" size="8" required></dl>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
                                         <dl><label for="rua">End: </label></dl>
                                     </td>
                                     <td align="left">
@@ -156,14 +164,6 @@
                                                 <option>TO</option>
                                             </select>
                                         </dl>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <dl><label for="cep">CEP: </label></dl>
-                                    </td>
-                                    <td align="left">
-                                        <dl><input type="text" name="cep" size="5" maxlength="5" required> - <input type="text" name="cep2" size="3" maxlength="3" required></dl>
                                     </td>
                                 </tr>
                             </table>

@@ -94,6 +94,14 @@
                                     <ul/>
                                     <tr>
                                         <td>
+                                            <dl><label for="cep">CEP: </label></dl>
+                                        </td>
+                                        <td align="left">
+                                            <dl><input type="text" name="cep" size="8"  value="${cliente.cep}" required></dl>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
                                             <dl><label for="rua">End: </label></dl>
                                         </td>
                                         <td align="left">
@@ -134,14 +142,6 @@
                                             <dl><input type="text" name="uf" size="2" value="${cliente.uf}" required></dl>
                                         </td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <dl><label for="cep">CEP: </label></dl>
-                                        </td>
-                                        <td align="left">
-                                            <dl><input type="text" name="cep" size="8"  value="${cliente.cep}" required></dl>
-                                        </td>
-                                    </tr>
                                 </table>
                             </fieldset>
                             <br/>
@@ -153,5 +153,4 @@
         </div>
     </div>
 </div>
-
 <jsp:include page="footer.jsp"/>
