@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="Funcionario" scope="request" class="model.Funcionario"/>
 <jsp:include page="header.jsp"/>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -31,25 +31,29 @@
                 </ul>
             </c:if>
         </div>
-        <jsp:useBean id="Funcionario" scope="request" class="model.Funcionario"/>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"> <center> <b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <div class="sectionrightf">
+                    <form name="fomularioPesquisa" action="Controle?classe=ControleLogicoFuncionario&acao=buscar_funcionario" method="POST">
+                        <b>Pesquisar: &nbsp;</b>
+                        <input type="search" name="pesquisa" placeholder="Nome, CPF, Telefone / Usuario" size="28" required autofocus title="Informe o Nome, CPF, Telefone ou Usuario do Funcionário">
+                        <input type="submit" class="btn btn-primary btn-sm" value="Buscar" name="buscar"/>
+                    </form>  
+                </div>
+                <div class="sectionleft">
+                    <b id="nametable">Funcionários</b>
+                </div>
+                <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th colspan="4"><h2>FUNCIONÁRIOS</h2><td align="right">
-                                <form name="fomularioPesquisa" action="Controle?classe=ControleLogicoFuncionario&acao=buscar_funcionario" method="POST">
-                                    <b>Pesquisar: &nbsp;&nbsp;</b><input type="search" name="pesquisa" placeholder="Nome, CPF, Telefone ou Usuario" size="30" required autofocus title="Informe o Nome, CPF, Telefone ou Usuario do Funcionário">
-                                    <a href="#"><input type="submit" class="btn btn-primary btn-sm" value="Buscar" name="buscar"/>
-                                    </a></td></form></th>
-                        </tr>
                         <tr>
                             <th>Nome</th>
                             <th>Celular</th>
                             <th>Ativo</th>
                             <th>Função</th>
-                            <th><input type="image" src="img/pencil.png"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,5 +73,4 @@
         </div>
     </div>
 </div>
-
 <jsp:include page="footer.jsp"/>

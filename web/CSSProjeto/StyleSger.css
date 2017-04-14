@@ -18,6 +18,14 @@
     text-align: left;
 }
 
+.sectionrightf{
+    width:30%;
+    margin-right:14%;
+    float:right;
+    display: inline;
+    text-align: left;
+}
+
 #nametable{
     font-size: 32px;
     color: #337ab7;    
