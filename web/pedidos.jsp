@@ -1,6 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<jsp:useBean id="Pedido" scope="request" class="model.Pedido"/>
 <jsp:include page="header.jsp"/>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -31,37 +31,37 @@
                 </ul>
             </c:if>
         </div>
-        <jsp:useBean id="Pedido" scope="request" class="model.Pedido"/>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"> <center> <b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
-            <div class="table-responsive"> 
-                <table class="table table-striped">
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div class="table-responsive">
+                <div class="sectionright">
+                    <form name="fomularioCadastro" action="Controle?classe=ControleLogicoPedido&acao=listar_pedido_status" method="POST"> 
+                        <select name="statusEscolhido">
+                            <option value="todos" selected>Todos</option> 
+                            <option value="Aguardando Entrega">Aguardando Entrega</option> 
+                            <option value="Entrega em Andamento">Entrega em Andamento</option>
+                            <option value="Cancelado">Cancelado</option> 
+                            <option value="Entregue">Entregue</option>
+                            <option value="Não Entregue">Não Entregue</option>
+                        </select>&nbsp;
+                        <input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
+                    </form>
+                </div>
+                <div class="sectionleft">
+                    <b id="nametable">Pedidos</b>
+                </div>
+                <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th colspan="4">
-                                <a href="Controle?classe=ControleLogicoRedirecionamento&page=pedidos_cadastro"><input class="btn btn-primary" type="button"value="Inserir Pedido"></a>
-                                <a href="Controle?classe=ControleLogicoRedirecionamento&page=pedidos_pesquisar"><input class="btn btn-primary" type="button" value="Pesquisar Pedido"></a>
-                                <form name="fomularioCadastro" action="Controle?classe=ControleLogicoPedido&acao=listar_pedido_status" method="POST">    
-                            <td align="right">   
-                                <select name="statusEscolhido">
-                                    <option value="todos" selected>Todos</option> 
-                                    <option value="Aguardando Entrega">Aguardando Entrega</option> 
-                                    <option value="Entrega em Andamento">Entrega em Andamento</option>
-                                    <option value="Cancelado">Cancelado</option> 
-                                    <option value="Entregue">Entregue</option>
-                                    <option value="Não Entregue">Não Entregue</option>
-                                </select>&nbsp; <a href="#"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
-                            </td></form></th>     
+                            <th>ID</th>
+                            <th>Status</th>
+                            <th>Cliente</th>
+                            <th>Valor(R$)</th>
+                            <th>Data</th>
+                            <th></th>
                         </tr>
-                    <br/>
-                    <tr>
-                        <th>ID</th>
-                        <th>Status</th>
-                        <th>Cliente</th>
-                        <th>Valor</th>
-                        <th>Data</th>
-                        <th></th>
-                    </tr>
                     </thead>
                     <tbody>
                         <c:forEach items="${ListaPedidos}" var="Pedido">
@@ -77,8 +77,9 @@
                     </tbody>
                 </table>
             </div>
+            <a href="Controle?classe=ControleLogicoRedirecionamento&page=pedidos_cadastro"><input class="btn btn-primary" type="button"value="Inserir Pedido"></a>
+            <a href="Controle?classe=ControleLogicoRedirecionamento&page=pedidos_pesquisar"><input class="btn btn-primary" type="button" value="Pesquisar Pedido"></a>
         </div>	  
     </div>
 </div>
-
 <jsp:include page="footer.jsp"/>
