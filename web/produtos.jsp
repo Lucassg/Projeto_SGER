@@ -1,6 +1,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<jsp:useBean id="Produto" scope="request" class="model.Produto"/>
 <jsp:include page="header.jsp"/>
-
 <div class="container-fluid">
     <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -30,26 +30,30 @@
                     <li><a href="Controle?classe=ControleLogicoFuncionario&acao=listar_funcionario">FUNCIONÁRIOS</a></li>
                 </ul>
             </c:if>
-        </div>
-        <jsp:useBean id="Produto" scope="request" class="model.Produto"/>
+        </div>        
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"> <center> <b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div class="table-responsive">
-                <table class="table table-striped">
+                <div class="sectionright">
+                    <form name="fomularioPesquisa" action="Controle?classe=ControleLogicoProduto&acao=buscar_produto" method="POST">
+                        <b>Pesquisar: &nbsp;</b>
+                        <input type="search" name="pesquisa"  placeholder="Nome ou descrição Produto" size="25" autofocus required title="Informe Nome ou Descrição do Produto">
+                        <input type="submit" class="btn btn-primary btn-sm" value="Buscar" name="buscar"/>
+                    </form>
+                </div>
+                <div class="sectionleft">
+                    <b id="nametable">Produtos</b>
+                </div>
+                <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th colspan="4"><h2>PRODUTOS</h2><td align="right">
-                                <form name="fomularioPesquisa" action="Controle?classe=ControleLogicoProduto&acao=buscar_produto" method="POST">
-                                    <b>Pesquisar: &nbsp;&nbsp;</b><input type="search" name="pesquisa"  placeholder="Nome ou descrição Produto" size="25" autofocus required title="Informe Nome ou Descrição do Produto">
-                                    <a href="#"><input type="submit" class="btn btn-primary btn-sm" value="Buscar" name="buscar"/>
-                                    </a></td></form></th>
-                        </tr>
                         <tr>
                             <th>Nome</th>
                             <th>Descrição</th>
                             <th>Valor(R$)</th>
                             <th>Ativo</th>
-                            <th><input type="image" src="img/pencil.png"></th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -69,5 +73,4 @@
         </div>
     </div>
 </div>
-
 <jsp:include page="footer.jsp"/>
