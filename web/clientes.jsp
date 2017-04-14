@@ -1,5 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<jsp:useBean id="Cliente" scope="request" class="model.Cliente"/>
 <jsp:include page="header.jsp"/>
 <div class="container-fluid">
     <div class="row">
@@ -30,21 +30,26 @@
                     <li><a href="Controle?classe=ControleLogicoFuncionario&acao=listar_funcionario">FUNCIONÁRIOS</a></li>
                 </ul>
             </c:if>
+        </div> 
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <h1 class="page-header"><center><b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
         </div>
-        <jsp:useBean id="Cliente" scope="request" class="model.Cliente"/>
-        <h1 class="page-header"><center><b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
+        <div class="section">
+            <div class="sectionright">
+                <form name="fomularioPesquisa" action="Controle?classe=ControleLogicoCliente&acao=buscar_cliente" method="POST" >
+                    <b>Pesquisar: &nbsp;</b>
+                    <input type="search" placeholder="Nome, CPF, Telefone" name="pesquisa" size="20" title="Informe Nome, CPF, Celular ou Telefone" autofocus required>
+                    <input type="submit" class="btn btn-primary btn-sm" value="Buscar" name="buscar"/>
+                </form>
+            </div>
+        </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">        
             <div class="table-responsive">
-                <table class="table">
+                <div class="sectionleft">
+                    <b id="nametable">Clientes</b>
+                </div>
+                <table class="table table-bordered">
                     <thead>
-                        <tr>
-                            <th colspan="4"><h2>CLIENTES</h2><td align="right">
-                                <form name="fomularioPesquisa" action="Controle?classe=ControleLogicoCliente&acao=buscar_cliente" method="POST" >
-                                    <b>Pesquisar: &nbsp;&nbsp;</b>
-                                    <input type="search" placeholder="Nome, CPF, Telefone" name="pesquisa" size="20" title="Informe Nome, CPF, Celular ou Telefone" autofocus required>
-                                    <a href="#"><input type="submit" class="btn btn-primary btn-sm" value="Buscar" name="buscar"/>
-                                    </a></td></form></th>
-                        </tr>
                         <tr>
                             <th>Nome</th>
                             <th>Celular</th>
