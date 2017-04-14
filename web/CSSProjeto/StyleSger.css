@@ -22,13 +22,3 @@
     font-size: 32px;
     color: #337ab7;    
 }
-.textleft{ 
-/* id */
-    float: left;
-    clear: both; 
-}
-
-.textright{
-    float: right;
-    clear: both; 
-}
