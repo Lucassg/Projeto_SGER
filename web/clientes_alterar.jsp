@@ -89,6 +89,14 @@
                                 <ul/>
                                 <tr>
                                     <td>
+                                        <dl><label for="cep">CEP: </label></dl>
+                                    </td>
+                                    <td align="left">
+                                        <dl><input type="text" name="cep" size="8" value="${cliente.cep}" required></dl>
+                                    </td>
+                                </tr>    
+                                <tr>
+                                    <td>
                                         <dl><label for="rua">End: </label></dl>
                                     </td>
                                     <td align="left">
@@ -130,12 +138,6 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td>
-                                        <dl><label for="cep">CEP: </label></dl>
-                                    </td>
-                                    <td align="left">
-                                        <dl><input type="text" name="cep" size="8" value="${cliente.cep}" required></dl>
-                                    </td>
                                     <td>
                                         <dl><label for="ativo">Ativo:</label></dl>
                                     </td>
