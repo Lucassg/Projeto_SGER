@@ -30,3 +30,17 @@
     font-size: 32px;
     color: #337ab7;    
 }
+
+#chart1{
+    width:50%;
+    height:600px;
+    float:left;
+    display: inline;
+}
+
+#chart2{
+    width:50%;
+    height:600px;
+    float:left;
+    display: inline;
+}
