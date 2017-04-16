@@ -14,7 +14,9 @@ function drawChart1() {
 
     var options = {
         title: 'Pedidos Fechados',
+        titleTextStyle:{fontSize: 32, bold:true},
         legend:'top',
+//        pieSliceText:'value',
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('chart1'));
@@ -32,6 +34,7 @@ function drawChart2() {
 
     var options = {
         title: 'Pedidos Abertos',
+        titleTextStyle:{fontSize: 32, bold:true},
         legend:'top',
     };
 
