@@ -33,5 +33,16 @@ public class DaoRelatorio extends DaoGenerico {
         List lista = criteria.list();
         session.close();
         return lista;
-    }    
+    }   
+    
+    public List PedidosAbertos(Class clas) throws HibernateException {
+        Session session = hibernateConfiguracao.openSession();
+        Criteria criteria = session.createCriteria(clas);
+        criteria.add(Restrictions.or(Restrictions.eq("status", "Aguardando Entrega"), Restrictions.eq("status", "Entrega em Andamento")));
+//        criteria.setMaxResults(5);
+        List lista = criteria.list();
+        session.close();
+        return lista;
+    }
+    
 }
