@@ -68,6 +68,7 @@
                         </div>
                     </div>
                     <input id="Buscar1" class="btn btn-primary btn-xs" type="submit" value="Buscar1" name="buscar1" onclick="drawChart()"/>
+                    <input id="Buscar2" class="btn btn-primary btn-xs" type="submit" value="Buscar2" name="buscar2" onclick="imprime()"/>
                     </tr>
                     <tr>
                     <div id="container" style="width: 1000px; height: 600px; margin: 0 auto"></div>

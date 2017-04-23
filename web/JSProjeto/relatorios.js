@@ -1,11 +1,17 @@
 google.charts.load('current', {packages: ['corechart']});
-var point1, point2, dataArray = [];
+var grafico_json;
 
 document.getElementById("Buscar1").onclick = drawChart;
 
+document.getElementById("Buscar2").onclick = imprime;
+
+function imprime(){
+    console.log(grafico_json);
+}
+
 function drawChart() {
 
-    var grafico_json = pedidosJSON();
+    grafico_json = pedidosJSON();
     var grafico_formatado = [];
 
     $.each(grafico_json, function (i, obj) {
@@ -19,7 +25,9 @@ function drawChart() {
     data.addRows(grafico_formatado);
 
     var options = {
-        title: 'Entregas (30 min)'
+        title: 'Entregas (30 min)',
+        legend: 'top',
+        isStacked: true
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('container'));

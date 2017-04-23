@@ -1,13 +1,1 @@
-[{
-        "mes": "Janeiro",
-        "quantidade": 2
-    }, {
-        "mes": "Dezembro",
-        "quantidade": 10
-    }, {
-        "mes": "Março",
-        "quantidade": 10
-    }, {
-        "mes": "Fevereiro",
-        "quantidade": 4
-    }]
+[{"mes":"Julho","quantidade":1},{"mes":"Junho","quantidade":1},{"mes":"Outubro","quantidade":3},{"mes":"Abril","quantidade":4},{"mes":"Janeiro","quantidade":5},{"mes":"Dezembro","quantidade":10},{"mes":"Março","quantidade":10},{"mes":"Maio","quantidade":1},{"mes":"Setembro","quantidade":1},{"mes":"Fevereiro","quantidade":5},{"mes":"Agosto","quantidade":1},{"mes":"Novembro","quantidade":2}]
