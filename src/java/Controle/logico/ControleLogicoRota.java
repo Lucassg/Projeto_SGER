@@ -106,7 +106,7 @@ public class ControleLogicoRota implements ControleLogico {
 
     }
 
-    public void gerar_rotas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        public void gerar_rotas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         Sger sger = new Sger();
         List<RotaTemp> ListaParesPedidos = new ArrayList<>();

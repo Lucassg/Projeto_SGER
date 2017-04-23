@@ -124,7 +124,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <dl><label for="usuario">Usuario: &nbsp;</label></dl>
+                                        <dl><label for="usuario">Usuário: &nbsp;</label></dl>
                                     </td>
                                     <td align="left">
                                         <dl><input type="text" name="usuario" size="10" value="${Funcionario.usuario}" required></dl>

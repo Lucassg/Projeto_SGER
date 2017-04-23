@@ -1,7 +1,5 @@
 package teste;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.maps.DistanceMatrixApi;
 import com.google.maps.GeoApiContext;
 import com.google.maps.model.DistanceMatrix;
@@ -9,8 +7,6 @@ import com.google.maps.model.Unit;
 import dao.DaoItens_Pedido;
 import dao.DaoPedido;
 import dao.DaoSger;
-import java.io.FileWriter;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
