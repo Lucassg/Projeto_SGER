@@ -36,8 +36,6 @@ function drawChart2() {
         grafico_formatado.push([i, grafico_json[i]]);
     }
 
-    console.log(grafico_formatado);
-
     var data = new google.visualization.DataTable();
 
     data.addColumn('string', 'Status');
