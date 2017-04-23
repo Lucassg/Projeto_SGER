@@ -5,7 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import dao.DaoFuncionario;
 import dao.DaoRelatorio;
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -56,7 +59,7 @@ public class jsonServlet extends HttpServlet {
         } catch (ParseException ex) {
             Logger.getLogger(ControleLogicoRelatorio.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         List<Pedido> ListaRelatorio = new ArrayList<>();
         List<Funcionario> ListaEntregador = new ArrayList<>();
         ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosEntregues(Pedido.class, datainicio, datafinal);
@@ -67,6 +70,11 @@ public class jsonServlet extends HttpServlet {
         ListaRelatorio.forEach(l -> ListaMeses.add(mes.format(l.getData_hora_pedido())));
         Map<String, Long> counts = ListaMeses.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
+        try (BufferedWriter buff_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts_hashmap.json", false), "UTF-8"))) {
+            Gson gson = new GsonBuilder().create();
+            gson.toJson(counts, buff_writer);
+        }
+
         jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
         List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
         ListaPedidosEntregues = new ArrayList<>();
@@ -74,45 +82,45 @@ public class jsonServlet extends HttpServlet {
         for (Map.Entry<String, Long> count : counts.entrySet()) {
             PedidosEntregues.setMes(count.getKey());
             PedidosEntregues.setQuantidade(count.getValue());
-            String[] split_data = PedidosEntregues.getMes().split(" "); 
-            
-            switch(split_data[0]){
+            String[] split_data = PedidosEntregues.getMes().split(" ");
+
+            switch (split_data[0]) {
                 case "Janeiro":
-                PedidosEntregues.setMes_numero(1);
-                break;
+                    PedidosEntregues.setMes_numero(1);
+                    break;
                 case "Fevereiro":
-                PedidosEntregues.setMes_numero(2);
-                break;
+                    PedidosEntregues.setMes_numero(2);
+                    break;
                 case "Março":
-                PedidosEntregues.setMes_numero(3);
-                break;
+                    PedidosEntregues.setMes_numero(3);
+                    break;
                 case "Abril":
-                PedidosEntregues.setMes_numero(4);
-                break;
+                    PedidosEntregues.setMes_numero(4);
+                    break;
                 case "Maio":
-                PedidosEntregues.setMes_numero(5);
-                break;
+                    PedidosEntregues.setMes_numero(5);
+                    break;
                 case "Junho":
-                PedidosEntregues.setMes_numero(6);
-                break;
+                    PedidosEntregues.setMes_numero(6);
+                    break;
                 case "Julho":
-                PedidosEntregues.setMes_numero(7);
-                break;
+                    PedidosEntregues.setMes_numero(7);
+                    break;
                 case "Agosto":
-                PedidosEntregues.setMes_numero(8);
-                break;
+                    PedidosEntregues.setMes_numero(8);
+                    break;
                 case "Setembro":
-                PedidosEntregues.setMes_numero(9);
-                break;
+                    PedidosEntregues.setMes_numero(9);
+                    break;
                 case "Outubro":
-                PedidosEntregues.setMes_numero(10);
-                break;
+                    PedidosEntregues.setMes_numero(10);
+                    break;
                 case "Novembro":
-                PedidosEntregues.setMes_numero(11);
-                break;
+                    PedidosEntregues.setMes_numero(11);
+                    break;
                 case "Dezembro":
-                PedidosEntregues.setMes_numero(12);
-                break;
+                    PedidosEntregues.setMes_numero(12);
+                    break;
             }
             PedidosEntregues.setAno(Integer.parseInt(split_data[1]));
             ListaPedidosEntregues.add(PedidosEntregues);
@@ -124,7 +132,8 @@ public class jsonServlet extends HttpServlet {
         String json;
         Gson gson = new Gson();
         gson = new GsonBuilder().create();
-        json = gson.toJson(ListaPedidosEntregues);
+//        json = gson.toJson(ListaPedidosEntregues);
+        json = gson.toJson(counts);
 
         response.setContentType("application/json");
         response.getWriter().write(json);
@@ -132,7 +141,7 @@ public class jsonServlet extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-    
+
     }
 
     static class pedidosEntregues {

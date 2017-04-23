@@ -580,10 +580,10 @@ public class ControleLogicoRota implements ControleLogico {
 //            enderecos.add(removerAcentos(PedidosRota.get(k).getCliente().enderecoToString()));
 //        }
 
-        try (BufferedWriter buff_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Lucas Garcia\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\enderecos_multiplos_pontos.json", false), "UTF-8"))) {
-            Gson gson = new GsonBuilder().create();
-            gson.toJson(enderecos, buff_writer);
-        }
+    try (BufferedWriter buff_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Lucas Garcia\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\enderecos_multiplos_pontos.json", false), "UTF-8"))) {
+        Gson gson = new GsonBuilder().create();
+        gson.toJson(enderecos, buff_writer);
+    }
     }
 
     public void entregador_rota(int qtderotas, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -51,7 +51,7 @@
                             <form name="datas" action="Controle?classe=ControleLogicoRelatorio&acao=gera_relatorio" method="POST">
                                 <p >Data Inicial: <input type="text" id="datainicial" name="datainicial"/></p>
                                 <p >Data Final: <input type="text" id="datafinal" name="datafinal"/></p>
-                                &nbsp; <a href="#"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
+                                <!--&nbsp; <a href="#"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>removendo botão da tela-->
                             </form>
                         </div>
 
@@ -63,7 +63,7 @@
                                         <option value="${Entregador.id}">${Entregador.nome}</option>
                                     </c:forEach>
                                 </select>
-                                &nbsp; <a href="#"><input id="Buscar" class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>
+                                <!--&nbsp; <a href="#"><input id="Buscar" class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>removendo botão da tela-->
                             </form>
                         </div>
                     </div>
