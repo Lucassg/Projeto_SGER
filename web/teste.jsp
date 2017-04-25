@@ -42,6 +42,7 @@
                 </form>
             </div>
             <input id="Buscar1" class="btn btn-primary btn-xs" type="submit" value="Buscar1" name="buscar1" onclick="drawChart()"/>
+            <input id="Buscar2" class="btn btn-primary btn-xs" type="submit" value="Buscar2" name="buscar2" onclick="chartTest()"/>
         </div>
         <div id="divcolumn" class="graf" style="background: #000; float: top; width: 600px; height: 400px; margin: 0 auto">
             <br>
@@ -63,6 +64,7 @@
                 <input id="column" type="radio" name="chart" value="pie"> Pie
             </form>
         </div>
+        <div id="div7" style="float: bottom; width: 1000px; height: 600px; margin: 0 auto"></div>
     </body>
     <script type="text/javascript" src="JSProjeto/jquery-3.1.1.min.js"></script>
     <script type="text/javascript" src="JSProjeto/jquery-ui.min.js"></script>
