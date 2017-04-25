@@ -47,27 +47,27 @@
                 </select>
             </div>
             <div class="tiporelt">
-                <div id="pentregues" style="display: none;">
+                <div id="pentregues" class="hidediv">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosEntregues()"/>
                 </div>
-                <div id="pentregador" style="display: none;">
+                <div id="pentregador" class="hidediv">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosPorEntreguador()"/>
                 </div>
-                <div id="pnentregues" style="display: none;">
+                <div id="pnentregues" class="hidediv">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosNEntregues()"/>
                 </div>
-                <div id="pgerado" style="display: none;">
+                <div id="pgerado" class="hidediv">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="prejuizoGerado()"/>
                 </div>
-                <div id="pnejustificativa" style="display: none;">
+                <div id="pnejustificativa" class="hidediv">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pNEtreguePorJustificativa()"/>
@@ -78,7 +78,7 @@
         <div id="divcombo" class="graf"></div>
         <div id="divbar" class="graf"></div>
         <div id="divpie" class="graf"></div>
-        <div id="radiotela">
+        <div id="radiotela" class="hidediv">
             <input id="pie" type="radio" name="chart" value="column"> Column
             <input id="combo" type="radio" name="chart" value="combo"> Combo
             <input id="bar" type="radio" name="chart" value="bar"> Bar

@@ -64,6 +64,10 @@
     margin: 0 auto;
 }
 
+.hidediv{
+    display: none;   
+}
+
 #nametable{
     font-size: 32px;
     color: #337ab7;    
