@@ -1,5 +1,5 @@
 google.charts.load('current', {packages: ['corechart']});
-var data = new google.visualization.DataTable();
+var data;
 var options;
 var grafico_json = new Object();
 var tipo_graf;
@@ -7,7 +7,22 @@ var tipo_graf;
 $(document).ready(function () {
     $("input[name$='chart']").click(function () {
         var select = $(this).val();
-
+        if (select == "column") {
+            var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+            chart.draw(data, options);
+        }
+        if (select == "pie") {
+            var chart = new google.visualization.PieChart(document.getElementById('divpie'));
+            chart.draw(data, options);
+        }
+        if (select == "combo") {
+            var chart = new google.visualization.ComboChart(document.getElementById('divcombo'));
+            chart.draw(data, options);
+        }
+        if (select == "bar") {
+            var chart = new google.visualization.BarChart(document.getElementById('divbar'));
+            chart.draw(data, options);
+        }
         $("div.graf").hide();
         $("#div" + select).show();
     });
@@ -55,6 +70,8 @@ function drawChart() {
     $.each(grafico_json, function (i, obj) {
         grafico_formatado.push([obj.mes, obj.quantidade]);
     });
+    
+    data = new google.visualization.DataTable();
 
     data.addColumn('string', 'Mês');
     data.addColumn('number', 'Quantidade');
@@ -65,10 +82,11 @@ function drawChart() {
         legend: 'top',
         isStacked: true
     };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+    chart.draw(data, options);
 }
 
-var chart = new google.visualization.ColumnChart(document.getElementById('divpie'));
-chart.draw(data, options);
 
 function relatorioNaoEntregues() {
 
