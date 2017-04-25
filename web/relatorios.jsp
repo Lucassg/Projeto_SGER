@@ -78,13 +78,11 @@
         <div id="divcombo" class="graf"></div>
         <div id="divbar" class="graf"></div>
         <div id="divpie" class="graf"></div>
-                <div id="div6" style="float: bottom; width: 400px; margin: 0 auto">
-            <form action="" >
-                <input id="pie" type="radio" name="chart" value="column"> Column
-                <input id="combo" type="radio" name="chart" value="combo"> Combo
-                <input id="bar" type="radio" name="chart" value="bar"> Bar
-                <input id="column" type="radio" name="chart" value="pie"> Pie
-            </form>
+        <div id="radiotela" style="">
+            <input id="pie" type="radio" name="chart" value="column"> Column
+            <input id="combo" type="radio" name="chart" value="combo"> Combo
+            <input id="bar" type="radio" name="chart" value="bar"> Bar
+            <input id="column" type="radio" name="chart" value="pie"> Pie
         </div>
     </div>	
 </div>

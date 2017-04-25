@@ -82,3 +82,9 @@
     float:left;
     display: inline;
 }
+
+#radiotela{
+    float: bottom; 
+    width: 400px; 
+    margin: 0 auto;
+}
