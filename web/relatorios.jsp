@@ -35,56 +35,48 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"><center><b> SGER - Sistema de Gerenciamento de Entregas </b></br>para Restaurantes</center></h1>
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <tr>
-                    <div>
-                        <select id="tiposrelatorios">
-                            <option value=" "></option>
-                            <option value="Pedidos Entregues">Pedidos Entregues</option>
-                            <option value="Pedidos Nao Entregues">Pedidos Nao Entregues</option>
-                            <option value="Pedidos Por Entregador">Pedidos por Entregador</option>
-                        </select>
-                        <br>
-                        <br>
-                        <div id="data" style="display: none;">
-                            <form name="datas" action="Controle?classe=ControleLogicoRelatorio&acao=gera_relatorio" method="POST">
-                                <p >Data Inicial: <input type="text" id="datainicial" name="datainicial"/></p>
-                                <p >Data Final: <input type="text" id="datafinal" name="datafinal"/></p>
-                                <!--&nbsp; <a href="#"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>removendo botão da tela-->
-                            </form>
-                        </div>
-
-                        <div id="entregadores" style="display: none;">
-                            <form name="datas" action="Controle?classe=ControleLogicoRelatorio&acao=relatorio_entregador" method="POST">
-                                <select name="entregador">
-                                    <option value="null"></option>
-                                    <c:forEach items="${ListaEntregadores}" var="Entregador">
-                                        <option value="${Entregador.id}">${Entregador.nome}</option>
-                                    </c:forEach>
-                                </select>
-                                <!--&nbsp; <a href="#"><input id="Buscar" class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>removendo botão da tela-->
-                            </form>
-                        </div>
-                    </div>
-                    <input id="Buscar1" class="btn btn-primary btn-xs" type="submit" value="Buscar1" name="buscar1" onclick="drawChart()"/>
-                    <input id="Buscar2" class="btn btn-primary btn-xs" type="submit" value="Buscar2" name="buscar2" onclick="imprime()"/>
-                    </tr>
-                    <tr>
-                    <div id="container" style="width: 1000px; height: 600px; margin: 0 auto"></div>
-                    </tr>
-                </table>
+            <div class="tiporelt">
+                <b>Tipo de Relatório:</b>
+                <select id="tiposrelatorios">
+                    <option value="null"></option>
+                    <option value="Pedidos Entregues">Pedidos Entregues</option>
+                    <option value="Pedidos Por Entregador">Pedidos Por Entregador</option>
+                    <option value="Pedidos Nao Entregues">Pedidos Não Entregues</option> 
+                    <option value="Prejuizo Gerado">Prejuízo Gerado</option>
+                    <option value="Pedidos Nao Entregues Por Justificativa">Pedidos Não Entregues Por Justificativa</option>
+                </select>
+            </div>
+            <div class="tiporelt">
+                <div id="pentregues" style="display: none;">
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
+                </div>
+                <div id="pentregador" style="display: none;">
+                    Pedido por entregador
+                </div>
+                <div id="pnentregues" style="display: none;">
+                    Pedidos Não Entregues
+                </div>
+                <div id="pgerado" style="display: none;">
+                    Prejuizo Gerado
+                </div>
+                <div id="pnejustificativa" style="display: none;">
+                    Pedidos Não Entregues por Justificativa
+                </div>
             </div>
         </div>
+        <div id="divcolumn" class="graf"></div>
+        <div id="divcombo" class="graf"></div>
+        <div id="divbar" class="graf"></div>
+        <div id="divpie" class="graf"></div>
     </div>	
 </div>
-
 <script type="text/javascript" src="JSProjeto/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="JSProjeto/jquery-ui.min.js"></script>
 <script type="text/javascript" src="JSProjeto/jquery.datetimepicker.min.js"></script>
 <script type="text/javascript" src="JSProjeto/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="JSProjeto/relatorios.js"></script>
-</body>
 
 <jsp:include page="footer.jsp"/>

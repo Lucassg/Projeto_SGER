@@ -1,9 +1,48 @@
 google.charts.load('current', {packages: ['corechart']});
 var grafico_json;
 
-document.getElementById("Buscar1").onclick = drawChart;
-
-document.getElementById("Buscar2").onclick = imprime;
+$(document).ready(function () {
+    $('#tiposrelatorios').change(function () {
+        
+        if ($('#tiposrelatorios').val() == 'Pedidos Entregues'){
+            $('#pentregues').show();
+            $('#pentregador').hide();
+            $('#pnentregues').hide();
+            $('#pgerado').hide();
+            $('#pnejustificativa').hide();
+        } else if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador'){
+            $('#pentregador').show();
+            $('#pentregues').hide();
+            $('#pnentregues').hide();
+            $('#pgerado').hide();
+            $('#pnejustificativa').hide();
+        } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues'){
+            $('#pnentregues').show();
+            $('#pentregues').hide();
+            $('#pentregador').hide();
+            $('#pgerado').hide();
+            $('#pnejustificativa').hide();
+        } else if ($('#tiposrelatorios').val() == 'Prejuizo Gerado'){
+            $('#pgerado').show();
+            $('#pentregues').hide();
+            $('#pentregador').hide();
+            $('#pnentregues').hide();
+            $('#pnejustificativa').hide();
+        } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues Por Justificativa'){
+            $('#pnejustificativa').show();
+            $('#pentregues').hide();
+            $('#pentregador').hide();
+            $('#pnentregues').hide();
+            $('#pgerado').hide();
+        } else {
+            $('#pentregues').hide();
+            $('#pentregador').hide();
+            $('#pnentregues').hide();
+            $('#pgerado').hide();
+            $('#pnejustificativa').hide();
+        }        
+    });
+});
 
 function imprime(){
     console.log(grafico_json);
@@ -188,21 +227,4 @@ $('#datafinal').datetimepicker({
 
     yearOffset: 0,
     beforeShowDay: null
-});
-
-$(document).ready(function () {
-    $('#tiposrelatorios').change(function () {
-
-        if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues' || $('#tiposrelatorios').val() == 'Pedidos Entregues') {
-            $('#data').show();
-        } else {
-            $('#data').hide();
-        }
-
-        if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador') {
-            $('#entregadores').show();
-        } else {
-            $('#entregadores').hide();
-        }
-    });
 });

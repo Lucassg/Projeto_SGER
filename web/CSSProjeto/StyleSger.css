@@ -26,6 +26,44 @@
     text-align: left;
 }
 
+.tiporelt{
+    margin-bottom: 1%;
+    width:100%;
+    float:left;
+}
+
+.nameinput{
+    font-size: 14px
+}
+
+.divcolumn{ 
+    float: top; 
+    width: 600px; 
+    height: 400px; 
+    margin: 0 auto;
+}
+
+.divcombo{ 
+    float: top; 
+    width: 600px; 
+    height: 400px; 
+    margin: 0 auto;
+}
+
+.divbar{ 
+    float: top; 
+    width: 600px; 
+    height: 400px; 
+    margin: 0 auto;
+}
+
+.divpie{ 
+    float: top; 
+    width: 600px; 
+    height: 400px; 
+    margin: 0 auto;
+}
+
 #nametable{
     font-size: 32px;
     color: #337ab7;    
