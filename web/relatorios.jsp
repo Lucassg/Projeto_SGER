@@ -50,27 +50,27 @@
                 <div id="pentregues" style="display: none;">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosEntregues()"/>
                 </div>
                 <div id="pentregador" style="display: none;">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosPorEntreguador()"/>
                 </div>
                 <div id="pnentregues" style="display: none;">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosNEntregues()"/>
                 </div>
                 <div id="pgerado" style="display: none;">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="prejuizoGerado()"/>
                 </div>
                 <div id="pnejustificativa" style="display: none;">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pNEtreguePorJustificativa()"/>
                 </div>
             </div>
         </div>
@@ -78,6 +78,14 @@
         <div id="divcombo" class="graf"></div>
         <div id="divbar" class="graf"></div>
         <div id="divpie" class="graf"></div>
+                <div id="div6" style="float: bottom; width: 400px; margin: 0 auto">
+            <form action="" >
+                <input id="pie" type="radio" name="chart" value="column"> Column
+                <input id="combo" type="radio" name="chart" value="combo"> Combo
+                <input id="bar" type="radio" name="chart" value="bar"> Bar
+                <input id="column" type="radio" name="chart" value="pie"> Pie
+            </form>
+        </div>
     </div>	
 </div>
 <script type="text/javascript" src="JSProjeto/jquery-3.1.1.min.js"></script>

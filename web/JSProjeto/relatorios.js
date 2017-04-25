@@ -44,9 +44,50 @@ $(document).ready(function () {
     });
 });
 
-function imprime(){
-    console.log(grafico_json);
-}
+$(document).ready(function () {
+    $("input[name$='chart']").click(function () {
+        var select = $(this).val();
+        if (select == "column") {
+            var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+            chart.draw(data, options);
+        }
+        if (select == "pie") {
+            var chart = new google.visualization.PieChart(document.getElementById('divpie'));
+            chart.draw(data, options);
+        }
+        if (select == "combo") {
+            var chart = new google.visualization.ComboChart(document.getElementById('divcombo'));
+            chart.draw(data, options);
+        }
+        if (select == "bar") {
+            var chart = new google.visualization.BarChart(document.getElementById('divbar'));
+            chart.draw(data, options);
+        }
+        $("div.graf").hide();
+        $("#div" + select).show();
+    });
+});
+
+function pedidosEntregues(){
+    
+};
+
+function pedidosPorEntreguador(){
+    
+};
+
+function pedidosNEntregues(){
+    
+};
+
+function prejuizoGerado(){
+    
+};
+
+function pNEtreguePorJustificativa(){
+    
+};
+
 
 function drawChart() {
 
