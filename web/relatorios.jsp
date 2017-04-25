@@ -53,16 +53,24 @@
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
                 </div>
                 <div id="pentregador" style="display: none;">
-                    Pedido por entregador
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
                 </div>
                 <div id="pnentregues" style="display: none;">
-                    Pedidos Não Entregues
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
                 </div>
                 <div id="pgerado" style="display: none;">
-                    Prejuizo Gerado
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
                 </div>
                 <div id="pnejustificativa" style="display: none;">
-                    Pedidos Não Entregues por Justificativa
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="drawChart()"/>
                 </div>
             </div>
         </div>
