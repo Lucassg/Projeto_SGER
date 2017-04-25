@@ -132,8 +132,8 @@ public class jsonServlet extends HttpServlet {
         String json;
         Gson gson = new Gson();
         gson = new GsonBuilder().create();
-//        json = gson.toJson(ListaPedidosEntregues);
-        json = gson.toJson(counts);
+        json = gson.toJson(ListaPedidosEntregues);
+//        json = gson.toJson(counts);
 
         response.setContentType("application/json");
         response.getWriter().write(json);

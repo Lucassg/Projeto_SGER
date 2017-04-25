@@ -54,6 +54,9 @@ public class ControleLogicoRelatorio implements ControleLogico {
             case "consulta_entregador":
                 consulta_entregador(request, response);
                 break;
+            case "consulta_entregador_teste":
+                consulta_entregador_teste(request, response);
+                break;
             case "relatorio_entregador":
                 relatorio_entregador(request, response);
                 break;
@@ -115,6 +118,14 @@ public class ControleLogicoRelatorio implements ControleLogico {
         ListaEntregadores = (List<Funcionario>) acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
         request.setAttribute("ListaEntregadores", ListaEntregadores);
         request.getRequestDispatcher("relatorios").forward(request, response);
+    }
+    
+    public void consulta_entregador_teste(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        List<Funcionario> ListaEntregadores;
+        ListaEntregadores = (List<Funcionario>) acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
+        request.setAttribute("ListaEntregadores", ListaEntregadores);
+        request.getRequestDispatcher("teste").forward(request, response);
     }
 
     public void relatorio_entregador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
