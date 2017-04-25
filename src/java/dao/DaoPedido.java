@@ -70,7 +70,17 @@ public class DaoPedido extends DaoGenerico {
         Session session = hibernateConfiguracao.openSession();
         Criteria criteria = session.createCriteria(clas);
         criteria.add(Restrictions.eq("status", "Aguardando Entrega"));
-        criteria.setMaxResults(5);
+        criteria.setMaxResults(23);
+        List lista = criteria.list();
+        session.close();
+        return lista;
+    }
+    public List carregarPedidosFechados() throws HibernateException {
+        Session session = hibernateConfiguracao.openSession();
+        Criteria criteria = session.createCriteria(Pedido.class);
+        criteria.add(Restrictions.or(Restrictions.eq("status", "Entregue"), 
+                Restrictions.eq("status", "Não Entregue"),
+                Restrictions.eq("status", "Cancelado")));
         List lista = criteria.list();
         session.close();
         return lista;

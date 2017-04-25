@@ -137,8 +137,8 @@
         <jsp-file>/rota_pedidos.jsp</jsp-file>
     </servlet>
     <servlet>
-        <servlet-name>jsonServleti</servlet-name>
-        <servlet-class>Controle.jsonServleti</servlet-class>
+        <servlet-name>ServletIndex</servlet-name>
+        <servlet-class>Controle.ServletIndex</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Controle</servlet-name>
@@ -277,8 +277,8 @@
         <url-pattern>/rota_pedidos</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>jsonServleti</servlet-name>
-        <url-pattern>/jsonServleti</url-pattern>
+        <servlet-name>ServletIndex</servlet-name>
+        <url-pattern>/ServletIndex</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>60</session-timeout>
