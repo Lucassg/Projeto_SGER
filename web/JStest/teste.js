@@ -4,6 +4,8 @@ var options;
 var grafico_json = new Object();
 var tipo_graf;
 
+document.getElementById("Buscar2").onclick = chartTest;
+
 $(document).ready(function () {
     $("input[name$='chart']").click(function () {
         var select = $(this).val();
@@ -70,7 +72,7 @@ function drawChart() {
     $.each(grafico_json, function (i, obj) {
         grafico_formatado.push([obj.mes, obj.quantidade]);
     });
-    
+
     data = new google.visualization.DataTable();
 
     data.addColumn('string', 'Mês');
@@ -245,5 +247,53 @@ $('#datafinal').datetimepicker({
 
     yearOffset: 0,
     beforeShowDay: null
+});
+
+
+function chartTest() {
+
+    data = new google.visualization.arrayToDataTable([
+        ['Dias', 'Quantidade'],
+        ['1', 10],
+        ['2', 10],
+        ['3', 10],
+        ['4', 10],
+        ['5', 10],
+        ['6', 10],
+        ['7', 10],
+        ['8', 10],
+        ['8', 10],
+        ['9', 10],
+        ['10', 10],
+        ['11', 10],
+        ['12', 10],
+        ['13', 10],
+        ['14', 10],
+        ['15', 10],
+        ['16', 10],
+        ['17', 10],
+        ['18', 10],
+        ['19', 10],
+        ['20', 10],
+        ['21', 10],
+        ['22', 10],
+        ['23', 10],
+        ['24', 10],
+        ['25', 10],
+        ['26', 10],
+        ['27', 10],
+        ['28', 10],
+        ['29', 10],
+        ['30', 10],
+    ]);
+
+    options = {
+        title: 'Entregas (30 min)',
+        legend: 'top',
+        isStacked: true
+    };
+
+    var chart = new google.visualization.BarChart(document.getElementById('div7'));
+    chart.draw(data, options);
+
 }
-);
