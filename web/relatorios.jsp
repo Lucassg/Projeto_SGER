@@ -78,7 +78,7 @@
         <div id="divcombo" class="graf"></div>
         <div id="divbar" class="graf"></div>
         <div id="divpie" class="graf"></div>
-        <div id="radiotela" style="">
+        <div id="radiotela">
             <input id="pie" type="radio" name="chart" value="column"> Column
             <input id="combo" type="radio" name="chart" value="combo"> Combo
             <input id="bar" type="radio" name="chart" value="bar"> Bar
