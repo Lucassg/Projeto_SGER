@@ -144,6 +144,10 @@
         <servlet-name>jsonServleti2</servlet-name>
         <servlet-class>Controle.jsonServleti2</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>jsonServleti2</servlet-name>
+        <servlet-class>Controle.jsonServleti2</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controle</servlet-name>
         <url-pattern>/Controle</url-pattern>
@@ -283,6 +287,10 @@
     <servlet-mapping>
         <servlet-name>ServletIndex</servlet-name>
         <url-pattern>/ServletIndex</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jsonServleti2</servlet-name>
+        <url-pattern>/jsonServleti2</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>jsonServleti2</servlet-name>
