@@ -42,6 +42,7 @@ $(document).ready(function () {
             $('#pnentregues').hide();
             $('#pgerado').hide();
             $('#pnejustificativa').hide();
+            $('#radiotela').hide(); 
         }        
     });
 });
@@ -70,8 +71,7 @@ $(document).ready(function () {
     });
 });
 
-function pedidosEntregues(){
-    
+function pedidosEntregues(){ 
       data = new google.visualization.arrayToDataTable([
         ['Dias', 'Quantidade'],
         ['1', 10],
@@ -94,7 +94,7 @@ function pedidosEntregues(){
         ['17', 10],
         ['18', 10],
         ['19', 10],
-        ['20', 10],
+        ['20', 30],
         ['21', 10],
         ['22', 10],
         ['23', 10],
@@ -110,12 +110,18 @@ function pedidosEntregues(){
     options = {
         title: 'Entregas (30 min)',
         legend: 'top',
-        isStacked: true
+        isStacked: true,
+        height:600,
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
-    chart.draw(data, options); 
-    $('#divcolumn').show()
+    chart.draw(data, options);
+    $('#radiotela').show();
+    $('#pentregues').hide();
+    $('#pentregador').hide();
+    $('#pnentregues').hide();
+    $('#pgerado').hide();
+    $('#pnejustificativa').hide();
 };
 
 function pedidosPorEntreguador(){
@@ -143,8 +149,6 @@ function drawChart() {
     $.each(grafico_json, function (i, obj) {
         grafico_formatado.push([obj.mes, obj.quantidade]);
     });
-    
-
     
     var data = new google.visualization.DataTable();
 

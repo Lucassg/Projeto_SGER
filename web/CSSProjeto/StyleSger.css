@@ -36,29 +36,22 @@
     font-size: 14px
 }
 
-.divcolumn{ 
-    float: top; 
-    width:100%; 
-    height:600px;
-    margin: 0 auto;
+.divcolumn{  
 }
 
 .divcombo{  
-    width:100%; 
-    height:600px;
-    margin: 0 auto;
+    width:100%;
+    height:1000px;
 }
 
 .divbar{ 
-    width:100%; 
-    height:600px; 
-    margin: 0 auto;
+    width:100%;
+    height:1000px;
 }
 
 .divpie{ 
-    width:100%; 
-    height:600px; 
-    margin: 0 auto;
+    width:100%;
+    height:1000px;
 }
 
 .hidediv{
