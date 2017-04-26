@@ -36,6 +36,10 @@
     font-size: 14px
 }
 
+.hidediv{
+    display: none;   
+}
+
 #divcolumn{
     height:600px;
 }
@@ -50,10 +54,6 @@
 
 #divpie{ 
     height:600px;
-}
-
-#hidediv{
-    display: none;   
 }
 
 #nametable{
