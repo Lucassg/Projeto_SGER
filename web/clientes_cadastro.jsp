@@ -24,7 +24,7 @@
                     <li><a href="Controle?classe=ControleLogicoRedirecionamento&page=produtos">PRODUTOS</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li><a href="Controle?classe=ControleLogicoRedirecionamento&page=relatorios">RELATÓRIOS</a></li>
+                   <li><a href="Controle?classe=ControleLogicoRelatorio&acao=consulta_entregador">RELATÓRIOS</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="Controle?classe=ControleLogicoFuncionario&acao=listar_funcionario">FUNCIONÁRIOS</a></li>
