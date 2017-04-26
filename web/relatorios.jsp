@@ -80,11 +80,12 @@
             <div id="divbar" class="graf"></div>
             <div id="divpie" class="graf"></div>
             <div id="radiotela" class="hidediv">
-                <input selected id="pie" type="radio" name="chart" value="column"> Column
+                <input id="pie" type="radio" name="chart" value="column" CHECKED> Coluna
                 <input id="combo" type="radio" name="chart" value="combo"> Combo
                 <input id="bar" type="radio" name="chart" value="bar"> Bar
-                <input id="column" type="radio" name="chart" value="pie"> Pie
+                <input id="column" type="radio" name="chart" value="pie"> Pizza
             </div>
+            <div id="teste"></div>
         </div>
     </div>	
 </div>

@@ -41,7 +41,7 @@
 
 .divcombo{  
     width:100%;
-    height:1000px;
+    height:100%;
 }
 
 .divbar{ 
@@ -81,4 +81,9 @@
     float: bottom; 
     width: 400px; 
     margin: 0 auto;
+}
+
+#teste{
+      width:100%;
+    height:600px;   
 }

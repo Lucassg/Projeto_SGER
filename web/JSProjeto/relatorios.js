@@ -74,44 +74,25 @@ $(document).ready(function () {
 function pedidosEntregues(){ 
       data = new google.visualization.arrayToDataTable([
         ['Dias', 'Quantidade'],
-        ['1', 10],
+        ['1', 5],
         ['2', 10],
-        ['3', 10],
-        ['4', 10],
-        ['5', 10],
-        ['6', 10],
-        ['7', 10],
-        ['8', 10],
-        ['8', 10],
-        ['9', 10],
-        ['10', 10],
-        ['11', 10],
-        ['12', 10],
-        ['13', 10],
-        ['14', 10],
-        ['15', 10],
-        ['16', 10],
-        ['17', 10],
-        ['18', 10],
-        ['19', 10],
-        ['20', 30],
-        ['21', 10],
-        ['22', 10],
-        ['23', 10],
-        ['24', 10],
-        ['25', 10],
-        ['26', 10],
-        ['27', 10],
-        ['28', 10],
-        ['29', 10],
-        ['30', 10],
+        ['3', 9],
+        ['4', 8],
+        ['5', 7],
+        ['6', 6],
+        ['7', 5],
+        ['8', 4],
+        ['9', 3],
+        ['10', 2],
+        ['11', 1],
+
     ]);
 
     options = {
         title: 'Entregas (30 min)',
         legend: 'top',
         isStacked: true,
-        height:600,
+
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
@@ -139,52 +120,6 @@ function prejuizoGerado(){
 function pNEtreguePorJustificativa(){
     
 };
-
-
-function drawChart() {
-
-    grafico_json = pedidosJSON();
-    var grafico_formatado = [];
-
-    $.each(grafico_json, function (i, obj) {
-        grafico_formatado.push([obj.mes, obj.quantidade]);
-    });
-    
-    var data = new google.visualization.DataTable();
-
-    data.addColumn('string', 'Mês');
-    data.addColumn('number', 'Quantidade');
-    data.addRows(grafico_formatado);
-
-    var options = {
-        title: 'Entregas (30 min)',
-        legend: 'top',
-        isStacked: true
-    };
-
-    var chart = new google.visualization.ColumnChart(document.getElementById('container'));
-    chart.draw(data, options);
-}
-google.charts.setOnLoadCallback(drawChart);
-
-function pedidosJSON() {
-
-    var arrayJSON = [];
-    $.ajax({
-        url: 'jsonServlet',
-        data: {datainicial : $('#datainicial').val(), datafinal : $('#datafinal').val()},
-        type: 'get',
-        dataType: 'json',
-        async: false,
-        success: function (json) {
-            $.each(json, function (index, pedido) {
-                arrayJSON[index] = pedido;
-                console.log(arrayJSON[index]);
-            });
-        }
-    });
-    return arrayJSON;
-}
 
 $('#datainicial').datetimepicker({
     inline: true,
