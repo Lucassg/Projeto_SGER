@@ -40,6 +40,10 @@
     display: none;   
 }
 
+.graf{
+    display: none;   
+}
+
 #divcolumn{
     height:600px;
 }

@@ -12,37 +12,48 @@ $(document).ready(function () {
             $('#pnentregues').hide();
             $('#pgerado').hide();
             $('#pnejustificativa').hide();
+            $("div.graf").hide();
+            $('#radiotela').hide();
         } else if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador'){
             $('#pentregador').show();
             $('#pentregues').hide();
             $('#pnentregues').hide();
             $('#pgerado').hide();
             $('#pnejustificativa').hide();
+            $("div.graf").hide();
+            $('#radiotela').hide();
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues'){
             $('#pnentregues').show();
             $('#pentregues').hide();
             $('#pentregador').hide();
             $('#pgerado').hide();
             $('#pnejustificativa').hide();
+            $("div.graf").hide();
+            $('#radiotela').hide();
         } else if ($('#tiposrelatorios').val() == 'Prejuizo Gerado'){
             $('#pgerado').show();
             $('#pentregues').hide();
             $('#pentregador').hide();
             $('#pnentregues').hide();
             $('#pnejustificativa').hide();
+            $("div.graf").hide();
+            $('#radiotela').hide();
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues Por Justificativa'){
             $('#pnejustificativa').show();
             $('#pentregues').hide();
             $('#pentregador').hide();
             $('#pnentregues').hide();
             $('#pgerado').hide();
+            $("div.graf").hide();
+            $('#radiotela').hide();
         } else {
             $('#pentregues').hide();
             $('#pentregador').hide();
             $('#pnentregues').hide();
             $('#pgerado').hide();
             $('#pnejustificativa').hide();
-            $('#radiotela').hide(); 
+            $('#radiotela').hide();
+            $("div.graf").hide();
         }        
     });
 });
@@ -92,7 +103,8 @@ function pedidosEntregues(){
         title: 'Entregas (30 min)',
         legend: 'top',
         isStacked: true,
-
+        height:600,
+        width:1500,
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
@@ -104,6 +116,7 @@ function pedidosEntregues(){
     $('#pnentregues').hide();
     $('#pgerado').hide();
     $('#pnejustificativa').hide();
+    $("#divcolumn").show();
 };
 
 function pedidosPorEntreguador(){
