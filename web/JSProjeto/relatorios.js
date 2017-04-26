@@ -1,13 +1,145 @@
 google.charts.load('current', {packages: ['corechart']});
 var grafico_json;
+var data;
+var options;
 
-document.getElementById("Buscar1").onclick = drawChart;
+$(document).ready(function () {
+    $('#tiposrelatorios').change(function () {
+        
+        if ($('#tiposrelatorios').val() == 'Pedidos Entregues'){
+            $('#pentregues').show();
+            $('#pentregador').hide();
+            $('#pnentregues').hide();
+            $('#pgerado').hide();
+            $('#pnejustificativa').hide();
+        } else if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador'){
+            $('#pentregador').show();
+            $('#pentregues').hide();
+            $('#pnentregues').hide();
+            $('#pgerado').hide();
+            $('#pnejustificativa').hide();
+        } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues'){
+            $('#pnentregues').show();
+            $('#pentregues').hide();
+            $('#pentregador').hide();
+            $('#pgerado').hide();
+            $('#pnejustificativa').hide();
+        } else if ($('#tiposrelatorios').val() == 'Prejuizo Gerado'){
+            $('#pgerado').show();
+            $('#pentregues').hide();
+            $('#pentregador').hide();
+            $('#pnentregues').hide();
+            $('#pnejustificativa').hide();
+        } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues Por Justificativa'){
+            $('#pnejustificativa').show();
+            $('#pentregues').hide();
+            $('#pentregador').hide();
+            $('#pnentregues').hide();
+            $('#pgerado').hide();
+        } else {
+            $('#pentregues').hide();
+            $('#pentregador').hide();
+            $('#pnentregues').hide();
+            $('#pgerado').hide();
+            $('#pnejustificativa').hide();
+            $('#radiotela').hide(); 
+        }        
+    });
+});
 
-document.getElementById("Buscar2").onclick = imprime;
+$(document).ready(function () {
+    $("input[name$='chart']").click(function () {
+        var select = $(this).val();
+        if (select == "column") {
+            var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+            chart.draw(data, options);
+        }
+        if (select == "pie") {
+            var chart = new google.visualization.PieChart(document.getElementById('divpie'));
+            chart.draw(data, options);
+        }
+        if (select == "combo") {
+            var chart = new google.visualization.ComboChart(document.getElementById('divcombo'));
+            chart.draw(data, options);
+        }
+        if (select == "bar") {
+            var chart = new google.visualization.BarChart(document.getElementById('divbar'));
+            chart.draw(data, options);
+        }
+        $("div.graf").hide();
+        $("#div" + select).show();
+    });
+});
 
-function imprime(){
-    console.log(grafico_json);
-}
+function pedidosEntregues(){ 
+      data = new google.visualization.arrayToDataTable([
+        ['Dias', 'Quantidade'],
+        ['1', 10],
+        ['2', 10],
+        ['3', 10],
+        ['4', 10],
+        ['5', 10],
+        ['6', 10],
+        ['7', 10],
+        ['8', 10],
+        ['8', 10],
+        ['9', 10],
+        ['10', 10],
+        ['11', 10],
+        ['12', 10],
+        ['13', 10],
+        ['14', 10],
+        ['15', 10],
+        ['16', 10],
+        ['17', 10],
+        ['18', 10],
+        ['19', 10],
+        ['20', 30],
+        ['21', 10],
+        ['22', 10],
+        ['23', 10],
+        ['24', 10],
+        ['25', 10],
+        ['26', 10],
+        ['27', 10],
+        ['28', 10],
+        ['29', 10],
+        ['30', 10],
+    ]);
+
+    options = {
+        title: 'Entregas (30 min)',
+        legend: 'top',
+        isStacked: true,
+        height:600,
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+    chart.draw(data, options);
+    $('#radiotela').show();
+    $('#pentregues').hide();
+    $('#pentregador').hide();
+    $('#pnentregues').hide();
+    $('#pgerado').hide();
+    $('#pnejustificativa').hide();
+};
+
+function pedidosPorEntreguador(){
+    
+};
+
+function pedidosNEntregues(){
+    
+};
+
+function prejuizoGerado(){
+    
+};
+
+function pNEtreguePorJustificativa(){
+    
+};
+
 
 function drawChart() {
 
@@ -17,8 +149,6 @@ function drawChart() {
     $.each(grafico_json, function (i, obj) {
         grafico_formatado.push([obj.data, obj.quantidade]);
     });
-    
-
     
     var data = new google.visualization.DataTable();
 
@@ -191,21 +321,4 @@ $('#datafinal').datetimepicker({
 
     yearOffset: 0,
     beforeShowDay: null
-});
-
-$(document).ready(function () {
-    $('#tiposrelatorios').change(function () {
-
-        if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues' || $('#tiposrelatorios').val() == 'Pedidos Entregues') {
-            $('#data').show();
-        } else {
-            $('#data').hide();
-        }
-
-        if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador') {
-            $('#entregadores').show();
-        } else {
-            $('#entregadores').hide();
-        }
-    });
 });

@@ -34,6 +34,7 @@
             </c:if>
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+<<<<<<< HEAD
             <h1 class="page-header"> <center> <b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -78,17 +79,66 @@
                     <div id="container" style="width: 1000px; height: 600px; margin: 0 auto"></div>
                     </tr>
                 </table>
+=======
+            <h1 class="page-header"><center><b> SGER - Sistema de Gerenciamento de Entregas </b></br>para Restaurantes</center></h1>
+            <div class="tiporelt">
+                <b>Tipo de Relatório:</b>
+                <select id="tiposrelatorios">
+                    <option value="null"></option>
+                    <option value="Pedidos Entregues">Pedidos Entregues</option>
+                    <option value="Pedidos Por Entregador">Pedidos Por Entregador</option>
+                    <option value="Pedidos Nao Entregues">Pedidos Não Entregues</option> 
+                    <option value="Prejuizo Gerado">Prejuízo Gerado</option>
+                    <option value="Pedidos Nao Entregues Por Justificativa">Pedidos Não Entregues Por Justificativa</option>
+                </select>
+            </div>
+            <div class="tiporelt">
+                <div id="pentregues" class="hidediv">
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosEntregues()"/>
+                </div>
+                <div id="pentregador" class="hidediv">
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosPorEntreguador()"/>
+                </div>
+                <div id="pnentregues" class="hidediv">
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosNEntregues()"/>
+                </div>
+                <div id="pgerado" class="hidediv">
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="prejuizoGerado()"/>
+                </div>
+                <div id="pnejustificativa" class="hidediv">
+                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
+                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pNEtreguePorJustificativa()"/>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div id="divcolumn" class="graf"></div>
+            <div id="divcombo" class="graf"></div>
+            <div id="divbar" class="graf"></div>
+            <div id="divpie" class="graf"></div>
+            <div id="radiotela" class="hidediv">
+                <input selected id="pie" type="radio" name="chart" value="column"> Column
+                <input id="combo" type="radio" name="chart" value="combo"> Combo
+                <input id="bar" type="radio" name="chart" value="bar"> Bar
+                <input id="column" type="radio" name="chart" value="pie"> Pie
             </div>
         </div>
     </div>	
 </div>
-
 <script type="text/javascript" src="JSProjeto/jquery-3.1.1.min.js"></script>
 <script type="text/javascript" src="JSProjeto/jquery-ui.min.js"></script>
 <script type="text/javascript" src="JSProjeto/jquery.datetimepicker.min.js"></script>
 <script type="text/javascript" src="JSProjeto/jquery.datetimepicker.full.min.js"></script>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript" src="JSProjeto/relatorios.js"></script>
-</body>
 
 <jsp:include page="footer.jsp"/>
