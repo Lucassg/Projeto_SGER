@@ -46,6 +46,9 @@ public class jsonServlet extends HttpServlet {
             case "Pedidos Entregues":
                 pedidos_entregues(request, response);
                 break;
+            case "Pedidos Nao Entregues":
+                pedidos_nao_entregues(request, response);
+                break;
             default:
                 break;
         }
@@ -146,7 +149,98 @@ public class jsonServlet extends HttpServlet {
         response.getWriter().write(json);
 
     }
-    
+
+    public void pedidos_nao_entregues(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Date datainicio = new Date();
+        Date datafinal = new Date();
+        String data_inicial = request.getParameter("datainicial");
+        String data_final = request.getParameter("datafinal");
+
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            fmt.setLenient(false);
+            datainicio = fmt.parse(data_inicial);
+            datafinal = fmt.parse(data_final);
+        } catch (ParseException ex) {
+            Logger.getLogger(ControleLogicoRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        List<Pedido> ListaRelatorio = new ArrayList<>();
+        ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosNaoEntregues(Pedido.class, datainicio, datafinal);
+
+        List<String> ListaDatas = new ArrayList<>();
+
+        String json;
+        Gson gson = new Gson();
+
+        String dia_mes = request.getParameter("dia_mes");
+
+        if (dia_mes.equals("mes")) {
+
+            SimpleDateFormat mes = new SimpleDateFormat("MM-MMMMM yyyy");
+
+            ListaRelatorio.forEach(l -> ListaDatas.add(mes.format(l.getData_hora_pedido())));
+            Map<String, Long> counts = ListaDatas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+
+            jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
+            List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
+            ListaPedidosEntregues = new ArrayList<>();
+
+            for (Map.Entry<String, Long> count : counts.entrySet()) {
+
+                String[] split_data = count.getKey().split(" ");
+                String[] split_data2 = count.getKey().split("-");
+
+                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
+                PedidosEntregues.setData(split_data2[1]);
+                PedidosEntregues.setQuantidade(count.getValue());
+                PedidosEntregues.setAno(Integer.parseInt(split_data[1]));
+
+                ListaPedidosEntregues.add(PedidosEntregues);
+                PedidosEntregues = new jsonServlet.pedidosEntregues();
+            }
+
+            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+
+            gson = new GsonBuilder().create();
+            json = gson.toJson(ListaPedidosEntregues);
+        } else {
+
+            SimpleDateFormat dia = new SimpleDateFormat("D-d MMM yyyy");
+
+            ListaRelatorio.forEach(l -> ListaDatas.add(dia.format(l.getData_hora_pedido())));
+            Map<String, Long> counts = ListaDatas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+
+            jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
+            List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
+            ListaPedidosEntregues = new ArrayList<>();
+
+            for (Map.Entry<String, Long> count : counts.entrySet()) {
+
+                String[] split_data = count.getKey().split(" ");
+                String[] split_data2 = count.getKey().split("-");
+
+                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
+                PedidosEntregues.setData(split_data2[1]);
+                PedidosEntregues.setQuantidade(count.getValue());
+                PedidosEntregues.setAno(Integer.parseInt(split_data[2]));
+
+                ListaPedidosEntregues.add(PedidosEntregues);
+                PedidosEntregues = new jsonServlet.pedidosEntregues();
+            }
+
+            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+
+            gson = new GsonBuilder().create();
+            json = gson.toJson(ListaPedidosEntregues);
+        }
+
+        response.setContentType("application/json");
+        response.getWriter().write(json);
+    }
+
     static class pedidosEntregues {
 
         private String data;

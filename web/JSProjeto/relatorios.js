@@ -115,7 +115,7 @@ function pedidosEntregues() {
         data.addColumn('string', 'Dia');
         data.addColumn('number', 'Quantidade');
     }
-    
+
     data.addRows(grafico_formatado);
 
     options = {
@@ -146,8 +146,59 @@ function pedidosPorEntreguador() {
 
 function pedidosNEntregues() {
 
-}
-;
+    $.ajax({
+        url: 'jsonServlet',
+        data: {datainicial: $('#datainicial').val(),
+            datafinal: $('#datafinal').val(),
+            tipo_relatorio: $('#tiposrelatorios').val(),
+            dia_mes: $('#mesdia:checked').val()},
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function (json) {
+            $.each(json, function (index, pedido) {
+                arrayJSON[index] = pedido;
+            });
+        }
+    });
+
+    var grafico_formatado = [];
+
+    $.each(arrayJSON, function (i, obj) {
+        grafico_formatado.push([obj.data, obj.quantidade]);
+    });
+
+    data = new google.visualization.DataTable();
+
+    if ($('input[name="mesdia"]:checked').val() == "mes") {
+        data.addColumn('string', 'Mês');
+        data.addColumn('number', 'Quantidade');
+    } else {
+        data.addColumn('string', 'Dia');
+        data.addColumn('number', 'Quantidade');
+    }
+
+    data.addRows(grafico_formatado);
+
+    options = {
+        title: 'Entregas (30 min)',
+        legend: 'top',
+        isStacked: true,
+        height: 600,
+        width: 1200,
+    };
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+    chart.draw(data, options);
+
+    $('#radiotela').show();
+    $('#pentregues').hide();
+    $('#pentregador').hide();
+    $('#pnentregues').hide();
+    $('#pgerado').hide();
+    $('#pnejustificativa').hide();
+    $("#divcolumn").show();
+};
 
 function prejuizoGerado() {
 

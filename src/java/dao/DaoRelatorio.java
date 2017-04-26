@@ -17,8 +17,17 @@ public class DaoRelatorio extends DaoGenerico {
     public List pedidosEntregues(Class clas, Date datainicio, Date datafinal) throws HibernateException {
         Session session = hibernateConfiguracao.openSession();
         Criteria criteria = session.createCriteria(clas);
-        //criteria.add(Restrictions.eq("status", "Entrega em Andamento")); 
-        //criteria.add(Restrictions.and(Restrictions.between("data_hora_pedido", datainicio, datafinal)));
+        criteria.add(Restrictions.eq("status", "Entregue")); 
+        criteria.add(Restrictions.between("data_hora_pedido", datainicio, datafinal));
+        List lista = criteria.list();
+        session.close();
+        return lista;
+    }    
+    
+    public List pedidosNaoEntregues(Class clas, Date datainicio, Date datafinal) throws HibernateException {
+        Session session = hibernateConfiguracao.openSession();
+        Criteria criteria = session.createCriteria(clas);
+        criteria.add(Restrictions.eq("status", "Não Entregue")); 
         criteria.add(Restrictions.between("data_hora_pedido", datainicio, datafinal));
         List lista = criteria.list();
         session.close();
