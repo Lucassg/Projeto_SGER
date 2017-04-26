@@ -50,6 +50,8 @@
                 <div id="pentregues" class="hidediv">
                     <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial" >
                     <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal" >
+                    <input id="radio1" type="radio" name="mes" value="mes"> Mês
+                    <input id="radio2" type="radio" name="dia" value="dia"> Dia
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosEntregues()"/>
                 </div>
                 <div id="pentregador" class="hidediv">
