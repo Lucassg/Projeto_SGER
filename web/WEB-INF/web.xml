@@ -148,6 +148,10 @@
         <servlet-name>teste</servlet-name>
         <jsp-file>/teste.jsp</jsp-file>
     </servlet>
+    <servlet>
+        <servlet-name>relatorio_teste</servlet-name>
+        <jsp-file>/relatorio_teste.jsp</jsp-file>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Controle</servlet-name>
         <url-pattern>/Controle</url-pattern>
@@ -295,6 +299,10 @@
     <servlet-mapping>
         <servlet-name>teste</servlet-name>
         <url-pattern>/teste</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>relatorio_teste</servlet-name>
+        <url-pattern>/relatorio_teste</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>60</session-timeout>

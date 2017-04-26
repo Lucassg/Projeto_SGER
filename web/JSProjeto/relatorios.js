@@ -104,7 +104,7 @@ function pedidosEntregues(){
         legend: 'top',
         isStacked: true,
         height:600,
-        width:1500,
+        width:1200,
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));

@@ -90,7 +90,6 @@ function pedidosfechadosJSON() {
         success: function (json) {
             $.each(json, function (index, pedido) {
                 arrayJSON[index] = pedido;
-//                console.log(arrayJSON[index]);
             });
         }
     });
