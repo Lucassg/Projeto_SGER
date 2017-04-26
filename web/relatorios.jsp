@@ -41,9 +41,9 @@
                     <div>
                         <select id="tiposrelatorios">
                             <option value=" "></option>
-                            <option value="Pedidos Entregues">Pedidos Entregues</option>
-                            <option value="Pedidos Nao Entregues">Pedidos Nao Entregues</option>
-                            <option value="Pedidos Por Entregador">Pedidos por Entregador</option>
+                            <option value="Pedidos Entregues" id="pedidos_entregues" name="pedidos_entregues">Pedidos Entregues</option>
+                            <option value="Pedidos Nao Entregues" id="pedidos_nao_entregues" name="pedidos_nao_entregues">Pedidos Nao Entregues</option>
+                            <option value="Pedidos Por Entregador" id="pedidos_por_entregador" name="pedidos_por_entregador">Pedidos por Entregador</option>
                         </select>
                         <br>
                         <br>
@@ -52,6 +52,10 @@
                                 <p >Data Inicial: <input type="text" id="datainicial" name="datainicial"/></p>
                                 <p >Data Final: <input type="text" id="datafinal" name="datafinal"/></p>
                                 <!--&nbsp; <a href="#"><input class="btn btn-primary btn-xs" type="submit" value="Buscar" name="buscar"/>removendo botão da tela-->
+                            </form>
+                            <form action="" >
+                                <input id="radio_dia_mes" type="radio" name="radio_dia_mes" value="dia"> Dia
+                                <input id="radio_dia_mes" type="radio" name="radio_dia_mes" value="mes"> Mes
                             </form>
                         </div>
 

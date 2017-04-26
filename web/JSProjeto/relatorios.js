@@ -15,7 +15,7 @@ function drawChart() {
     var grafico_formatado = [];
 
     $.each(grafico_json, function (i, obj) {
-        grafico_formatado.push([obj.mes, obj.quantidade]);
+        grafico_formatado.push([obj.data, obj.quantidade]);
     });
     
 
@@ -42,7 +42,10 @@ function pedidosJSON() {
     var arrayJSON = [];
     $.ajax({
         url: 'jsonServlet',
-        data: {datainicial : $('#datainicial').val(), datafinal : $('#datafinal').val()},
+        data: {datainicial : $('#datainicial').val(), 
+            datafinal : $('#datafinal').val(), 
+            tipo_relatorio : $('#tiposrelatorios').val(), 
+            dia_mes : $('#radio_dia_mes:checked').val()},
         type: 'get',
         dataType: 'json',
         async: false,
