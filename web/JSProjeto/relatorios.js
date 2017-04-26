@@ -97,6 +97,7 @@ function pedidosEntregues(){
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
+    
     $('#radiotela').show();
     $('#pentregues').hide();
     $('#pentregador').hide();

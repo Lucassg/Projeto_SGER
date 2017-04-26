@@ -85,7 +85,6 @@
                 <input id="bar" type="radio" name="chart" value="bar"> Bar
                 <input id="column" type="radio" name="chart" value="pie"> Pizza
             </div>
-            <div id="teste"></div>
         </div>
     </div>	
 </div>
