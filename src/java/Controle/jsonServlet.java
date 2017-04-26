@@ -44,13 +44,29 @@ public class jsonServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        String acao = request.getParameter("tipo_relatorio");
+
+        switch (acao) {
+            case "Pedidos Entregues":
+                pedidos_entregues(request, response);
+                break;
+            default:
+                break;
+        }
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+    }
+
+    public void pedidos_entregues(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
         Date datainicio = new Date();
         Date datafinal = new Date();
         String data_inicial = request.getParameter("datainicial");
         String data_final = request.getParameter("datafinal");
 
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        SimpleDateFormat mes = new SimpleDateFormat("MMMMM yyyy");
 
         try {
             fmt.setLenient(false);
@@ -61,108 +77,99 @@ public class jsonServlet extends HttpServlet {
         }
 
         List<Pedido> ListaRelatorio = new ArrayList<>();
-        List<Funcionario> ListaEntregador = new ArrayList<>();
         ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosEntregues(Pedido.class, datainicio, datafinal);
-        ListaEntregador = (List<Funcionario>) acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
 
-        List<String> ListaMeses = new ArrayList<>();
-
-        ListaRelatorio.forEach(l -> ListaMeses.add(mes.format(l.getData_hora_pedido())));
-        Map<String, Long> counts = ListaMeses.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-
-        try (BufferedWriter buff_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER2203\\web\\JSON\\counts_hashmap.json", false), "UTF-8"))) {
-            Gson gson = new GsonBuilder().create();
-            gson.toJson(counts, buff_writer);
-        }
-
-        jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
-        List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
-        ListaPedidosEntregues = new ArrayList<>();
-
-        for (Map.Entry<String, Long> count : counts.entrySet()) {
-            PedidosEntregues.setMes(count.getKey());
-            PedidosEntregues.setQuantidade(count.getValue());
-            String[] split_data = PedidosEntregues.getMes().split(" ");
-
-            switch (split_data[0]) {
-                case "Janeiro":
-                    PedidosEntregues.setMes_numero(1);
-                    break;
-                case "Fevereiro":
-                    PedidosEntregues.setMes_numero(2);
-                    break;
-                case "Março":
-                    PedidosEntregues.setMes_numero(3);
-                    break;
-                case "Abril":
-                    PedidosEntregues.setMes_numero(4);
-                    break;
-                case "Maio":
-                    PedidosEntregues.setMes_numero(5);
-                    break;
-                case "Junho":
-                    PedidosEntregues.setMes_numero(6);
-                    break;
-                case "Julho":
-                    PedidosEntregues.setMes_numero(7);
-                    break;
-                case "Agosto":
-                    PedidosEntregues.setMes_numero(8);
-                    break;
-                case "Setembro":
-                    PedidosEntregues.setMes_numero(9);
-                    break;
-                case "Outubro":
-                    PedidosEntregues.setMes_numero(10);
-                    break;
-                case "Novembro":
-                    PedidosEntregues.setMes_numero(11);
-                    break;
-                case "Dezembro":
-                    PedidosEntregues.setMes_numero(12);
-                    break;
-            }
-            PedidosEntregues.setAno(Integer.parseInt(split_data[1]));
-            ListaPedidosEntregues.add(PedidosEntregues);
-            PedidosEntregues = new jsonServlet.pedidosEntregues();
-        }
-
-        Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+        List<String> ListaDatas = new ArrayList<>();
 
         String json;
         Gson gson = new Gson();
-        gson = new GsonBuilder().create();
-        json = gson.toJson(ListaPedidosEntregues);
-//        json = gson.toJson(counts);
+
+        String dia_mes = request.getParameter("dia_mes");
+
+        if (dia_mes.equals("mes")) {
+
+            SimpleDateFormat mes = new SimpleDateFormat("MM-MMMMM yyyy");
+
+            ListaRelatorio.forEach(l -> ListaDatas.add(mes.format(l.getData_hora_pedido())));
+            Map<String, Long> counts = ListaDatas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+
+            jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
+            List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
+            ListaPedidosEntregues = new ArrayList<>();
+
+            for (Map.Entry<String, Long> count : counts.entrySet()) {
+
+                String[] split_data = count.getKey().split(" ");
+                String[] split_data2 = count.getKey().split("-");
+
+                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
+                PedidosEntregues.setData(split_data2[1]);
+                PedidosEntregues.setQuantidade(count.getValue());
+                PedidosEntregues.setAno(Integer.parseInt(split_data[1]));
+
+                ListaPedidosEntregues.add(PedidosEntregues);
+                PedidosEntregues = new jsonServlet.pedidosEntregues();
+            }
+
+            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+
+            gson = new GsonBuilder().create();
+            json = gson.toJson(ListaPedidosEntregues);
+        } else {
+
+            SimpleDateFormat dia = new SimpleDateFormat("D-d MMM yyyy");
+
+            ListaRelatorio.forEach(l -> ListaDatas.add(dia.format(l.getData_hora_pedido())));
+            Map<String, Long> counts = ListaDatas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+
+            jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
+            List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
+            ListaPedidosEntregues = new ArrayList<>();
+
+            for (Map.Entry<String, Long> count : counts.entrySet()) {
+
+                String[] split_data = count.getKey().split(" ");
+                String[] split_data2 = count.getKey().split("-");
+
+                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
+                PedidosEntregues.setData(split_data2[1]);
+                PedidosEntregues.setQuantidade(count.getValue());
+                PedidosEntregues.setAno(Integer.parseInt(split_data[2]));
+
+                ListaPedidosEntregues.add(PedidosEntregues);
+                PedidosEntregues = new jsonServlet.pedidosEntregues();
+            }
+
+            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+
+            gson = new GsonBuilder().create();
+            json = gson.toJson(ListaPedidosEntregues);
+        }
 
         response.setContentType("application/json");
         response.getWriter().write(json);
 
     }
-
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
+    
     static class pedidosEntregues {
 
-        private String mes;
+        private String data;
         private Long quantidade;
-        private int mes_numero;
+        private int dia_ano;
         private int ano;
 
         /**
-         * @return the mes
+         * @return the data
          */
-        public String getMes() {
-            return mes;
+        public String getData() {
+            return data;
         }
 
         /**
-         * @param mes the mes to set
+         * @param data the data to set
          */
-        public void setMes(String mes) {
-            this.mes = mes;
+        public void setData(String data) {
+            this.data = data;
         }
 
         /**
@@ -180,17 +187,17 @@ public class jsonServlet extends HttpServlet {
         }
 
         /**
-         * @return the mes_numero
+         * @return the dia_ano
          */
-        public int getMes_numero() {
-            return mes_numero;
+        public int getDia_ano() {
+            return dia_ano;
         }
 
         /**
-         * @param mes_numero the mes_numero to set
+         * @param dia_ano the dia_ano to set
          */
-        public void setMes_numero(int mes_numero) {
-            this.mes_numero = mes_numero;
+        public void setDia_ano(int dia_ano) {
+            this.dia_ano = dia_ano;
         }
 
         /**
@@ -217,7 +224,8 @@ public class jsonServlet extends HttpServlet {
             if (comparar_data != 0) {
                 return comparar_data;
             }
-            return Integer.compare(s1.getMes_numero(), s2.getMes_numero());
+            return Integer.compare(s1.getDia_ano(), s2.getDia_ano());
         }
     }
+
 }
