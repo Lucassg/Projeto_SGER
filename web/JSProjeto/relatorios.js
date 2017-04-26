@@ -113,8 +113,9 @@ function pedidosEntregues(){
         isStacked: true
     };
 
-    var chart = new google.visualization.BarChart(document.getElementById('pentregues'));
-    chart.draw(data, options);   
+    var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+    chart.draw(data, options); 
+    $('#divcolumn').show()
 };
 
 function pedidosPorEntreguador(){

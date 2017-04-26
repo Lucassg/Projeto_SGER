@@ -74,15 +74,17 @@
                 </div>
             </div>
         </div>
-        <div id="divcolumn" class="graf"></div>
-        <div id="divcombo" class="graf"></div>
-        <div id="divbar" class="graf"></div>
-        <div id="divpie" class="graf"></div>
-        <div id="radiotela" class="hidediv">
-            <input id="pie" type="radio" name="chart" value="column"> Column
-            <input id="combo" type="radio" name="chart" value="combo"> Combo
-            <input id="bar" type="radio" name="chart" value="bar"> Bar
-            <input id="column" type="radio" name="chart" value="pie"> Pie
+        <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+            <div id="divcolumn" class="graf"></div>
+            <div id="divcombo" class="graf"></div>
+            <div id="divbar" class="graf"></div>
+            <div id="divpie" class="graf"></div>
+            <div id="radiotela">
+                <input id="pie" type="radio" name="chart" value="column"> Column
+                <input id="combo" type="radio" name="chart" value="combo"> Combo
+                <input id="bar" type="radio" name="chart" value="bar"> Bar
+                <input id="column" type="radio" name="chart" value="pie"> Pie
+            </div>
         </div>
     </div>	
 </div>
