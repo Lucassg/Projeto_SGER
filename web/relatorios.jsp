@@ -80,7 +80,7 @@
             <div id="divbar" class="graf"></div>
             <div id="divpie" class="graf"></div>
             <div id="radiotela" class="hidediv">
-                <input id="pie" type="radio" name="chart" value="column"> Column
+                <input selected id="pie" type="radio" name="chart" value="column"> Column
                 <input id="combo" type="radio" name="chart" value="combo"> Combo
                 <input id="bar" type="radio" name="chart" value="bar"> Bar
                 <input id="column" type="radio" name="chart" value="pie"> Pie
