@@ -86,8 +86,8 @@ function pedidosEntregues() {
 
     $.ajax({
         url: 'jsonServlet',
-        data: {datainicial: $('#datainicial').val(),
-            datafinal: $('#datafinal').val(),
+        data: {datainicial: $('#datainicial_entregue').val(),
+            datafinal: $('#datafinal_entregue').val(),
             tipo_relatorio: $('#tiposrelatorios').val(),
             dia_mes: $('#mesdia:checked').val()},
         type: 'get',
@@ -122,8 +122,8 @@ function pedidosEntregues() {
         title: 'Entregas (30 min)',
         legend: 'top',
         isStacked: true,
-        height: 600,
-        width: 1200,
+        height: 500,
+        width: 950,
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
@@ -148,8 +148,8 @@ function pedidosNEntregues() {
 
     $.ajax({
         url: 'jsonServlet',
-        data: {datainicial: $('#datainicial').val(),
-            datafinal: $('#datafinal').val(),
+        data: {datainicial: $('#datainicial_nao_entregue').val(),
+            datafinal: $('#datafinal_nao_entregue').val(),
             tipo_relatorio: $('#tiposrelatorios').val(),
             dia_mes: $('#mesdia:checked').val()},
         type: 'get',
@@ -185,7 +185,7 @@ function pedidosNEntregues() {
         legend: 'top',
         isStacked: true,
         height: 600,
-        width: 1200,
+        width: 1000,
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
@@ -210,7 +210,7 @@ function pNEtreguePorJustificativa() {
 }
 ;
 
-$('#datainicial').datetimepicker({
+$('.datetimepicker').datetimepicker({
     inline: true,
     lang: 'pt-BR',
 
@@ -271,73 +271,6 @@ $('#datainicial').datetimepicker({
     fixed: false,
 
     roundTime: 'ceil', // ceil, floor
-    className: '',
-
-    yearOffset: 0,
-    beforeShowDay: null
-});
-
-$('#datafinal').datetimepicker({
-    inline: true,
-    lang: 'pt-BR',
-
-    format: 'Y-m-d H:i:s',
-
-    startDate: false,
-
-    step: 60,
-    monthChangeSpinner: true,
-    closeOnDateSelect: false,
-    closeOnWithoutClick: true,
-    closeOnInputClick: true,
-
-    timepicker: true,
-    datepicker: true,
-
-    defaultTime: false,
-    defaultDate: false,
-
-    minDate: false,
-    maxDate: false,
-    minTime: false,
-    maxTime: false,
-
-    opened: false,
-    initTime: true,
-    inline: false,
-
-    withoutCopyright: true,
-
-    inverseButton: false,
-    hours12: false,
-    next: 'xdsoft_next',
-    prev: 'xdsoft_prev',
-    dayOfWeekStart: 0,
-
-    timeHeightInTimePicker: 25,
-
-    todayButton: true,
-    defaultSelect: true,
-
-    scrollMonth: true,
-    scrollTime: true,
-    scrollInput: true,
-
-    lazyInit: false,
-
-    mask: false,
-    validateOnBlur: true,
-    allowBlank: true,
-
-    yearStart: 1950,
-    yearEnd: 2050,
-
-    style: '',
-    id: '',
-
-    fixed: false,
-
-    roundTime: 'ceil',
     className: '',
 
     yearOffset: 0,
