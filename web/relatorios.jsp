@@ -48,38 +48,38 @@
             </div>
             <div class="tiporelt">
                 <div id="pentregues" class="hidediv">
-                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
-                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="radio1" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="radio2" type="radio" name="mesdia" value="dia"> Dia
+                    <b>Data Inicial: <input type="text" id="datainicial" name="datainicial"/></b> 
+                    <b>Data Final: <input type="text" id="datafinal" name="datafinal"/></b> 
+                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
+                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosEntregues()"/>
                 </div>
                 <div id="pentregador" class="hidediv">
-                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
-                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="radio3" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="radio4" type="radio" name="mesdia" value="dia"> Dia
+                    <b>Data Inicial: <input type="text" id="datainicial" name="datainicial"/></b>
+                    <b>Data Final: <input type="text" id="datafinal" name="datafinal"/></b>
+                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
+                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosPorEntreguador()"/>
                 </div>
                 <div id="pnentregues" class="hidediv">
-                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
-                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="radio5" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="radio6" type="radio" name="mesdia" value="dia"> Dia
+                    <b>Data Inicial: <input type="text" id="datainicial" name="datainicial"/></b>
+                    <b>Data Final: <input type="text" id="datafinal" name="datafinal"/></b>
+                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
+                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosNEntregues()"/>
                 </div>
                 <div id="pgerado" class="hidediv">
-                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
-                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="radio7" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="radio8" type="radio" name="mesdia" value="dia"> Dia
+                    <b>Data Inicial: <input type="text" id="datainicial" name="datainicial"/></b>
+                    <b>Data Final: <input type="text" id="datafinal" name="datafinal"/></b>
+                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
+                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="prejuizoGerado()"/>
                 </div>
                 <div id="pnejustificativa" class="hidediv">
-                    <b>Data Inicial:</b> <input type="text" id="datainicial" name="datainicial"/>
-                    <b>Data Final:</b> <input type="text" id="datafinal" name="datafinal"/>
-                    <input id="radio9" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="radio10" type="radio" name="mesdia" value="dia"> Dia
+                    <b>Data Inicial: <input type="text" id="datainicial" name="datainicial"/></b>
+                    <b>Data Final: <input type="text" id="datafinal" name="datafinal"/></b>
+                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
+                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pNEtreguePorJustificativa()"/>
                 </div>
             </div>
