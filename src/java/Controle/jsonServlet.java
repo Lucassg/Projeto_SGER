@@ -267,7 +267,7 @@ public class jsonServlet extends HttpServlet {
         List<Pedido> ListaRelatorio = new ArrayList<>();
         List<Rota> ListaRotaEntregador = new ArrayList<Rota>();
         List<Funcionario> ListaFuncionario = new ArrayList<Funcionario>();
-        
+
         ListaFuncionario = (List<Funcionario>) acessohibernaterelatorio.consultaEntregador(Funcionario.class, id_entregador);
         Funcionario funcionario = (Funcionario) ListaFuncionario.get(0);
         ListaRotaEntregador = (List<Rota>) acessohibernaterelatorio.consultaRotaEntregador(Rota.class, funcionario, datainicio, datafinal);
@@ -282,27 +282,46 @@ public class jsonServlet extends HttpServlet {
 
         if (dia_mes.equals("mes")) {
 
-            SimpleDateFormat mes = new SimpleDateFormat("MM-MMMMM yyyy");
+            SimpleDateFormat mes = new SimpleDateFormat("MM MMMMM yyyy");
 
-            ListaRelatorio.forEach(l -> ListaDatas.add(mes.format(l.getData_hora_pedido())));
+            ListaRelatorio.forEach(l -> ListaDatas.add(mes.format(l.getData_hora_pedido()) + " " + l.getStatus()));
             Map<String, Long> counts = ListaDatas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+            Map<Pedido, Long> counts2 = ListaRelatorio.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
             jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
             List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
             ListaPedidosEntregues = new ArrayList<>();
 
+//            final jsonServlet.pedidosEntregador PedidosEntregador = new jsonServlet.pedidosEntregador();
+            final List<jsonServlet.pedidosEntregador> ListaPedidosEntregador = new ArrayList<>();
+
             for (Map.Entry<String, Long> count : counts.entrySet()) {
+                
+                jsonServlet.pedidosEntregador PedidosEntregador = new jsonServlet.pedidosEntregador();
 
                 String[] split_data = count.getKey().split(" ");
-                String[] split_data2 = count.getKey().split("-");
 
-                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
-                PedidosEntregues.setData(split_data2[1]);
-                PedidosEntregues.setQuantidade(count.getValue());
-                PedidosEntregues.setAno(Integer.parseInt(split_data[1]));
+                PedidosEntregador.setAno(Integer.parseInt(split_data[2]));
+                PedidosEntregador.setMes_dia(Integer.parseInt(split_data[0]));
+                PedidosEntregador.setData(split_data[1] + " " + split_data[2]);
 
-                ListaPedidosEntregues.add(PedidosEntregues);
-                PedidosEntregues = new jsonServlet.pedidosEntregues();
+                if (split_data[3] == "Entregue") {
+                    PedidosEntregador.setQtde_entregue(count.getValue());
+                } else {
+                    PedidosEntregador.setQtde_nentregue(count.getValue());
+                }
+
+                ListaPedidosEntregador.forEach(l -> {
+
+                    if ((l.getData() == (PedidosEntregador.getData()) && (l.getQtde_entregue() != null))) {
+                        l.setQtde_nentregue(PedidosEntregador.getQtde_nentregue());
+                    }
+                    if ((l.getData() == (PedidosEntregador.getData()) && (l.getQtde_nentregue() != null))) {
+                        l.setQtde_nentregue(PedidosEntregador.getQtde_entregue());
+                    }
+                });
+                
+                ListaPedidosEntregador.add(PedidosEntregador);
             }
 
             Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
@@ -348,7 +367,7 @@ public class jsonServlet extends HttpServlet {
 
         private String data;
         private Long quantidade;
-        private int dia_ano;
+        private int mes_dia;
         private int ano;
 
         /**
@@ -380,17 +399,96 @@ public class jsonServlet extends HttpServlet {
         }
 
         /**
-         * @return the dia_ano
+         * @return the mes_dia
          */
         public int getDia_ano() {
-            return dia_ano;
+            return mes_dia;
         }
 
         /**
-         * @param dia_ano the dia_ano to set
+         * @param dia_ano the mes_dia to set
          */
         public void setDia_ano(int dia_ano) {
-            this.dia_ano = dia_ano;
+            this.mes_dia = dia_ano;
+        }
+
+        /**
+         * @return the ano
+         */
+        public int getAno() {
+            return ano;
+        }
+
+        /**
+         * @param ano the ano to set
+         */
+        public void setAno(int ano) {
+            this.ano = ano;
+        }
+    }
+
+    static class pedidosEntregador {
+
+        private String data;
+        private Long qtde_entregue;
+        private Long qtde_nentregue;
+        private int mes_dia;
+        private int ano;
+
+        /**
+         * @return the data
+         */
+        public String getData() {
+            return data;
+        }
+
+        /**
+         * @param data the data to set
+         */
+        public void setData(String data) {
+            this.data = data;
+        }
+
+        /**
+         * @return the qtde_entregue
+         */
+        public Long getQtde_entregue() {
+            return qtde_entregue;
+        }
+
+        /**
+         * @param qtde_entregue the qtde_entregue to set
+         */
+        public void setQtde_entregue(Long qtde_entregue) {
+            this.qtde_entregue = qtde_entregue;
+        }
+
+        /**
+         * @return the qtde_nentregue
+         */
+        public Long getQtde_nentregue() {
+            return qtde_nentregue;
+        }
+
+        /**
+         * @param qtde_nentregue the qtde_nentregue to set
+         */
+        public void setQtde_nentregue(Long qtde_nentregue) {
+            this.qtde_nentregue = qtde_nentregue;
+        }
+
+        /**
+         * @return the mes_dia
+         */
+        public int getMes_dia() {
+            return mes_dia;
+        }
+
+        /**
+         * @param mes_dia the mes_dia to set
+         */
+        public void setMes_dia(int mes_dia) {
+            this.mes_dia = mes_dia;
         }
 
         /**
