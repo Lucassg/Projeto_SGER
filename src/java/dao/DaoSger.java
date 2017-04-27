@@ -5,8 +5,6 @@ import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import static org.hibernate.criterion.Projections.id;
-import org.hibernate.criterion.Restrictions;
 
 public class DaoSger extends DaoGenerico {
    
