@@ -26,7 +26,7 @@
                     <li><a href="Controle?classe=ControleLogicoProduto&acao=listar_produto">PRODUTOS</a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
-                    <li class="active"><a href="Controle?classe=ControleLogicoRedirecionamento&page=relatorios">RELATÓRIOS<span class="sr-only">(current)</span></a></li>
+                    <li class="active"><a href="Controle?classe=ControleLogicoRelatorio&acao=consulta_entregador">RELATÓRIOS<span class="sr-only">(current)</span></a></li>
                 </ul>
                 <ul class="nav nav-sidebar">
                     <li><a href="Controle?classe=ControleLogicoFuncionario&acao=listar_funcionario">FUNCIONÁRIOS</a></li>
@@ -55,6 +55,14 @@
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosEntregues()"/>
                 </div>
                 <div id="pentregador" class="hidediv">
+                    <form name="datas" action="Controle?classe=ControleLogicoRelatorio&acao=relatorio_entregador" method="POST">
+                        <select id="entregador" name="entregador">
+                            <option value="null"></option>
+                            <c:forEach items="${ListaEntregadores}" var="Entregador">
+                                <option value="${Entregador.id}">${Entregador.nome}</option>
+                            </c:forEach>
+                        </select>
+                    </form>
                     <b>Data Inicial: <input type="text" id="datainicial_entregador" name="datainicial_entregador" class="datetimepicker"/></b> 
                     <b>Data Final: <input type="text" id="datafinal_entregador" name="datafinal_entregador" class="datetimepicker"/></b> 
                     <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
