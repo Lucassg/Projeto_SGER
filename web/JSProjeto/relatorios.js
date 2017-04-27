@@ -119,7 +119,7 @@ function pedidosEntregues() {
     data.addRows(grafico_formatado);
 
     options = {
-        title: 'Entregas (30 min)',
+        title: 'Pedidos Entregues',
         legend: 'top',
         isStacked: true,
         height: 500,
@@ -177,7 +177,7 @@ function pedidosPorEntreguador() {
     data.addRows(grafico_formatado);
 
     options = {
-        title: 'Entregas (30 min)',
+        title: 'Pedidos Não Entregues',
         legend: 'top',
         isStacked: true,
         height: 500,
@@ -236,7 +236,7 @@ function pedidosNEntregues() {
     data.addRows(grafico_formatado);
 
     options = {
-        title: 'Entregas (30 min)',
+        title: 'Pedidos Por Entregador',
         legend: 'top',
         isStacked: true,
         height: 600,
