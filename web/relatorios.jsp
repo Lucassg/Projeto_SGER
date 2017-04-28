@@ -56,6 +56,7 @@
                 </div>
                 <div id="pentregador" class="hidediv">
                     <form name="datas" action="Controle?classe=ControleLogicoRelatorio&acao=relatorio_entregador" method="POST">
+                        <b>Entregador: </b>
                         <select id="entregador" name="entregador">
                             <option value="null"></option>
                             <c:forEach items="${ListaEntregadores}" var="Entregador">
@@ -86,8 +87,6 @@
                 <div id="pnejustificativa" class="hidediv">
                     <b>Data Inicial: <input type="text" id="datainicial_just" name="datainicial_just" class="datetimepicker"/></b> 
                     <b>Data Final: <input type="text" id="datafinal_just" name="datafinal_just" class="datetimepicker"></b>
-                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pNEtreguePorJustificativa()"/>
                 </div>
             </div>

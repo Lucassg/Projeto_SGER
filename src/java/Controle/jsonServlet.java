@@ -57,6 +57,9 @@ public class jsonServlet extends HttpServlet {
             case "Prejuizo Gerado":
                 prejuizo_gerado(request, response);
                 break;
+            case "Pedidos Nao Entregues Por Justificativa":
+                relarotio_justificativas(request, response);
+                break;
             default:
                 break;
         }
@@ -433,7 +436,6 @@ public class jsonServlet extends HttpServlet {
             List<String> ListaValores = new ArrayList<>();
             ListaRelatorio.forEach(l -> ListaValores.add(mes.format(l.getData_hora_pedido()) + " " + l.getValor()));
             Map<String, Long> counts = ListaDatas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-            Map<String, Long> counts2 = ListaValores.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
             jsonServlet.prejuizoGerado PrejuizoGerado = new jsonServlet.prejuizoGerado();
             List<jsonServlet.prejuizoGerado> ListaPrejuizoGerado = new ArrayList<>();
@@ -455,9 +457,9 @@ public class jsonServlet extends HttpServlet {
                 int contador = 0;
                 String[] split_valor = valor.split(" ");
                 String data = split_valor[1] + " " + split_valor[2];
-                
+
                 for (jsonServlet.prejuizoGerado pe : ListaPrejuizoGerado) {
-                    
+
                     if (pe.getData().equals(data)) {
                         pe.setPrejuizo(pe.getPrejuizo() + Float.parseFloat(split_valor[3]));
                     }
@@ -470,37 +472,84 @@ public class jsonServlet extends HttpServlet {
             json = gson.toJson(ListaPrejuizoGerado);
         } else {
 
-            SimpleDateFormat dia = new SimpleDateFormat("D-d MMM yyyy");
+            SimpleDateFormat dia = new SimpleDateFormat("D d MMM yyyy");
 
             ListaRelatorio.forEach(l -> ListaDatas.add(dia.format(l.getData_hora_pedido())));
+            List<String> ListaValores = new ArrayList<>();
+            ListaRelatorio.forEach(l -> ListaValores.add(dia.format(l.getData_hora_pedido()) + " " + l.getValor()));
             Map<String, Long> counts = ListaDatas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
 
-            jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
-            List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
-            ListaPedidosEntregues = new ArrayList<>();
+            jsonServlet.prejuizoGerado PrejuizoGerado = new jsonServlet.prejuizoGerado();
+            List<jsonServlet.prejuizoGerado> ListaPrejuizoGerado = new ArrayList<>();
 
             for (Map.Entry<String, Long> count : counts.entrySet()) {
 
                 String[] split_data = count.getKey().split(" ");
-                String[] split_data2 = count.getKey().split("-");
 
-                PedidosEntregues.setMes_dia(Integer.parseInt(split_data2[0]));
-                PedidosEntregues.setData(split_data2[1]);
-                PedidosEntregues.setQuantidade(count.getValue());
-                PedidosEntregues.setAno(Integer.parseInt(split_data[2]));
+                PrejuizoGerado.setMes_dia(Integer.parseInt(split_data[0]));
+                PrejuizoGerado.setData(split_data[1] + " " + split_data[2] + " " + split_data[3]);
+                PrejuizoGerado.setAno(Integer.parseInt(split_data[3]));
 
-                ListaPedidosEntregues.add(PedidosEntregues);
-                PedidosEntregues = new jsonServlet.pedidosEntregues();
+                ListaPrejuizoGerado.add(PrejuizoGerado);
+                PrejuizoGerado = new jsonServlet.prejuizoGerado();
             }
 
-            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasRelEntreguesComparador());
+            for (String valor : ListaValores) {
+
+                String[] split_valor = valor.split(" ");
+                String data = split_valor[1] + " " + split_valor[2] + " " + split_valor[3];
+
+                for (jsonServlet.prejuizoGerado pe : ListaPrejuizoGerado) {
+
+                    if (pe.getData().equals(data)) {
+                        pe.setPrejuizo(pe.getPrejuizo() + Float.parseFloat(split_valor[4]));
+                    }
+                }
+            }
+
+            Collections.sort(ListaPrejuizoGerado, new jsonServlet.datasPrejuizoGerado());
 
             gson = new GsonBuilder().create();
-            json = gson.toJson(ListaPedidosEntregues);
+            json = gson.toJson(ListaPrejuizoGerado);
         }
 
         response.setContentType("application/json");
         response.getWriter().write(json);
+    }
+
+    public void relarotio_justificativas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+        Date datainicio = new Date();
+        Date datafinal = new Date();
+        String data_inicial = request.getParameter("datainicial");
+        String data_final = request.getParameter("datafinal");
+
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            fmt.setLenient(false);
+            datainicio = fmt.parse(data_inicial);
+            datafinal = fmt.parse(data_final);
+        } catch (ParseException ex) {
+            Logger.getLogger(ControleLogicoRelatorio.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        List<Pedido> ListaRelatorio = new ArrayList<>();
+        ListaRelatorio = (List<Pedido>) acessohibernaterelatorio.pedidosNaoEntregues(Pedido.class, datainicio, datafinal);
+
+        List<String> ListaJustificativas = new ArrayList<>();
+
+        ListaRelatorio.forEach(l -> ListaJustificativas.add(l.getJustificativa()));
+        Map<String, Long> counts = ListaJustificativas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+
+        String json;
+        Gson gson = new Gson();
+        gson = new GsonBuilder().create();
+        json = gson.toJson(counts);
+
+        response.setContentType("application/json");
+        response.getWriter().write(json);
+
     }
 
     static class pedidosEntregues {
