@@ -106,7 +106,7 @@ public class jsonServlet extends HttpServlet {
                 String[] split_data = count.getKey().split(" ");
                 String[] split_data2 = count.getKey().split("-");
 
-                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
+                PedidosEntregues.setMes_dia(Integer.parseInt(split_data2[0]));
                 PedidosEntregues.setData(split_data2[1]);
                 PedidosEntregues.setQuantidade(count.getValue());
                 PedidosEntregues.setAno(Integer.parseInt(split_data[1]));
@@ -115,7 +115,7 @@ public class jsonServlet extends HttpServlet {
                 PedidosEntregues = new jsonServlet.pedidosEntregues();
             }
 
-            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasRelEntreguesComparador());
 
             gson = new GsonBuilder().create();
             json = gson.toJson(ListaPedidosEntregues);
@@ -135,7 +135,7 @@ public class jsonServlet extends HttpServlet {
                 String[] split_data = count.getKey().split(" ");
                 String[] split_data2 = count.getKey().split("-");
 
-                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
+                PedidosEntregues.setMes_dia(Integer.parseInt(split_data2[0]));
                 PedidosEntregues.setData(split_data2[1]);
                 PedidosEntregues.setQuantidade(count.getValue());
                 PedidosEntregues.setAno(Integer.parseInt(split_data[2]));
@@ -144,7 +144,7 @@ public class jsonServlet extends HttpServlet {
                 PedidosEntregues = new jsonServlet.pedidosEntregues();
             }
 
-            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasRelEntreguesComparador());
 
             gson = new GsonBuilder().create();
             json = gson.toJson(ListaPedidosEntregues);
@@ -198,7 +198,7 @@ public class jsonServlet extends HttpServlet {
                 String[] split_data = count.getKey().split(" ");
                 String[] split_data2 = count.getKey().split("-");
 
-                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
+                PedidosEntregues.setMes_dia(Integer.parseInt(split_data2[0]));
                 PedidosEntregues.setData(split_data2[1]);
                 PedidosEntregues.setQuantidade(count.getValue());
                 PedidosEntregues.setAno(Integer.parseInt(split_data[1]));
@@ -207,7 +207,7 @@ public class jsonServlet extends HttpServlet {
                 PedidosEntregues = new jsonServlet.pedidosEntregues();
             }
 
-            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasRelEntreguesComparador());
 
             gson = new GsonBuilder().create();
             json = gson.toJson(ListaPedidosEntregues);
@@ -227,7 +227,7 @@ public class jsonServlet extends HttpServlet {
                 String[] split_data = count.getKey().split(" ");
                 String[] split_data2 = count.getKey().split("-");
 
-                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
+                PedidosEntregues.setMes_dia(Integer.parseInt(split_data2[0]));
                 PedidosEntregues.setData(split_data2[1]);
                 PedidosEntregues.setQuantidade(count.getValue());
                 PedidosEntregues.setAno(Integer.parseInt(split_data[2]));
@@ -236,7 +236,7 @@ public class jsonServlet extends HttpServlet {
                 PedidosEntregues = new jsonServlet.pedidosEntregues();
             }
 
-            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasRelEntreguesComparador());
 
             gson = new GsonBuilder().create();
             json = gson.toJson(ListaPedidosEntregues);
@@ -286,17 +286,11 @@ public class jsonServlet extends HttpServlet {
 
             ListaRelatorio.forEach(l -> ListaDatas.add(mes.format(l.getData_hora_pedido()) + " " + l.getStatus()));
             Map<String, Long> counts = ListaDatas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-            Map<Pedido, Long> counts2 = ListaRelatorio.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-
-            jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
-            List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
-            ListaPedidosEntregues = new ArrayList<>();
-
-//            final jsonServlet.pedidosEntregador PedidosEntregador = new jsonServlet.pedidosEntregador();
+         
             final List<jsonServlet.pedidosEntregador> ListaPedidosEntregador = new ArrayList<>();
 
-            for (Map.Entry<String, Long> count : counts.entrySet()) {
-                
+            lab1: for (Map.Entry<String, Long> count : counts.entrySet()) {
+
                 jsonServlet.pedidosEntregador PedidosEntregador = new jsonServlet.pedidosEntregador();
 
                 String[] split_data = count.getKey().split(" ");
@@ -304,59 +298,72 @@ public class jsonServlet extends HttpServlet {
                 PedidosEntregador.setAno(Integer.parseInt(split_data[2]));
                 PedidosEntregador.setMes_dia(Integer.parseInt(split_data[0]));
                 PedidosEntregador.setData(split_data[1] + " " + split_data[2]);
-
-                if (split_data[3] == "Entregue") {
+                System.out.println(split_data[3]);
+                if (split_data[3].equals("Entregue")) {
                     PedidosEntregador.setQtde_entregue(count.getValue());
                 } else {
                     PedidosEntregador.setQtde_nentregue(count.getValue());
                 }
 
-                ListaPedidosEntregador.forEach(l -> {
-
-                    if ((l.getData() == (PedidosEntregador.getData()) && (l.getQtde_entregue() != null))) {
-                        l.setQtde_nentregue(PedidosEntregador.getQtde_nentregue());
+                for (jsonServlet.pedidosEntregador listaentregador : ListaPedidosEntregador) {
+                    if ((listaentregador.getData().equals(PedidosEntregador.getData()) && (listaentregador.getQtde_entregue() != null))) {
+                        listaentregador.setQtde_nentregue(PedidosEntregador.getQtde_nentregue());
+                        continue lab1;
                     }
-                    if ((l.getData() == (PedidosEntregador.getData()) && (l.getQtde_nentregue() != null))) {
-                        l.setQtde_nentregue(PedidosEntregador.getQtde_entregue());
+                    if ((listaentregador.getData().equals(PedidosEntregador.getData()) && (listaentregador.getQtde_nentregue() != null))) {
+                        listaentregador.setQtde_entregue(PedidosEntregador.getQtde_entregue());
+                        continue lab1;
                     }
-                });
-                
+                }
                 ListaPedidosEntregador.add(PedidosEntregador);
             }
 
-            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+            Collections.sort(ListaPedidosEntregador, new jsonServlet.datasEntregadorComparador());
 
             gson = new GsonBuilder().create();
-            json = gson.toJson(ListaPedidosEntregues);
+            json = gson.toJson(ListaPedidosEntregador);
         } else {
 
-            SimpleDateFormat dia = new SimpleDateFormat("D-d MMM yyyy");
+            SimpleDateFormat dia = new SimpleDateFormat("D d MMM yyyy");
 
-            ListaRelatorio.forEach(l -> ListaDatas.add(dia.format(l.getData_hora_pedido())));
+            ListaRelatorio.forEach(l -> ListaDatas.add(dia.format(l.getData_hora_pedido()) + " " + l.getStatus()));
             Map<String, Long> counts = ListaDatas.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
+         
+            final List<jsonServlet.pedidosEntregador> ListaPedidosEntregador = new ArrayList<>();
 
-            jsonServlet.pedidosEntregues PedidosEntregues = new jsonServlet.pedidosEntregues();
-            List<jsonServlet.pedidosEntregues> ListaPedidosEntregues;
-            ListaPedidosEntregues = new ArrayList<>();
+            lab1: for (Map.Entry<String, Long> count : counts.entrySet()) {
 
-            for (Map.Entry<String, Long> count : counts.entrySet()) {
+                jsonServlet.pedidosEntregador PedidosEntregador = new jsonServlet.pedidosEntregador();
 
                 String[] split_data = count.getKey().split(" ");
-                String[] split_data2 = count.getKey().split("-");
 
-                PedidosEntregues.setDia_ano(Integer.parseInt(split_data2[0]));
-                PedidosEntregues.setData(split_data2[1]);
-                PedidosEntregues.setQuantidade(count.getValue());
-                PedidosEntregues.setAno(Integer.parseInt(split_data[2]));
+                PedidosEntregador.setAno(Integer.parseInt(split_data[3]));
+                PedidosEntregador.setMes_dia(Integer.parseInt(split_data[0]));
+                PedidosEntregador.setData(split_data[1] + " " + split_data[2] + " " + split_data[3]);
+                System.out.println(split_data[4]);
+                if (split_data[4].equals("Entregue")) {
+                    PedidosEntregador.setQtde_entregue(count.getValue());
+                } else {
+                    PedidosEntregador.setQtde_nentregue(count.getValue());
+                }
 
-                ListaPedidosEntregues.add(PedidosEntregues);
-                PedidosEntregues = new jsonServlet.pedidosEntregues();
+                for (jsonServlet.pedidosEntregador listaentregador : ListaPedidosEntregador) {
+                    if ((listaentregador.getData().equals(PedidosEntregador.getData()) && (listaentregador.getQtde_entregue() != null))) {
+                        listaentregador.setQtde_nentregue(PedidosEntregador.getQtde_nentregue());
+                        continue lab1;
+                    }
+                    if ((listaentregador.getData().equals(PedidosEntregador.getData()) && (listaentregador.getQtde_nentregue() != null))) {
+                        listaentregador.setQtde_entregue(PedidosEntregador.getQtde_entregue());
+                        continue lab1;
+                    }
+                }
+                ListaPedidosEntregador.add(PedidosEntregador);
             }
 
-            Collections.sort(ListaPedidosEntregues, new jsonServlet.datasComparador());
+            Collections.sort(ListaPedidosEntregador, new jsonServlet.datasEntregadorComparador());
 
             gson = new GsonBuilder().create();
-            json = gson.toJson(ListaPedidosEntregues);
+            json = gson.toJson(ListaPedidosEntregador);
         }
 
         response.setContentType("application/json");
@@ -398,19 +405,6 @@ public class jsonServlet extends HttpServlet {
             this.quantidade = quantidade;
         }
 
-        /**
-         * @return the mes_dia
-         */
-        public int getDia_ano() {
-            return mes_dia;
-        }
-
-        /**
-         * @param dia_ano the mes_dia to set
-         */
-        public void setDia_ano(int dia_ano) {
-            this.mes_dia = dia_ano;
-        }
 
         /**
          * @return the ano
@@ -424,6 +418,20 @@ public class jsonServlet extends HttpServlet {
          */
         public void setAno(int ano) {
             this.ano = ano;
+        }
+
+        /**
+         * @return the mes_dia
+         */
+        public int getMes_dia() {
+            return mes_dia;
+        }
+
+        /**
+         * @param mes_dia the mes_dia to set
+         */
+        public void setMes_dia(int mes_dia) {
+            this.mes_dia = mes_dia;
         }
     }
 
@@ -506,7 +514,7 @@ public class jsonServlet extends HttpServlet {
         }
     }
 
-    public static class datasComparador implements Comparator<pedidosEntregues> {
+    public static class datasRelEntreguesComparador implements Comparator<pedidosEntregues> {
 
         @Override
         public int compare(pedidosEntregues s1, pedidosEntregues s2) {
@@ -515,7 +523,19 @@ public class jsonServlet extends HttpServlet {
             if (comparar_data != 0) {
                 return comparar_data;
             }
-            return Integer.compare(s1.getDia_ano(), s2.getDia_ano());
+            return Integer.compare(s1.getMes_dia(), s2.getMes_dia());
+        }
+    }
+    public static class datasEntregadorComparador implements Comparator<pedidosEntregador> {
+
+        @Override
+        public int compare(pedidosEntregador s1, pedidosEntregador s2) {
+            Integer comparar_data = s1.getAno();
+            comparar_data = comparar_data.compareTo(s2.getAno());
+            if (comparar_data != 0) {
+                return comparar_data;
+            }
+            return Integer.compare(s1.getMes_dia(), s2.getMes_dia());
         }
     }
 

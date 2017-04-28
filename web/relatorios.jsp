@@ -37,13 +37,13 @@
             <h1 class="page-header"><center><b> SGER - Sistema de Gerenciamento de Entregas </b></br>para Restaurantes</center></h1>
             <div class="tiporelt">
                 <b>Tipo de Relatório:</b>
-                <select id="tiposrelatorios">
-                    <option value="null"></option>
-                    <option value="Pedidos Entregues">Pedidos Entregues</option>
-                    <option value="Pedidos Por Entregador">Pedidos Por Entregador</option>
-                    <option value="Pedidos Nao Entregues">Pedidos Não Entregues</option> 
-                    <option value="Prejuizo Gerado">Prejuízo Gerado</option>
-                    <option value="Pedidos Nao Entregues Por Justificativa">Pedidos Não Entregues Por Justificativa</option>
+                <select id="tiposrelatorios" name="tiposrelatorios">
+                    <option name="tipo_rel" value="null"></option>
+                    <option name="tipo_rel" value="Pedidos Entregues">Pedidos Entregues</option>
+                    <option name="tipo_rel" value="Pedidos Por Entregador">Pedidos Por Entregador</option>
+                    <option name="tipo_rel" value="Pedidos Nao Entregues">Pedidos Não Entregues</option> 
+                    <option name="tipo_rel" value="Prejuizo Gerado">Prejuízo Gerado</option>
+                    <option name="tipo_rel" value="Pedidos Nao Entregues Por Justificativa">Pedidos Não Entregues Por Justificativa</option>
                 </select>
             </div>
             <div class="tiporelt">
