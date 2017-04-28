@@ -50,7 +50,7 @@ public class DaoRelatorio extends DaoGenerico {
 
         Session session = hibernateConfiguracao.openSession();
         Criteria criteria = session.createCriteria(clas);
-        criteria.add(Restrictions.eq("funcionario", funcionario));
+        criteria.add(Restrictions.and(Restrictions.eq("funcionario", funcionario), Restrictions.eq("status", "Rota Concluída")));
         List lista = criteria.list();
         session.close();
         return lista;
