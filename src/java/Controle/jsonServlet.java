@@ -444,7 +444,7 @@ public class jsonServlet extends HttpServlet {
 
                 PrejuizoGerado.setMes_dia(Integer.parseInt(split_data[0]));
                 PrejuizoGerado.setData(split_data[1] + " " + split_data[2]);
-                PrejuizoGerado.setAno(Integer.parseInt(split_data[1]));
+                PrejuizoGerado.setAno(Integer.parseInt(split_data[2]));
 
                 ListaPrejuizoGerado.add(PrejuizoGerado);
                 PrejuizoGerado = new jsonServlet.prejuizoGerado();

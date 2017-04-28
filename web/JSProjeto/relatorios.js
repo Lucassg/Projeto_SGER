@@ -316,7 +316,7 @@ function prejuizoGerado() {
     var grafico_formatado = [];
 
     $.each(arrayJSON, function (i, obj) {
-        grafico_formatado.push([obj.data, obj.quantidade]);
+        grafico_formatado.push([obj.data, obj.prejuizo]);
     });
 
     data = new google.visualization.DataTable();
@@ -338,10 +338,74 @@ function prejuizoGerado() {
         height: 600,
         width: 1000,
     }
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+    chart.draw(data, options);
+
+    $('#radiotela').show();
+    $('#pentregues').hide();
+    $('#pentregador').hide();
+    $('#pnentregues').hide();
+    $('#pgerado').hide();
+    $('#pnejustificativa').hide();
+    $("#divcolumn").show();
 }
 ;
 
 function pNEtreguePorJustificativa() {
+
+    $.ajax({
+        url: 'jsonServlet',
+        data: {datainicial: $('#datainicial_just').val(),
+            datafinal: $('#datafinal_just').val(),
+            tipo_relatorio: $('#tiposrelatorios').val(),
+            dia_mes: $('#mesdia:checked').val()},
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function (json) {
+            $.each(json, function (index, pedido) {
+                arrayJSON[index] = pedido;
+            });
+        }
+    });
+
+    var grafico_formatado = [];
+
+    $.each(arrayJSON, function (i, obj) {
+        grafico_formatado.push([obj.data, obj.prejuizo]);
+    });
+
+    data = new google.visualization.DataTable();
+
+    if ($('input[name="mesdia"]:checked').val() == "mes") {
+        data.addColumn('string', 'Mês');
+        data.addColumn('number', 'Valor');
+    } else {
+        data.addColumn('string', 'Dia');
+        data.addColumn('number', 'Valor');
+    }
+
+    data.addRows(grafico_formatado);
+
+    options = {
+        title: 'Prejuízo Gerado',
+        legend: 'top',
+        isStacked: true,
+        height: 600,
+        width: 1000,
+    }
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+    chart.draw(data, options);
+
+    $('#radiotela').show();
+    $('#pentregues').hide();
+    $('#pentregador').hide();
+    $('#pnentregues').hide();
+    $('#pgerado').hide();
+    $('#pnejustificativa').hide();
+    $("#divcolumn").show();
 
 }
 ;
