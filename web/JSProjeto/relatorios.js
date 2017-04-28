@@ -79,8 +79,6 @@ $(document).ready(function () {
                     graf_temp.push([obj.data, obj.qtde_entregue + obj.qtde_nentregue]);
                 });
 
-                console.log(graf_temp);
-
                 var data_temp = new google.visualization.DataTable();
 
                 if ($('input[name="mesdia"]:checked').val() == "mes") {
@@ -90,7 +88,6 @@ $(document).ready(function () {
                     data_temp.addColumn('string', 'Dia');
                     data_temp.addColumn('number', 'Pedidos');
                 }
-
 
                 data_temp.addRows(graf_temp);
 
@@ -333,11 +330,12 @@ function prejuizoGerado() {
 
     options = {
         title: 'Prejuízo Gerado',
+        subtitle: 'De 01-01-2017 a 28-04-2017',
         legend: 'top',
         isStacked: true,
         height: 600,
         width: 1000,
-    }
+    };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
@@ -358,8 +356,7 @@ function pNEtreguePorJustificativa() {
         url: 'jsonServlet',
         data: {datainicial: $('#datainicial_just').val(),
             datafinal: $('#datafinal_just').val(),
-            tipo_relatorio: $('#tiposrelatorios').val(),
-            dia_mes: $('#mesdia:checked').val()},
+            tipo_relatorio: $('#tiposrelatorios').val()},
         type: 'get',
         dataType: 'json',
         async: false,
@@ -372,29 +369,24 @@ function pNEtreguePorJustificativa() {
 
     var grafico_formatado = [];
 
-    $.each(arrayJSON, function (i, obj) {
-        grafico_formatado.push([obj.data, obj.prejuizo]);
-    });
+    for (var i in arrayJSON) {
+        grafico_formatado.push([i, arrayJSON[i]]);
+    }
 
     data = new google.visualization.DataTable();
 
-    if ($('input[name="mesdia"]:checked').val() == "mes") {
-        data.addColumn('string', 'Mês');
-        data.addColumn('number', 'Valor');
-    } else {
-        data.addColumn('string', 'Dia');
-        data.addColumn('number', 'Valor');
-    }
+    data.addColumn('string', 'Justificativa');
+    data.addColumn('number', 'Quantidade');
 
     data.addRows(grafico_formatado);
 
     options = {
-        title: 'Prejuízo Gerado',
+        title: 'Pedidos não Entregues por Justificativas',
         legend: 'top',
         isStacked: true,
         height: 600,
         width: 1000,
-    }
+    };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
