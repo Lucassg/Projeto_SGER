@@ -66,8 +66,41 @@ $(document).ready(function () {
             chart.draw(data, options);
         }
         if (select == "pie") {
-            var chart = new google.visualization.PieChart(document.getElementById('divpie'));
-            chart.draw(data, options);
+
+            json_temp = arrayJSON;
+            var graf_temp = [];
+
+            console.log(json_temp);
+
+            console.log($('select[name="tiposrelatorios"] option:selected').val());
+
+            if ($('select[name="tiposrelatorios"] option:selected').val() == "Pedidos Por Entregador") {
+                $.each(json_temp, function (i, obj) {
+                    graf_temp.push([obj.data, obj.qtde_entregue + obj.qtde_nentregue]);
+                });
+
+                console.log(graf_temp);
+
+                var data_temp = new google.visualization.DataTable();
+
+                if ($('input[name="mesdia"]:checked').val() == "mes") {
+                    data_temp.addColumn('string', 'Mês');
+                    data_temp.addColumn('number', 'Pedidos');
+                } else {
+                    data_temp.addColumn('string', 'Dia');
+                    data_temp.addColumn('number', 'Pedidos');
+                }
+
+
+                data_temp.addRows(graf_temp);
+
+                var chart = new google.visualization.PieChart(document.getElementById('divpie'));
+                chart.draw(data_temp, options);
+            } else {
+
+                var chart = new google.visualization.PieChart(document.getElementById('divpie'));
+                chart.draw(data, options);
+            }
         }
         if (select == "combo") {
             var chart = new google.visualization.ComboChart(document.getElementById('divcombo'));
@@ -158,20 +191,26 @@ function pedidosPorEntreguador() {
         }
     });
 
+    console.log(arrayJSON);
+
     var grafico_formatado = [];
 
     $.each(arrayJSON, function (i, obj) {
-        grafico_formatado.push([obj.data, obj.quantidade]);
+        grafico_formatado.push([obj.data, obj.qtde_entregue, obj.qtde_nentregue]);
     });
+
+    console.log(grafico_formatado);
 
     data = new google.visualization.DataTable();
 
     if ($('input[name="mesdia"]:checked').val() == "mes") {
         data.addColumn('string', 'Mês');
-        data.addColumn('number', 'Quantidade');
+        data.addColumn('number', 'Entregues');
+        data.addColumn('number', 'Não Entregues');
     } else {
         data.addColumn('string', 'Dia');
-        data.addColumn('number', 'Quantidade');
+        data.addColumn('number', 'Entregues');
+        data.addColumn('number', 'Não Entregues');
     }
 
     data.addRows(grafico_formatado);
@@ -258,10 +297,115 @@ function pedidosNEntregues() {
 
 function prejuizoGerado() {
 
+    $.ajax({
+        url: 'jsonServlet',
+        data: {datainicial: $('#datainicial_pgerado').val(),
+            datafinal: $('#datafinal_pgerado').val(),
+            tipo_relatorio: $('#tiposrelatorios').val(),
+            dia_mes: $('#mesdia:checked').val()},
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function (json) {
+            $.each(json, function (index, pedido) {
+                arrayJSON[index] = pedido;
+            });
+        }
+    });
+
+    var grafico_formatado = [];
+
+    $.each(arrayJSON, function (i, obj) {
+        grafico_formatado.push([obj.data, obj.prejuizo]);
+    });
+
+    data = new google.visualization.DataTable();
+
+    if ($('input[name="mesdia"]:checked').val() == "mes") {
+        data.addColumn('string', 'Mês');
+        data.addColumn('number', 'Valor');
+    } else {
+        data.addColumn('string', 'Dia');
+        data.addColumn('number', 'Valor');
+    }
+
+    data.addRows(grafico_formatado);
+
+    options = {
+        title: 'Prejuízo Gerado',
+        legend: 'top',
+        isStacked: true,
+        height: 600,
+        width: 1000,
+    }
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+    chart.draw(data, options);
+
+    $('#radiotela').show();
+    $('#pentregues').hide();
+    $('#pentregador').hide();
+    $('#pnentregues').hide();
+    $('#pgerado').hide();
+    $('#pnejustificativa').hide();
+    $("#divcolumn").show();
 }
 ;
 
 function pNEtreguePorJustificativa() {
+
+    $.ajax({
+        url: 'jsonServlet',
+        data: {datainicial: $('#datainicial_just').val(),
+            datafinal: $('#datafinal_just').val(),
+            tipo_relatorio: $('#tiposrelatorios').val(),
+            dia_mes: $('#mesdia:checked').val()},
+        type: 'get',
+        dataType: 'json',
+        async: false,
+        success: function (json) {
+            $.each(json, function (index, pedido) {
+                arrayJSON[index] = pedido;
+            });
+        }
+    });
+
+    var grafico_formatado = [];
+
+    $.each(arrayJSON, function (i, obj) {
+        grafico_formatado.push([obj.data, obj.prejuizo]);
+    });
+
+    data = new google.visualization.DataTable();
+
+    if ($('input[name="mesdia"]:checked').val() == "mes") {
+        data.addColumn('string', 'Mês');
+        data.addColumn('number', 'Valor');
+    } else {
+        data.addColumn('string', 'Dia');
+        data.addColumn('number', 'Valor');
+    }
+
+    data.addRows(grafico_formatado);
+
+    options = {
+        title: 'Prejuízo Gerado',
+        legend: 'top',
+        isStacked: true,
+        height: 600,
+        width: 1000,
+    }
+
+    var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
+    chart.draw(data, options);
+
+    $('#radiotela').show();
+    $('#pentregues').hide();
+    $('#pentregador').hide();
+    $('#pnentregues').hide();
+    $('#pgerado').hide();
+    $('#pnejustificativa').hide();
+    $("#divcolumn").show();
 
 }
 ;
