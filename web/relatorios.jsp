@@ -68,7 +68,7 @@
                     <b>Data Final: <input type="text" id="datafinal_entregador" name="datafinal_entregador" class="datetimepicker"/></b> 
                     <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
                     <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
-                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosPorEntreguador()"/>
+                    <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosPorEntregador()"/>
                 </div>
                 <div id="pnentregues" class="hidediv">
                     <b>Data Inicial: <input type="text" id="datainicial_nao_entregue" name="datainicial_nao_entregue" class="datetimepicker"/></b> 
