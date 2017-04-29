@@ -56,7 +56,7 @@ public class DaoRelatorio extends DaoGenerico {
         return lista;
     }
 
-    public List pedidosEntregador(Class clas, Date datainicio, Date datafinal, List<Rota> rotas /*Rota rota*/) throws HibernateException {
+    public List pedidosEntregador(Class clas, Date datainicio, Date datafinal, List<Rota> rotas) throws HibernateException {
 
         Session session = hibernateConfiguracao.openSession();
         Criteria criteria = session.createCriteria(clas);

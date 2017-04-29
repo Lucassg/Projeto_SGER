@@ -70,10 +70,6 @@ $(document).ready(function () {
             json_temp = arrayJSON;
             var graf_temp = [];
 
-            console.log(json_temp);
-
-            console.log($('select[name="tiposrelatorios"] option:selected').val());
-
             if ($('select[name="tiposrelatorios"] option:selected').val() == "Pedidos Por Entregador") {
                 $.each(json_temp, function (i, obj) {
                     graf_temp.push([obj.data, obj.qtde_entregue + obj.qtde_nentregue]);
@@ -150,6 +146,7 @@ function pedidosEntregues() {
 
     options = {
         title: 'Pedidos Entregues',
+        titleTextStyle: {fontSize: 32, bold: true},
         legend: 'top',
         isStacked: true,
         height: 500,
@@ -169,7 +166,7 @@ function pedidosEntregues() {
 }
 ;
 
-function pedidosPorEntreguador() {
+function pedidosPorEntregador() {
 
     $.ajax({
         url: 'jsonServlet',
@@ -213,7 +210,8 @@ function pedidosPorEntreguador() {
     data.addRows(grafico_formatado);
 
     options = {
-        title: 'Pedidos Não Entregues',
+        title: 'Pedidos Por Entregador',
+        titleTextStyle: {fontSize: 32, bold: true},
         legend: 'top',
         isStacked: true,
         height: 500,
@@ -272,7 +270,8 @@ function pedidosNEntregues() {
     data.addRows(grafico_formatado);
 
     options = {
-        title: 'Pedidos Por Entregador',
+        title: 'Pedidos N\u00E3o Entregues',
+        titleTextStyle: {fontSize: 32, bold: true},
         legend: 'top',
         isStacked: true,
         height: 600,
@@ -329,7 +328,8 @@ function prejuizoGerado() {
     data.addRows(grafico_formatado);
 
     options = {
-        title: 'Prejuízo Gerado',
+        title: 'Preju\u00EDzo Gerado',
+        titleTextStyle: {fontSize: 32, bold: true},
         subtitle: 'De 01-01-2017 a 28-04-2017',
         legend: 'top',
         isStacked: true,
@@ -381,7 +381,8 @@ function pNEtreguePorJustificativa() {
     data.addRows(grafico_formatado);
 
     options = {
-        title: 'Pedidos não Entregues por Justificativas',
+        title: 'Pedidos N\u00E3o Entregues por Justificativas',
+        titleTextStyle: {fontSize: 32, bold: true},
         legend: 'top',
         isStacked: true,
         height: 600,
