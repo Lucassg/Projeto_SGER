@@ -12,7 +12,7 @@ public class DaoSger extends DaoGenerico {
     
     }
     
-        public Object carregaSger() throws HibernateException {
+    public Object carregaSger() throws HibernateException {
         Session session = hibernateConfiguracao.openSession();
         Transaction transaction = session.beginTransaction();
         Criteria criteria = session.createCriteria(Sger.class);
