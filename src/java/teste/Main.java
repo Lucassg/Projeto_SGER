@@ -1,29 +1,22 @@
 package teste;
 
-import dao.DaoItens_Pedido;
-import dao.DaoPedido;
-import java.io.FileNotFoundException;
+import dao.DaoArea_Entrega;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-import model.Pedido;
+import model.Area_Entrega;
 
 public class Main {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args){
 
-        DaoPedido acessohibernatepedido;
-        acessohibernatepedido = new DaoPedido();
-
-        List<Pedido> ListaPedidosFechados = (List<Pedido>) acessohibernatepedido.carregarPedidosFechados();
-
-        List<String> ListaStatus = new ArrayList<>();
-
-        ListaPedidosFechados.forEach(l -> ListaStatus.add(l.getStatus()));
-        Map<String, Long> counts = ListaStatus.stream().collect(Collectors.groupingBy(e -> e, Collectors.counting()));
-
-        System.exit(0);
+        DaoArea_Entrega acessohibernateareaentrega;
+        acessohibernateareaentrega = new DaoArea_Entrega();
+        List<Area_Entrega> ceps = new ArrayList<>();
+        ceps = acessohibernateareaentrega.carregarTudoOrdenado(Area_Entrega.class, "cep");
+        
+        for (int i = 0; i <= ceps.size(); i++) {
+            System.out.println("CEP: " + ceps.get(i).getCep());
+        }
 
     }
 }
