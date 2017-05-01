@@ -7,7 +7,7 @@
         </style>
     </head>
     <body>
-        <div id="map" ></div>
+        <div id="map" style="height: 90%; width: 90%"></div>
         <!--
         CSS do mapa caso seja necessário ver a output na página
         style="height: 90%; width: 90%"

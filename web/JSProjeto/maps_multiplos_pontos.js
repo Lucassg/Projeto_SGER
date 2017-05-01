@@ -12,8 +12,7 @@ window.exibeRotaMultiplosPontos = function () {
 function criaParadas(directionsService, directionsDisplay) {
     var waypts = [];
     var enderecosJSON = buscaEnderecosJSON();
-    var end_estabelecimento = "R. Jose Pires Neto, 185-189 - Cambui, Campinas - SP, 13025-170";
-    var end_final = "Av. Dr. Jesuíno Marcondes Machado, 699-731 - Chácara da Barra, Campinas - SP, 13090-723";
+    var end_estabelecimento = "Km 133, Rod. Dom Pedro I - Jardim Nilópolis, Campinas - SP, 13097-670, Brasil";
     
     for (var i = 0; i < enderecosJSON.length; i++) {
         waypts.push({
@@ -24,7 +23,7 @@ function criaParadas(directionsService, directionsDisplay) {
 
     directionsService.route({
         origin: end_estabelecimento,
-        destination: end_final,
+        destination: end_estabelecimento,
         waypoints: waypts,
         optimizeWaypoints: true,
         travelMode: google.maps.TravelMode.DRIVING

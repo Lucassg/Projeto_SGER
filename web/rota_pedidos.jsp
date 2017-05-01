@@ -63,7 +63,7 @@
                                     <td align="left">
                                         <dl><select name="${cont}">
                                                 <option selected value="entregue"></option>
-                                                <option value="não encontrou endereço">Não Encontrodo Endereço</option> 
+                                                <option value="não encontrou endereço">Não Encontrado Endereço</option> 
                                                 <option value="responsavel não encontrado">Responsável Não Encontrado</option> 
                                                 <option value="recusou pedido por demora">Recusou Pedido Por Demora</option> 
                                                 <option value="recusou por erro no pedido">Recusou Por Erro No Pedido</option> 
