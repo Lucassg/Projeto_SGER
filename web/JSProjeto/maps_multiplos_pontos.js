@@ -12,7 +12,7 @@ window.exibeRotaMultiplosPontos = function () {
 function criaParadas(directionsService, directionsDisplay) {
     var waypts = [];
     var enderecosJSON = buscaEnderecosJSON();
-    var end_estabelecimento = "Km 133, Rod. Dom Pedro I - Jardim Nilópolis, Campinas - SP, 13097-670, Brasil";
+    var end_estabelecimento = "Rua Doutor Antônio Duarte da Conceição, 1-169 - Jardim Santana, Campinas - SP, 13091-606";
     
     for (var i = 0; i < enderecosJSON.length; i++) {
         waypts.push({
