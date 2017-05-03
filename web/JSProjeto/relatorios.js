@@ -78,7 +78,7 @@ $(document).ready(function () {
                 var data_temp = new google.visualization.DataTable();
 
                 if ($('input[name="mesdia"]:checked').val() == "mes") {
-                    data_temp.addColumn('string', 'Mês');
+                    data_temp.addColumn('string', 'M\u00EAs');
                     data_temp.addColumn('number', 'Pedidos');
                 } else {
                     data_temp.addColumn('string', 'Dia');
@@ -135,7 +135,7 @@ function pedidosEntregues() {
     data = new google.visualization.DataTable();
 
     if ($('input[name="mesdia"]:checked').val() == "mes") {
-        data.addColumn('string', 'Mês');
+        data.addColumn('string', 'M\u00EAs');
         data.addColumn('number', 'Quantidade');
     } else {
         data.addColumn('string', 'Dia');
@@ -198,13 +198,13 @@ function pedidosPorEntregador() {
     data = new google.visualization.DataTable();
 
     if ($('input[name="mesdia"]:checked').val() == "mes") {
-        data.addColumn('string', 'Mês');
+        data.addColumn('string', 'M\u00EAs');
         data.addColumn('number', 'Entregues');
-        data.addColumn('number', 'Não Entregues');
+        data.addColumn('number', 'N\u00E3o Entregues');
     } else {
         data.addColumn('string', 'Dia');
         data.addColumn('number', 'Entregues');
-        data.addColumn('number', 'Não Entregues');
+        data.addColumn('number', 'N\u00E3o Entregues');
     }
 
     data.addRows(grafico_formatado);
@@ -216,6 +216,8 @@ function pedidosPorEntregador() {
         isStacked: true,
         height: 500,
         width: 950,
+        chartArea: {  width: "70%", height: "70%" },
+        legend: {position: 'top', textStyle: {fontSize: 14}}
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
@@ -260,7 +262,7 @@ function pedidosNEntregues() {
     data = new google.visualization.DataTable();
 
     if ($('input[name="mesdia"]:checked').val() == "mes") {
-        data.addColumn('string', 'Mês');
+        data.addColumn('string', 'M\u00EAs');
         data.addColumn('number', 'Quantidade');
     } else {
         data.addColumn('string', 'Dia');
@@ -318,7 +320,7 @@ function prejuizoGerado() {
     data = new google.visualization.DataTable();
 
     if ($('input[name="mesdia"]:checked').val() == "mes") {
-        data.addColumn('string', 'Mês');
+        data.addColumn('string', 'M\u00EAs');
         data.addColumn('number', 'Valor');
     } else {
         data.addColumn('string', 'Dia');

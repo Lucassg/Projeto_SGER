@@ -303,9 +303,9 @@ public class ControleLogicoRota implements ControleLogico {
         Deve-se levar em consideração os seguintes fatores:
             - O ponto inicial e final sempre será o endereço do estabelecimento
             - Deve-se respeitar o peso máximo que um carregador pode levar em sua
-            mochila (por enquanto usaremos o padrão de peso máximo igual a 10).
+            mochila (por enquanto usaremos o padrão de peso máximo igual a 24).
             - O tempo limite da rota deve ser respeitado. O padrão no momento será
-            de 30 minutos.
+            de 50 minutos.
             - De acordo com testes feitos no Directions e JavaScript API a 
             quantidade máxima de pontos de parada são 25 contando com o destino 
             e a origem. Portanto, devemos limitar cada rota a 23 pedidos.
@@ -404,8 +404,8 @@ public class ControleLogicoRota implements ControleLogico {
                 os dois pedidos de cada posição da ListaParesPedidos.
                  */
                 if (ListaRota.get(ListaRota.size() - 1).getId() == ListaParesPedidos.get(pares_pedidos).getPedido1().getId()
-                        && ((peso + ListaParesPedidos.get(pares_pedidos).getPedido2().getPeso()) <= 10)
-                        && ((tempo + ListaParesPedidos.get(pares_pedidos).getDistancia()) <= 1800)
+                        && ((peso + ListaParesPedidos.get(pares_pedidos).getPedido2().getPeso()) <= 24)
+                        && ((tempo + ListaParesPedidos.get(pares_pedidos).getDistancia()) <= 3000)
                         && ((qtde_enderecos + 1) <= 23)) {
 
                     /*
@@ -465,8 +465,8 @@ public class ControleLogicoRota implements ControleLogico {
                 são atendidas.
                  */
                 if (ListaRota.get(ListaRota.size() - 1).getId() == ListaParesPedidos.get(pares_pedidos).getPedido2().getId()
-                        && ((peso + ListaParesPedidos.get(pares_pedidos).getPedido1().getPeso()) <= 10)
-                        && ((tempo + ListaParesPedidos.get(pares_pedidos).getDistancia()) <= 1800)
+                        && ((peso + ListaParesPedidos.get(pares_pedidos).getPedido1().getPeso()) <= 24)
+                        && ((tempo + ListaParesPedidos.get(pares_pedidos).getDistancia()) <= 3000)
                         && ((qtde_enderecos + 1) <= 23)) {
 
                     ListaRota.add(ListaParesPedidos.get(pares_pedidos).getPedido1());
