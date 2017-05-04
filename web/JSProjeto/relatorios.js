@@ -212,12 +212,13 @@ function pedidosPorEntregador() {
     options = {
         title: 'Pedidos Por Entregador',
         titleTextStyle: {fontSize: 32, bold: true},
-        legend: 'top',
-        isStacked: true,
         height: 500,
         width: 950,
-        chartArea: {  width: "70%", height: "70%" },
-        legend: {position: 'top', textStyle: {fontSize: 14}}
+//        chartArea: {width: "70%", height: "70%"},
+        legend: {position: 'top', maxLines: 2},
+//        usar a linha abaixo se as labels encavalarem
+        hAxis: {showTextEvery: 0, slantedText: true, slantedTextAngle: 30},
+        isStacked: true,
     };
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
