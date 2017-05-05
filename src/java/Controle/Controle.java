@@ -30,6 +30,9 @@ public class Controle extends HttpServlet {
 
         } catch (Exception ex) {
             log(ex.getMessage());
+            request.setAttribute("errmsg", ex.getMessage());
+            System.out.println(request);
+            request.getRequestDispatcher("error").forward(request, response);
         }
     }
 
