@@ -33,10 +33,11 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"><center><b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes</center></h1>
-            <c:set var="mensagem" value='${requestScope["errmsg"]}' />
             <div id="">
                 <b>Um erro ocorreu ao executar a ação. Tente novamente ou entre em contato com o suporte.</b>
-                <b>${mensagem}</b><c:out value="${message}"/>
+                <br>
+                <br>
+                <b>Mensagem de erro: ${errmsg}</b>
             </div>
         </div>
     </div>

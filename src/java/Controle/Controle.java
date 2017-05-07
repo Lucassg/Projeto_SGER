@@ -2,10 +2,13 @@ package Controle;
 
 import Controle.logico.*;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.codehaus.groovy.runtime.ExceptionUtils;
 
 public class Controle extends HttpServlet {
 
@@ -30,8 +33,15 @@ public class Controle extends HttpServlet {
 
         } catch (Exception ex) {
             log(ex.getMessage());
-            request.setAttribute("errmsg", ex.getMessage());
-            System.out.println(request);
+            ex.printStackTrace();
+            String erro = ex.toString();
+//            StackTraceElement[] erro = ex.getStackTrace();
+//            String result = ex.toString() + "\n";
+//            StackTraceElement[] trace = ex.getStackTrace();
+//            for (int i = 0; i < trace.length; i++) {
+//                result += trace[i].toString() + "\n";
+//            }
+            request.getSession().setAttribute("errmsg", erro);
             request.getRequestDispatcher("error").forward(request, response);
         }
     }
