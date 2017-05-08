@@ -64,10 +64,18 @@
                         </c:forEach>
                     </tbody>
                 </table>
-                <a href="Controle?classe=ControleLogicoRota&acao=gerar_rotas"><input class="btn btn-primary" type="button" value="Gerar Rotas"></a>       
+                <a href="Controle?classe=ControleLogicoRota&acao=gerar_rotas"><input class="btn btn-primary" type="button" value="Gerar Rotas" id="botao" class="botao"></a>       
             </div>
         </div>
     </div>
 </div>
+
+<img src="img/Preloader_3.gif" id="img" style="display:none"/>
+
+<div class="se-pre-con" id="se-pre-con" name="se-pre-con"></div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.2/modernizr.js"></script>
+<script src="JSProjeto/loader.js" type="text/javascript"></script>
 
 <jsp:include page="footer.jsp"/>

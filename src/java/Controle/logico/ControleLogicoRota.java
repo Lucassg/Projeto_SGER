@@ -123,8 +123,8 @@ public class ControleLogicoRota implements ControleLogico {
         GeoApiContext: Objeto utilizado na API java do Maps. Utilizar o comando
         setApiKey para passar a chave de acesso ao Maps.
          */
-        GeoApiContext geoApiContext = new GeoApiContext().setApiKey("AIzaSyBNPdACkvr_g58Dy19fyguF14u5ZExDIyM");
-        //GeoApiContext geoApiContext = new GeoApiContext().setApiKey("AIzaSyAnkl6gpRCijYhMRGatUCnk3_E0kuS9xms");
+//        GeoApiContext geoApiContext = new GeoApiContext().setApiKey("AIzaSyBNPdACkvr_g58Dy19fyguF14u5ZExDIyM");
+        GeoApiContext geoApiContext = new GeoApiContext().setApiKey("AIzaSyAnkl6gpRCijYhMRGatUCnk3_E0kuS9xms");
 
         /*
         ListaRotasInicial do tipo RotaTemp contém todas as possíveis rotas iniciais

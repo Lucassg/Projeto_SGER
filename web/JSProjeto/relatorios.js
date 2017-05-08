@@ -3,6 +3,7 @@ var arrayJSON = [];
 var data;
 var options;
 
+
 $(document).ready(function () {
     $('#tiposrelatorios').change(function () {
 
@@ -62,6 +63,7 @@ $(document).ready(function () {
     $("input[name$='chart']").click(function () {
         var select = $(this).val();
         if (select == "column") {
+            $("div.graf").show();
             var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
             chart.draw(data, options);
         }
@@ -71,6 +73,7 @@ $(document).ready(function () {
             var graf_temp = [];
 
             if ($('select[name="tiposrelatorios"] option:selected').val() == "Pedidos Por Entregador") {
+                $("div.graf").show();
                 $.each(json_temp, function (i, obj) {
                     graf_temp.push([obj.data, obj.qtde_entregue + obj.qtde_nentregue]);
                 });
@@ -78,9 +81,11 @@ $(document).ready(function () {
                 var data_temp = new google.visualization.DataTable();
 
                 if ($('input[name="mesdia"]:checked').val() == "mes") {
+                    $("div.graf").show();
                     data_temp.addColumn('string', 'M\u00EAs');
                     data_temp.addColumn('number', 'Pedidos');
                 } else {
+                    $("div.graf").show();
                     data_temp.addColumn('string', 'Dia');
                     data_temp.addColumn('number', 'Pedidos');
                 }
@@ -91,15 +96,18 @@ $(document).ready(function () {
                 chart.draw(data_temp, options);
             } else {
 
+                $("div.graf").show();
                 var chart = new google.visualization.PieChart(document.getElementById('divpie'));
                 chart.draw(data, options);
             }
         }
         if (select == "combo") {
+            $("div.graf").show();
             var chart = new google.visualization.ComboChart(document.getElementById('divcombo'));
             chart.draw(data, options);
         }
         if (select == "bar") {
+            $("div.graf").show();
             var chart = new google.visualization.BarChart(document.getElementById('divbar'));
             chart.draw(data, options);
         }
@@ -153,6 +161,7 @@ function pedidosEntregues() {
         width: 950,
     };
 
+    $("div.graf").show();
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
@@ -212,15 +221,16 @@ function pedidosPorEntregador() {
     options = {
         title: 'Pedidos Por Entregador',
         titleTextStyle: {fontSize: 32, bold: true},
-        height: 500,
-        width: 950,
-//        chartArea: {width: "70%", height: "70%"},
+        height: 600,
+        width: 1000,
+//        chartArea: {top: 30, left: 80},
         legend: {position: 'top', maxLines: 2},
 //        usar a linha abaixo se as labels encavalarem
-        hAxis: {showTextEvery: 0, slantedText: true, slantedTextAngle: 30},
+//        hAxis: {showTextEvery: 0, slantedText: true, slantedTextAngle: 30},
         isStacked: true,
     };
 
+    $("div.graf").show();
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
@@ -231,8 +241,6 @@ function pedidosPorEntregador() {
     $('#pgerado').hide();
     $('#pnejustificativa').hide();
     $("#divcolumn").show();
-
-
 }
 ;
 
@@ -281,6 +289,7 @@ function pedidosNEntregues() {
         width: 1000,
     };
 
+    $("div.graf").show();
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
@@ -340,6 +349,7 @@ function prejuizoGerado() {
         width: 1000,
     };
 
+    $("div.graf").show();
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
@@ -390,8 +400,10 @@ function pNEtreguePorJustificativa() {
         isStacked: true,
         height: 600,
         width: 1000,
+//        hAxis: {showTextEvery: 0, slantedText: true, slantedTextAngle: 30},
     };
 
+    $("div.graf").show();
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
