@@ -6,65 +6,28 @@ $(document).ready(function () {
     $('#tiposrelatorios').change(function () {
 
         if ($('#tiposrelatorios').val() == 'Pedidos Entregues') {
+            $('.datetimepicker').val('');
             $('.hidediv').hide();
             $('#pentregues').show();
-            $('.datetimepicker').val('');
-            
-//            $('#pentregador').hide();
-//            $('#pnentregues').hide();
-//            $('#pgerado').hide();
-//            $('#pnejustificativa').hide();
-//            $("div.graf").hide();
-//            $('#radiotela').hide();
-            
         } else if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador') {
+            $('.datetimepicker').val('');
             $('.hidediv').hide();
-            $('#pentregador').show();
-            $('.datetimepicker').val('');
-            
-//            $('#pentregues').hide();
-//            $('#pnentregues').hide();
-//            $('#pgerado').hide();
-//            $('#pnejustificativa').hide();
-//            $("div.graf").hide();
-//            $('#radiotela').hide();
-            
-             
+            $('#pentregador').show();                  
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues') {
-            $('#pnentregues').show();
-            $('#pentregues').hide();
-            $('#pentregador').hide();
-            $('#pgerado').hide();
-            $('#pnejustificativa').hide();
-            $("div.graf").hide();
-            $('#radiotela').hide();
             $('.datetimepicker').val('');
+            $('.hidediv').hide();
+            $('#pnentregues').show();
         } else if ($('#tiposrelatorios').val() == 'Prejuizo Gerado') {
-            $('#pgerado').show();
-            $('#pentregues').hide();
-            $('#pentregador').hide();
-            $('#pnentregues').hide();
-            $('#pnejustificativa').hide();
-            $("div.graf").hide();
-            $('#radiotela').hide();
-            $('.datetimepicker').val(''); 
+            $('.datetimepicker').val('');
+            $('.hidediv').hide();
+            $('#pgerado').show();            
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues Por Justificativa') {
+            $('.datetimepicker').val('');
+            $('.hidediv').hide();
             $('#pnejustificativa').show();
-            $('#pentregues').hide();
-            $('#pentregador').hide();
-            $('#pnentregues').hide();
-            $('#pgerado').hide();
-            $("div.graf").hide();
-            $('#radiotela').hide();
-            $('.datetimepicker').val(''); 
         } else {
-            $('#pentregues').hide();
-            $('#pentregador').hide();
-            $('#pnentregues').hide();
-            $('#pgerado').hide();
-            $('#pnejustificativa').hide();
-            $('#radiotela').hide();
-            $("div.graf").hide();
+            $('.datetimepicker').val('');
+            $('.hidediv').hide();
         }
     });
 });
