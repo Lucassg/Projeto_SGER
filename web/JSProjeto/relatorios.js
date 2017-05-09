@@ -15,6 +15,7 @@ $(document).ready(function () {
             $('#pnejustificativa').hide();
             $("div.graf").hide();
             $('#radiotela').hide();
+            $('.datetimepicker').val('');
         } else if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador') {
             $('#pentregador').show();
             $('#pentregues').hide();
@@ -23,6 +24,8 @@ $(document).ready(function () {
             $('#pnejustificativa').hide();
             $("div.graf").hide();
             $('#radiotela').hide();
+            $('.datetimepicker').val(''); 
+             
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues') {
             $('#pnentregues').show();
             $('#pentregues').hide();
@@ -31,6 +34,7 @@ $(document).ready(function () {
             $('#pnejustificativa').hide();
             $("div.graf").hide();
             $('#radiotela').hide();
+            $('.datetimepicker').val('');
         } else if ($('#tiposrelatorios').val() == 'Prejuizo Gerado') {
             $('#pgerado').show();
             $('#pentregues').hide();
@@ -39,6 +43,7 @@ $(document).ready(function () {
             $('#pnejustificativa').hide();
             $("div.graf").hide();
             $('#radiotela').hide();
+            $('.datetimepicker').val(''); 
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues Por Justificativa') {
             $('#pnejustificativa').show();
             $('#pentregues').hide();
@@ -47,6 +52,7 @@ $(document).ready(function () {
             $('#pgerado').hide();
             $("div.graf").hide();
             $('#radiotela').hide();
+            $('.datetimepicker').val(''); 
         } else {
             $('#pentregues').hide();
             $('#pentregador').hide();

@@ -49,9 +49,11 @@
             <div class="tiporelt">
                 <div id="pentregues" class="hidediv">
                     <b>Data Inicial: <input type="text" id="datainicial_entregue" name="datainicial_entregue" class="datetimepicker"/></b> 
-                    <b>Data Final: <input type="text" id="datafinal_entregue" name="datafinal_entregue" class="datetimepicker"/></b> 
-                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
+                    <b>Data Final: <input type="text" id="datafinal_entregue" name="datafinal_entregue" class="datetimepicker"/></b>
+                    <form class="formradio">
+                        <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
+                        <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
+                    </form>
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosEntregues()"/>
                 </div>
                 <div id="pentregador" class="hidediv">
@@ -66,22 +68,28 @@
                             </c:forEach>
                         </select>
                     </form>
-                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
+                    <form class="formradio">
+                        <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
+                        <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
+                    </form>
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosPorEntregador()"/>
                 </div>
                 <div id="pnentregues" class="hidediv">
                     <b>Data Inicial: <input type="text" id="datainicial_nao_entregue" name="datainicial_nao_entregue" class="datetimepicker"/></b> 
                     <b>Data Final: <input type="text" id="datafinal_nao_entregue" name="datafinal_nao_entregue" class="datetimepicker"/></b>
-                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
+                    <form class="formradio">
+                        <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
+                        <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
+                    </form>
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosNEntregues()"/>
                 </div>
                 <div id="pgerado" class="hidediv">
                     <b>Data Inicial: <input type="text" id="datainicial_pgerado" name="datainicial_pgerado" class="datetimepicker"/></b> 
                     <b>Data Final: <input type="text" id="datafinal_pgerado" name="datafinal_pgerado" class="datetimepicker"/></b>
-                    <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
-                    <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
+                    <form class="formradio">
+                        <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
+                        <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
+                    </form>
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="prejuizoGerado()"/>
                 </div>
                 <div id="pnejustificativa" class="hidediv">

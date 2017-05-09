@@ -10,7 +10,7 @@
         <link href="CSSProjeto/StyleSger.css" rel="stylesheet" async="true">
         <link href="CSSProjeto/ie10-viewport-bug-workaround.css" rel="stylesheet" async="true"> <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <link href="CSSProjeto/dashboard.css" rel="stylesheet" async="true"> <!-- Custom styles for this template -->
-        <link rel="icon" href="img/IE.ico"> <!-- imagem que aparece no navegador-->
+        <link rel="icon" href="img/motoboy.ico"> <!-- imagem que aparece no navegador-->
         <title>SGER - Sistema de Gerenciamento de Entregas para Restaurantes</title>
     </head>
     <body>

@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="SGER - Sistema de Gerenciamento de Entregas para Restaurantes"> <!-- Descrição da página -->
         <meta name="author" content="Leonardo, Lucas Gacia, Lucas Martins"> <!-- autores -->
-        <link rel="icon" href="img/IE.ico"> <!-- imagem que aparece no navegador-->
+        <link rel="icon" href="img/motoboy.ico"> <!-- imagem que aparece no navegador-->
         <link href="CSSLogin/bootstrap.min.css" rel="stylesheet" async="true"><!-- Bootstrap core CSS -->
         <link href="CSSLogin/ie10-viewport-bug-workaround.css" rel="stylesheet" async="true"><!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->   
         <link href="CSSLogin/signin.css" rel="stylesheet" async="true"> <!-- Custom styles for this template -->
