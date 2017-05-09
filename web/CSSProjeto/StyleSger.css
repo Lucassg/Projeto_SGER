@@ -53,18 +53,21 @@
 
 #divcombo{  
     height:600px;
+    width:1000px;
     margin-left: auto;
     margin-right: auto
 }
 
 #divbar{ 
     height:600px;
+    width:1000px;
     margin-left: auto;
     margin-right: auto
 }
 
 #divpie{ 
     height:600px;
+    width:1000px;
     margin-left: auto;
     margin-right: auto
 }

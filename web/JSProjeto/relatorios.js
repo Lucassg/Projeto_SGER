@@ -36,7 +36,8 @@ $(document).ready(function () {
     $("input[name$='chart']").click(function () {
         var select = $(this).val();
         if (select == "column") {
-            $("div.graf").show();
+            $('.graf').hide();
+            $('#divcolumn').show();
             var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
             chart.draw(data, options);
         }
@@ -44,9 +45,7 @@ $(document).ready(function () {
 
             json_temp = arrayJSON;
             var graf_temp = [];
-
             if ($('select[name="tiposrelatorios"] option:selected').val() == "Pedidos Por Entregador") {
-                $("div.graf").show();
                 $.each(json_temp, function (i, obj) {
                     graf_temp.push([obj.data, obj.qtde_entregue + obj.qtde_nentregue]);
                 });
@@ -64,28 +63,29 @@ $(document).ready(function () {
                 }
 
                 data_temp.addRows(graf_temp);
-
+                $('.graf').hide();
+                $('#divpie').show();
                 var chart = new google.visualization.PieChart(document.getElementById('divpie'));
                 chart.draw(data_temp, options);
             } else {
-
-                $("div.graf").show();
+                $('.graf').hide();
+                $('#divpie').show()
                 var chart = new google.visualization.PieChart(document.getElementById('divpie'));
                 chart.draw(data, options);
             }
         }
         if (select == "combo") {
-            $("div.graf").show();
+            $('.graf').hide();
+            $('#divcombo').show();
             var chart = new google.visualization.ComboChart(document.getElementById('divcombo'));
             chart.draw(data, options);
         }
         if (select == "bar") {
-            $("div.graf").show();
+            $('.graf').hide();
+            $('#divbar').show();
             var chart = new google.visualization.BarChart(document.getElementById('divbar'));
             chart.draw(data, options);
         }
-        $("div.graf").hide();
-        $("#div" + select).show();
     });
 });
 
@@ -135,18 +135,11 @@ function pedidosEntregues() {
         height: 500,
         width: 950,
     };
-
-    $("divcolumn").show();
+    $('.hidediv').hide();
+    $('#radiotela').show();
+    $('#divcolumn').show();  
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
-
-    $('#radiotela').show();
-    $('#pentregues').hide();
-    $('#pentregador').hide();
-    $('#pnentregues').hide();
-    $('#pgerado').hide();
-    $('#pnejustificativa').hide();
-    $("#divcolumn").show();
 }
 ;
 
@@ -203,21 +196,15 @@ function pedidosPorEntregador() {
         isStacked: true,
     };
 
-    $("div.graf").show();
-    document.getElementById('divpie').setAttribute("style","heigth:0px");
-    document.getElementById('divbar').setAttribute("style","heigth:0px");
-    document.getElementById('divcombo').setAttribute("style","heigth:0px");
+    $('.hidediv').hide();
+    $('#radiotela').show();
+    $('#divcolumn').show();  
+//    document.getElementById('divpie').setAttribute("style","heigth:0px");
+//    document.getElementById('divbar').setAttribute("style","heigth:0px");
+//    document.getElementById('divcombo').setAttribute("style","heigth:0px");
 
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
-
-    $('#radiotela').show();
-    $('#pentregues').hide();
-    $('#pentregador').hide();
-    $('#pnentregues').hide();
-    $('#pgerado').hide();
-    $('#pnejustificativa').hide();
-//    $("#divcolumn").show();
 }
 ;
 
@@ -267,17 +254,11 @@ function pedidosNEntregues() {
         chartArea: {height: '55%', width: '80%'},
     };
 
-    $("divcolumn").show();
+    $('.hidediv').hide();
+    $('#radiotela').show();
+    $('#divcolumn').show();  
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
-
-    $('#radiotela').show();
-    $('#pentregues').hide();
-    $('#pentregador').hide();
-    $('#pnentregues').hide();
-    $('#pgerado').hide();
-    $('#pnejustificativa').hide();
-    $("#divcolumn").show();
 }
 ;
 
@@ -328,17 +309,11 @@ function prejuizoGerado() {
         chartArea: {height: '55%', width: '80%'},
     };
 
-    $("#divcolumn").show();
+    $('.hidediv').hide();
+    $('#radiotela').show();
+    $('#divcolumn').show();  
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
-
-    $('#radiotela').show();
-    $('#pentregues').hide();
-    $('#pentregador').hide();
-    $('#pnentregues').hide();
-    $('#pgerado').hide();
-    $('#pnejustificativa').hide();
-    $("#divcolumn").show();
 }
 ;
 
@@ -382,20 +357,12 @@ function pNEtreguePorJustificativa() {
         chartArea: {height: '55%', width: '80%'},
     };
 
-    $("#divcolumn").show();
+    $('.hidediv').hide();
+    $('#radiotela').show();
+    $('#divcolumn').show();  
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
-
-    $('#radiotela').show();
-    $('#pentregues').hide();
-    $('#pentregador').hide();
-    $('#pnentregues').hide();
-    $('#pgerado').hide();
-    $('#pnejustificativa').hide();
-    $("#divcolumn").show();
-
-}
-;
+};
 
 $('.datetimepicker').datetimepicker({
     inline: true,
