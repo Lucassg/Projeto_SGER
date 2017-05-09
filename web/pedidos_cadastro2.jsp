@@ -50,10 +50,16 @@
                             <th></th>
                         </tr>
                     </thead>
+                    <c:if test="${empty ListaItensPedido}">
+                        <input type="hidden" id="lista" name="lista" class="lista" value="null" />
+                    </c:if>
+                    <c:if test="${not empty ListaItensPedido}">
+                        <input type="hidden" id="lista" name="lista" class="lista" value="not null" />
+                    </c:if>
                     <c:set var="cont" value="0"/>
                     <c:forEach items="${ListaItensPedido}" var="Itens_Pedido">
                         <tr>
-                            <td>${cont = cont + 1}</td>
+                            <td id="tdcont">${cont = cont + 1}</td>
                             <td>${Itens_Pedido.produto_id.nome}</td>
                             <td>${Itens_Pedido.produto_id.descricao}</td>
                             <td>${Itens_Pedido.quantidade}</td>
@@ -100,10 +106,12 @@
                     </fieldset>
                 </table>
             </div>
-            <a href="Controle?classe=ControleLogicoPedido&acao=gravar_pedido"><input type="button" class="btn btn-success" value="Finalizar Pedido" name="cadastrar" /></a>
+            <a href="Controle?classe=ControleLogicoPedido&acao=gravar_pedido"><input type="button" class="btn btn-success" value="Finalizar Pedido" name="cadastrar" id="cadastrar" onclick="return runclick()"/></a>
             <a href="Controle?classe=ControleLogicoPedido&acao=cancelar_cad_pedido"><input type="button" class="btn btn-danger" value="Cancelar" name="cancelar" /></a>
         </div>
     </div>
 </div>
+
+<script src="JSProjeto/pedidos.js" type="text/javascript"/>
 
 <jsp:include page="footer.jsp"/>
