@@ -1,30 +1,34 @@
-google.charts.load('current', {packages: ['corechart']});
 var arrayJSON = [];
 var data;
 var options;
-
 
 $(document).ready(function () {
     $('#tiposrelatorios').change(function () {
 
         if ($('#tiposrelatorios').val() == 'Pedidos Entregues') {
+            $('.hidediv').hide();
             $('#pentregues').show();
-            $('#pentregador').hide();
-            $('#pnentregues').hide();
-            $('#pgerado').hide();
-            $('#pnejustificativa').hide();
-            $("div.graf").hide();
-            $('#radiotela').hide();
             $('.datetimepicker').val('');
+            
+//            $('#pentregador').hide();
+//            $('#pnentregues').hide();
+//            $('#pgerado').hide();
+//            $('#pnejustificativa').hide();
+//            $("div.graf").hide();
+//            $('#radiotela').hide();
+            
         } else if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador') {
+            $('.hidediv').hide();
             $('#pentregador').show();
-            $('#pentregues').hide();
-            $('#pnentregues').hide();
-            $('#pgerado').hide();
-            $('#pnejustificativa').hide();
-            $("div.graf").hide();
-            $('#radiotela').hide();
-            $('.datetimepicker').val(''); 
+            $('.datetimepicker').val('');
+            
+//            $('#pentregues').hide();
+//            $('#pnentregues').hide();
+//            $('#pgerado').hide();
+//            $('#pnejustificativa').hide();
+//            $("div.graf").hide();
+//            $('#radiotela').hide();
+            
              
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues') {
             $('#pnentregues').show();
@@ -121,6 +125,8 @@ $(document).ready(function () {
         $("#div" + select).show();
     });
 });
+
+google.charts.load('current', {packages: ['corechart']});
 
 function pedidosEntregues() {
 

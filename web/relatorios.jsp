@@ -106,10 +106,10 @@
                 <input id="bar" type="radio" name="chart" value="bar"> Bar
                 <input id="column" type="radio" name="chart" value="pie"> Pizza
             </div>
-            <div id="divcolumn" class="graf"></div>
-            <div id="divcombo" class="graf"></div>
-            <div id="divbar" class="graf"></div>
-            <div id="divpie" class="graf"></div>
+            <div id="divcolumn" class="graf hidediv"></div>
+            <div id="divcombo" class="graf hidediv"></div>
+            <div id="divbar" class="graf hidediv"></div>
+            <div id="divpie" class="graf hidediv"></div>
         </div>
     </div>	
 </div>
