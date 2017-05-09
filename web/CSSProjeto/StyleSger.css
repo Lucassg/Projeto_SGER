@@ -94,6 +94,10 @@
     margin: 0 auto;
 }
 
+#formfuncrelatorio{
+    display: inline;      
+}
+
 .se-pre-con {
 position: fixed;
 left: 0px;

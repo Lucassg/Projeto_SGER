@@ -55,7 +55,9 @@
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosEntregues()"/>
                 </div>
                 <div id="pentregador" class="hidediv">
-                    <form name="datas" action="Controle?classe=ControleLogicoRelatorio&acao=relatorio_entregador" method="POST">
+                    <b>Data Inicial: <input type="text" id="datainicial_entregador" name="datainicial_entregador" class="datetimepicker"/></b> 
+                    <b>Data Final: <input type="text" id="datafinal_entregador" name="datafinal_entregador" class="datetimepicker"/></b>
+                    <form id="formfuncrelatorio" name="datas" action="Controle?classe=ControleLogicoRelatorio&acao=relatorio_entregador" method="POST">
                         <b>Entregador: </b>
                         <select id="entregador" name="entregador">
                             <option value="null"></option>
@@ -64,8 +66,6 @@
                             </c:forEach>
                         </select>
                     </form>
-                    <b>Data Inicial: <input type="text" id="datainicial_entregador" name="datainicial_entregador" class="datetimepicker"/></b> 
-                    <b>Data Final: <input type="text" id="datafinal_entregador" name="datafinal_entregador" class="datetimepicker"/></b> 
                     <input id="mesdia" type="radio" name="mesdia" value="mes" checked> Mês
                     <input id="mesdia" type="radio" name="mesdia" value="dia"> Dia
                     <input id="Buscar" class="btn btn-primary" type="submit" value="Buscar" name="Gerar Relatório" onclick="pedidosPorEntregador()"/>
