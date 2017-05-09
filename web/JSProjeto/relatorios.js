@@ -161,7 +161,7 @@ function pedidosEntregues() {
         width: 950,
     };
 
-    $("div.graf").show();
+    $("divcolumn").show();
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
@@ -223,14 +223,16 @@ function pedidosPorEntregador() {
         titleTextStyle: {fontSize: 32, bold: true},
         height: 600,
         width: 1000,
-//        chartArea: {top: 30, left: 80},
+        chartArea: {height: '55%', width: '80%'},
         legend: {position: 'top', maxLines: 2},
-//        usar a linha abaixo se as labels encavalarem
-//        hAxis: {showTextEvery: 0, slantedText: true, slantedTextAngle: 30},
         isStacked: true,
     };
 
     $("div.graf").show();
+    document.getElementById('divpie').setAttribute("style","heigth:0px");
+    document.getElementById('divbar').setAttribute("style","heigth:0px");
+    document.getElementById('divcombo').setAttribute("style","heigth:0px");
+
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
@@ -240,7 +242,7 @@ function pedidosPorEntregador() {
     $('#pnentregues').hide();
     $('#pgerado').hide();
     $('#pnejustificativa').hide();
-    $("#divcolumn").show();
+//    $("#divcolumn").show();
 }
 ;
 
@@ -287,9 +289,10 @@ function pedidosNEntregues() {
         isStacked: true,
         height: 600,
         width: 1000,
+        chartArea: {height: '55%', width: '80%'},
     };
 
-    $("div.graf").show();
+    $("divcolumn").show();
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
@@ -347,9 +350,10 @@ function prejuizoGerado() {
         isStacked: true,
         height: 600,
         width: 1000,
+        chartArea: {height: '55%', width: '80%'},
     };
 
-    $("div.graf").show();
+    $("#divcolumn").show();
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
@@ -400,10 +404,10 @@ function pNEtreguePorJustificativa() {
         isStacked: true,
         height: 600,
         width: 1000,
-//        hAxis: {showTextEvery: 0, slantedText: true, slantedTextAngle: 30},
+        chartArea: {height: '55%', width: '80%'},
     };
 
-    $("div.graf").show();
+    $("#divcolumn").show();
     var chart = new google.visualization.ColumnChart(document.getElementById('divcolumn'));
     chart.draw(data, options);
 
