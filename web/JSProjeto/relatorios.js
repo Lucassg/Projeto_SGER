@@ -301,7 +301,6 @@ function prejuizoGerado() {
     options = {
         title: 'Preju\u00EDzo Gerado',
         titleTextStyle: {fontSize: 32, bold: true},
-        subtitle: 'De 01-01-2017 a 28-04-2017',
         legend: 'top',
         isStacked: true,
         height: 600,
