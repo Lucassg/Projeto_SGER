@@ -101,10 +101,10 @@
         </div>
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <div id="radiotela" class="hidediv">
-                <input id="pie" type="radio" name="chart" value="column" CHECKED> Coluna
-                <input id="combo" type="radio" name="chart" value="combo"> Combo
-                <input id="bar" type="radio" name="chart" value="bar"> Bar
-                <input id="column" type="radio" name="chart" value="pie"> Pizza
+                <input id="column" type="radio" name="chart" value="column" class="radiotprel"> Coluna
+                <input id="combo" type="radio" name="chart" value="combo" class="radiotprel"> Combo
+                <input id="bar" type="radio" name="chart" value="bar" class="radiotprel"> Bar
+                <input id="pie" type="radio" name="chart" value="pie" class="radiotprel"> Pizza
             </div>
             <div id="divcolumn" class="graf hidediv"></div>
             <div id="divcombo" class="graf hidediv"></div>

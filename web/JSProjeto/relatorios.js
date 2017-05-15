@@ -6,22 +6,27 @@ $(document).ready(function () {
     $('#tiposrelatorios').change(function () {
 
         if ($('#tiposrelatorios').val() == 'Pedidos Entregues') {
+            document.getElementById('column').checked = true;
             $('.datetimepicker').val('');
             $('.hidediv').hide();
             $('#pentregues').show();
         } else if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador') {
+            document.getElementById('column').checked = true;
             $('.datetimepicker').val('');
             $('.hidediv').hide();
             $('#pentregador').show();                  
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues') {
+            document.getElementById('column').checked = true;
             $('.datetimepicker').val('');
             $('.hidediv').hide();
             $('#pnentregues').show();
         } else if ($('#tiposrelatorios').val() == 'Prejuizo Gerado') {
+            document.getElementById('column').checked = true;
             $('.datetimepicker').val('');
             $('.hidediv').hide();
             $('#pgerado').show();            
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues Por Justificativa') {
+            document.getElementById('column').checked = true;
             $('.datetimepicker').val('');
             $('.hidediv').hide();
             $('#pnejustificativa').show();
