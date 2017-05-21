@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Area_Entrega;
 import model.Pedido;
 
 @WebServlet(name = "ServletIndex", urlPatterns = {"/ServletIndex"})
@@ -21,11 +22,11 @@ public class ServletIndex extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     DaoRelatorio acessohibernaterelatorio;
-
+    
     public ServletIndex() {
 
         acessohibernaterelatorio = new DaoRelatorio();
-
+        
     }
 
     @Override
