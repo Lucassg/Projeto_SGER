@@ -32,8 +32,8 @@ public class DaoPedido extends DaoGenerico {
         if (!"Todos".equals(status)) {
             criteria.add(Restrictions.eq("status", status));
         }
-        criteria.addOrder(Order.desc("data_hora_pedido"));
-        criteria.setMaxResults(10);
+        criteria.addOrder(Order.asc("data_hora_pedido"));
+        criteria.setMaxResults(23);
         List lista = criteria.list();
         session.close();
         return lista;
