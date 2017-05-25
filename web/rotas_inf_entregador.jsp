@@ -42,14 +42,17 @@
                         <thead>
                             <tr>
                                 <th>Rota</th>
+                                <th>Qtde Pedidos</th>
                                 <th>Entregador</th>
                             </tr>
                         </thead>
                         <tbody>
                             <c:set var="cont" value="0"/>
                             <c:forEach var="i" begin="1" end="${qtderotas}">
+                                <c:forEach items="${QtdePedidoPorRota}" var="Qtde">
                                 <tr>
                                     <td>${cont = cont + 1}</td>
+                                    <td>${Qtde}</td>
                                     <td align="left">
                                         <dl>
                                             <select name="${cont}">
@@ -61,6 +64,7 @@
                                         </dl>
                                     </td>
                                 </tr>
+                                </c:forEach>
                             </c:forEach> 
                         </tbody>
                     </table>    
