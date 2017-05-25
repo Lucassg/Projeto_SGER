@@ -35,38 +35,44 @@
         <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
             <h1 class="page-header"> <center> <b> SGER - Sistema de Gerenciamento de Entregas </b> </br>  para Restaurantes </center> </h1>
             <form action="Controle?classe=ControleLogicoRota&acao=gravar_rota" method="POST">
-            <div class="table-responsive">
-                <center><b><h3>Informe o Entregador para as Rotas Geradas</h2></b></center>
-                <br>
-                <table class="table table-bordered"> 
-                    <thead>
-                        <tr>
-                            <th>Rota</th>
-                            <th>Entregador</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <c:set var="cont" value="0"/>
-                        <c:forEach var="i" begin="1" end="${qtderotas}">
+                <div class="table-responsive">
+                    <center><b><h3>Informe o Entregador para as Rotas Geradas</h2></b></center>
+                    <br>
+                    <table class="table table-bordered"> 
+                        <thead>
                             <tr>
-                                <td>${cont = cont + 1}</td>
-                                <td align="left">
-                                    <dl><select name="${cont}">
-                                            <option value="null"></option>
-                                        <c:forEach items="${ListaEntregares}" var="Funcionario">
-                                            <option value="${Funcionario.cpf}">${Funcionario.nome}</option> 
-                                        </c:forEach>
-                                    </select></dl>
-                                </td>
+                                <th>Rota</th>
+                                <th>Entregador</th>
                             </tr>
-                        </c:forEach> 
-                    </tbody>
-                </table>    
-            </div>
-            <input class="btn btn-primary" type="submit" value="Salvar">
+                        </thead>
+                        <tbody>
+                            <c:set var="cont" value="0"/>
+                            <c:forEach var="i" begin="1" end="${qtderotas}">
+                                <tr>
+                                    <td>${cont = cont + 1}</td>
+                                    <td align="left">
+                                        <dl>
+                                            <select id="rota${cont}" name="rota${cont}">
+                                                <option value="null"></option>
+                                                <c:forEach items="${ListaEntregares}" var="Funcionario">
+                                                    <option value="${Funcionario.cpf}">${Funcionario.nome}</option> 
+                                                </c:forEach>
+                                            </select>
+                                            <input type="hidden" id="contador" name="contador" value="${cont}" />
+                                        </dl>
+                                    </td>
+                                </tr>
+                            </c:forEach> 
+                        </tbody>
+                    </table>    
+                </div>
+                <input type="hidden" id="contador2" name="contador2" value="${cont}" />
+                <input class="btn btn-primary" type="submit" value="Salvar" onclick="return runclick()">
             </form> 
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="JSProjeto/entregadores.js"></script>
 
 <jsp:include page="footer.jsp"/>
