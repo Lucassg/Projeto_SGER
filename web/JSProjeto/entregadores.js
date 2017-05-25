@@ -12,9 +12,4 @@ function runclick() {
             return false;
         }
     }
-
-//    var rota = "rota" + i;
-//    var select1 = document.getElementById(rota).value;
-//    console.log("contador: " + tdcont);
-//    console.log("select1: " + select1);
 }

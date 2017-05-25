@@ -52,13 +52,12 @@
                                     <td>${cont = cont + 1}</td>
                                     <td align="left">
                                         <dl>
-                                            <select id="rota${cont}" name="rota${cont}">
-                                                <option value="null"></option>
+                                            <select name="${cont}">
+                                                <option value="nao_gravar"></option>
                                                 <c:forEach items="${ListaEntregares}" var="Funcionario">
                                                     <option value="${Funcionario.cpf}">${Funcionario.nome}</option> 
                                                 </c:forEach>
                                             </select>
-                                            <input type="hidden" id="contador" name="contador" value="${cont}" />
                                         </dl>
                                     </td>
                                 </tr>
@@ -66,13 +65,10 @@
                         </tbody>
                     </table>    
                 </div>
-                <input type="hidden" id="contador2" name="contador2" value="${cont}" />
-                <input class="btn btn-primary" type="submit" value="Salvar" onclick="return runclick()">
+                <input class="btn btn-primary" type="submit" value="Salvar">
             </form> 
         </div>
     </div>
 </div>
-
-<script type="text/javascript" src="JSProjeto/entregadores.js"></script>
 
 <jsp:include page="footer.jsp"/>

@@ -535,7 +535,9 @@ public class ControleLogicoRota implements ControleLogico {
 
         for (Integer i = 0; i < ListaRotaFinal.size(); i++) {
             entregadorRota = String.valueOf(i + 1);
-            if (request.getParameter(entregadorRota) != null) {
+            String teste2 = request.getParameter(entregadorRota);
+            if (teste2 != "nao_gravar") {
+                String teste = request.getParameter(entregadorRota);
                 this.funcionario = (Funcionario) acessohibernatefuncionario.consultaEntregador(request.getParameter(entregadorRota), Funcionario.class);
                 this.rota.setFuncionario(this.funcionario);
                 this.rota.setStatus("Rota Gerada");
