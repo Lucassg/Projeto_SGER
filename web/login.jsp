@@ -8,11 +8,10 @@
         <meta name="description" content="SGER - Sistema de Gerenciamento de Entregas para Restaurantes"> <!-- Descrição da página -->
         <meta name="author" content="Leonardo, Lucas Gacia, Lucas Martins"> <!-- autores -->
         <link rel="icon" href="img/motoboy.ico"> <!-- imagem que aparece no navegador-->
-        <link href="CSSLogin/bootstrap.min.css" rel="stylesheet" async="true"><!-- Bootstrap core CSS -->
-        <link href="CSSLogin/ie10-viewport-bug-workaround.css" rel="stylesheet" async="true"><!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->   
-        <link href="CSSLogin/signin.css" rel="stylesheet" async="true"> <!-- Custom styles for this template -->
-        <title>Bem vindo ao SGER</title>
-        
+        <link href="CSSLogin/bootstrap.min.css" rel="stylesheet"><!-- Bootstrap core CSS -->
+        <link href="CSSLogin/ie10-viewport-bug-workaround.css" rel="stylesheet"><!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->   
+        <link href="CSSLogin/signin.css" rel="stylesheet"> <!-- Custom styles for this template -->
+        <title>Bem vindo ao SGER</title>       
         <c:if test="${Falha != null}">
             <script type="text/javascript"> alert("${Falha}");</script>
         </c:if>
@@ -34,8 +33,8 @@
             </form>
         </div> <!-- /container -->
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="JSLogin/ie10-viewport-bug-workaround.js" async="true"></script>
-        <script src="JSLogin/ie-emulation-modes-warning.js" async="true"></script>
+        <script src="JSLogin/ie10-viewport-bug-workaround.js"></script>
+        <script src="JSLogin/ie-emulation-modes-warning.js"></script>
         <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
     </body>
 </html>
