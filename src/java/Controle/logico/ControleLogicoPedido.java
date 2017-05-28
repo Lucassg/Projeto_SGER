@@ -269,6 +269,9 @@ public class ControleLogicoPedido implements ControleLogico {
         this.pedido.setJustificativa(request.getParameter("motivo"));
         this.pedido.setStatus("Cancelado");
         this.pedido.setData_hora_pedido((java.util.Date) new Date());
+        if (this.pedido.getRota() != null){
+            this.pedido.setRota(null);
+        }
         acessohibernatepedido.alterar(this.pedido);
         listar_pedido(request, response);
       
