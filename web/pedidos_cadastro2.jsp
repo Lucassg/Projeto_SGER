@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>
 
@@ -46,7 +47,8 @@
                             <th>Produto</th>
                             <th>Descrição</th>
                             <th>Quantidade</th>
-                            <th>Valor</th>
+                            <th>Valor Unit.</th>
+                            <th>Valor Total</th>
                             <th></th>
                         </tr>
                     </thead>
@@ -57,17 +59,21 @@
                         <input type="hidden" id="lista" name="lista" class="lista" value="not null" />
                     </c:if>
                     <c:set var="cont" value="0"/>
+                    <c:set var="total" value="0"/>
                     <c:forEach items="${ListaItensPedido}" var="Itens_Pedido">
                         <tr>
                             <td id="tdcont">${cont = cont + 1}</td>
                             <td>${Itens_Pedido.produto_id.nome}</td>
                             <td>${Itens_Pedido.produto_id.descricao}</td>
                             <td>${Itens_Pedido.quantidade}</td>
-                            <td>${Itens_Pedido.produto_id.valor}</td>
+                            <td><fmt:setLocale value="pt_BR"/><fmt:formatNumber value="${Itens_Pedido.produto_id.valor}" type = "currency"/></td>
+                            <td><fmt:setLocale value="pt_BR"/><fmt:formatNumber value="${Itens_Pedido.produto_id.valor * Itens_Pedido.quantidade}" type = "currency"/></td>
+                            <input type="hidden" value="$${total = total + Itens_Pedido.produto_id.valor * Itens_Pedido.quantidade}">
                             <td><a href="Controle?classe=ControleLogicoPedido&acao=excluir_item&index=${cont}"><input type="image" src="img/delete.png" name="deletar"></a></td>
                         </tr>
                     </c:forEach> 
                 </table>
+                <b>Total:</b> <fmt:setLocale value="pt_BR"/><fmt:formatNumber value="${total}" type = "currency"/>      
             </div>
             <div class="table-responsive">
                 <table class="table table-striped">

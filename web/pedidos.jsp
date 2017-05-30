@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:useBean id="Pedido" scope="request" class="model.Pedido"/>
 <jsp:include page="header.jsp"/>
@@ -58,7 +59,7 @@
                             <th>ID</th>
                             <th>Status</th>
                             <th>Cliente</th>
-                            <th>Valor(R$)</th>
+                            <th>Valor</th>
                             <th>Data</th>
                             <th></th>
                         </tr>
@@ -69,8 +70,8 @@
                                 <td>${Pedido.id}</td>
                                 <td>${Pedido.status}</td>
                                 <td>${Pedido.cliente.nome}</td>
-                                <td>${Pedido.valor}</td>
-                                <td>${Pedido.data_hora_pedido}</td>
+                                <td><fmt:setLocale value="pt_BR"/><fmt:formatNumber value="${Pedido.valor}" type="currency"/></td>
+                                <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${Pedido.data_hora_pedido}" /></td>
                                 <td><a href="Controle?classe=ControleLogicoPedido&acao=visualizar_pedido&pedido=${Pedido.id}"><input type="image" src="img/search.png" name="visualizar"></a></td>
                             </tr>
                         </c:forEach>

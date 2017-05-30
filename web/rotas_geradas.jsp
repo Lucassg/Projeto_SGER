@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>
 <div class="container-fluid">
@@ -54,7 +55,7 @@
                                 <td>${cont = cont + 1}</td>
                                 <td>${Rota.id}</td>
                                 <td>${Rota.status}</td>
-                                <td>${Rota.data_hora_rota}</td>
+                                <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${Rota.data_hora_rota}"/></td>
                                 <td>${Rota.funcionario.nome}</td>
                                 <td><a href="Controle?classe=ControleLogicoRota&acao=exibe_pedidos_rota&rota=${Rota.id}"><input type="image" src="img/search.png" name="visualizar"></a></td>
                             </tr>

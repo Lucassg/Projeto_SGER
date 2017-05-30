@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>
 
@@ -56,7 +57,7 @@
                                 <td>${cont = cont + 1}</td>
                                 <td>${Pedido.id}</td>
                                 <td>${Pedido.status}</td>
-                                <td>${Pedido.data_hora_pedido}</td>
+                                <td><fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${Pedido.data_hora_pedido}"/></td>
                                 <td>${Pedido.cliente.nome}</td>
                                 <td>${Pedido.cliente.rua}, ${Pedido.cliente.numero}</td>
                                 <td><a href="Controle?classe=ControleLogicoPedido&acao=visualizar_pedido&pedido=${Pedido.id}"><input type="image" src="img/search.png" name="visualizar"></a></td>
