@@ -1,6 +1,6 @@
-    <script src="JSProjeto/jquery-3.1.1.min.js" type="text/javascript"></script>
-    <script src="JSProjeto/viacep.js" type="text/javascript"></script>
-    <script src="JSProjeto/ie-emulation-modes-warning.js"></script> <!-- colocado para resolver problema de bug no IE9 -->
+<script src="JSProjeto/jquery-3.1.1.min.js" type="text/javascript" async="defer"></script>
+    <script src="JSProjeto/viacep.js" type="text/javascript" async="defer"></script>
+    <script src="JSProjeto/ie-emulation-modes-warning.js" async="defer"></script> <!-- colocado para resolver problema de bug no IE9 -->
     <!--[if lt IE 9]>
           <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
           <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
