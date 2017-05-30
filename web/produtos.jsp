@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:useBean id="Produto" scope="request" class="model.Produto"/>
 <jsp:include page="header.jsp"/>
@@ -51,7 +52,7 @@
                         <tr>
                             <th>Nome</th>
                             <th>Descrição</th>
-                            <th>Valor(R$)</th>
+                            <th>Valor</th>
                             <th>Ativo</th>
                             <th></th>
                         </tr>
@@ -61,7 +62,7 @@
                             <tr>
                                 <td>${Produto.nome}</td>
                                 <td>${Produto.descricao}</td>
-                                <td>${Produto.valor}</td>
+                                <td><fmt:setLocale value="pt_BR"/><fmt:formatNumber value="${Produto.valor}" type="currency"/></td>
                                 <td>${Produto.ativo}</td>
                                 <td><a href="Controle?classe=ControleLogicoProduto&acao=carregar_alterar_produto&id=${Produto.codigo}"><input type="image" src="img/pencil.png" name="alterar"></a></td>
                             </tr>

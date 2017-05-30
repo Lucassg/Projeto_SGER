@@ -1,3 +1,4 @@
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="header.jsp"/>
 
@@ -39,7 +40,7 @@
                 <br>
                 <b>Rota:</b> ${Rota.id} </br> 
                 <b>Status:</b> ${Rota.status} </br> 
-                <b>Data:</b> ${Rota.data_hora_rota} </br> 
+                <b>Data:</b> <fmt:formatDate type = "both" dateStyle = "short" timeStyle = "short" value = "${Rota.data_hora_rota}"/> </br> 
                 <b>Entregador:</b> ${Rota.funcionario.nome} </br></br>
                 <form action="Controle?classe=ControleLogicoRota&acao=rota_entregue&rota=${Rota.id}" method="POST">
                     <table class="table table-bordered"> 

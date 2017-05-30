@@ -1,4 +1,5 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="header.jsp"/>
 
 <div class="container-fluid">
@@ -39,7 +40,7 @@
                 <table class="table table-striped">
                     <fieldset>
                         <h4><b>Pedido: ${Pedido.id}</b></h4> 
-                        <h4>Status: ${Pedido.status}</h4> 
+                        <h4><b>Status:</b> ${Pedido.status}</h4> 
                         <table cellspacing="10">
                             <tr>
                                 <td>
@@ -143,18 +144,18 @@
                     </fieldset>
                 </table>
                 <div class="table-responsive">
-                    <table class="table table-striped">
+                <div class="sectionleft">
+                    <b id="nametable">Itens do Pedido</b>
+                </div>
+                    <table class="table table-bordered">
                         <thead>
-                            <tr>
-                                <th colspan="4"><h4><b>Itens do Pedido</b></h4></th>
-                            </tr>
                             <tr>
                                 <th>Item</th>
                                 <th>Produto</th>
                                 <th>Descrição</th>
                                 <th>Quantidade</th>
-                                <th>Valor</th>
-                                <th></th>
+                                <th>Valor Unit.</th>
+                                <th>Valor Total</th>
                             </tr>
                         </thead>
                         <c:set var="cont" value="0"/>
@@ -164,7 +165,8 @@
                                 <td>${Itens_Pedido.produto_id.nome}</td>
                                 <td>${Itens_Pedido.produto_id.descricao}</td>
                                 <td>${Itens_Pedido.quantidade}</td>
-                                <td>${Itens_Pedido.produto_id.valor}</td>
+                                <td><fmt:setLocale value="pt_BR"/><fmt:formatNumber value="${Itens_Pedido.produto_id.valor}" type = "currency"/></td>
+                                <td><fmt:setLocale value="pt_BR"/><fmt:formatNumber value="${Itens_Pedido.produto_id.valor * Itens_Pedido.quantidade}" type = "currency"/></td>
                             </tr>
                         </c:forEach> 
                     </table>
