@@ -98,6 +98,8 @@ google.charts.load('current', {packages: ['corechart']});
 
 function pedidosEntregues() {
 
+    arrayJSON = [];
+    
     $.ajax({
         url: 'jsonServlet',
         data: {datainicial: $('#datainicial_entregue').val(),
@@ -149,6 +151,8 @@ function pedidosEntregues() {
 ;
 
 function pedidosPorEntregador() {
+    
+    arrayJSON = [];
 
     $.ajax({
         url: 'jsonServlet',
@@ -214,6 +218,8 @@ function pedidosPorEntregador() {
 ;
 
 function pedidosNEntregues() {
+    
+    arrayJSON = [];
 
     $.ajax({
         url: 'jsonServlet',
@@ -268,6 +274,8 @@ function pedidosNEntregues() {
 ;
 
 function prejuizoGerado() {
+    
+    arrayJSON = [];
 
     $.ajax({
         url: 'jsonServlet',
@@ -322,6 +330,8 @@ function prejuizoGerado() {
 ;
 
 function pNEtreguePorJustificativa() {
+    
+    arrayJSON = [];
 
     $.ajax({
         url: 'jsonServlet',
