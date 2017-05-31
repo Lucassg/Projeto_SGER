@@ -27,7 +27,8 @@ function drawChart1() {
         titleTextStyle: {fontSize: 32, bold: true},
         legend: 'top',
         pieSliceText: 'value',
-        pieSliceText: 'percentage'
+        pieSliceText: 'percentage',
+        colors:['#F44336','#00796B','#1565C0']
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('chart1'));
@@ -55,6 +56,9 @@ function drawChart2() {
         title: 'Pedidos Abertos',
         titleTextStyle: {fontSize: 32, bold: true},
         legend: 'top',
+        pieSliceText: 'value',
+        pieSliceText: 'percentage',
+        colors:['#00796B','#1565C0']
     };
     var chart = new google.visualization.PieChart(document.getElementById('chart2'));
     chart.draw(data, options);
