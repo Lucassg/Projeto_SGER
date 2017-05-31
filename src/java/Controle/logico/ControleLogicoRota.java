@@ -591,7 +591,7 @@ public class ControleLogicoRota implements ControleLogico {
         for (int k = 0; k < PedidosRota.size(); k++) {
             enderecos.add(PedidosRota.get(k).getCliente().enderecoToString());
         }
-        try (BufferedWriter buff_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Lucas\\Google Drive\\NetBeansProjects\\Projeto_SGER\\web\\JSON\\enderecos_multiplos_pontos.json", false), "UTF-8"))) {
+        try (BufferedWriter buff_writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream("C:\\Users\\Lucas Martins\\Google Drive\\TCC\\Projeto\\Projeto_SGER\\web\\JSON\\enderecos_multiplos_pontos.json", false), "UTF-8"))) {
             Gson gson = new GsonBuilder().create();
             gson.toJson(enderecos, buff_writer);
         }

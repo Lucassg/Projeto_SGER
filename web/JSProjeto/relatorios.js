@@ -1,6 +1,7 @@
 var arrayJSON = [];
 var data;
 var options;
+var tpexibicaomesdia;
 
 $(document).ready(function () {
     $('#tiposrelatorios').change(function () {
@@ -8,11 +9,15 @@ $(document).ready(function () {
         if ($('#tiposrelatorios').val() == 'Pedidos Entregues') {
             document.getElementById('column').checked = true;
             $('.datetimepicker').val('');
+            $('.tpexibicao').val('');
+            $('.tpexibicao').val('mes');
             $('.hidediv').hide();
             $('#pentregues').show();
         } else if ($('#tiposrelatorios').val() == 'Pedidos Por Entregador') {
             document.getElementById('column').checked = true;
             $('.datetimepicker').val('');
+            $('.tpexibicao').val('');
+            $('.tpexibicao').val('mes');
             $('.hidediv').hide();
             $('#pentregador').show();                  
         } else if ($('#tiposrelatorios').val() == 'Pedidos Nao Entregues') {
@@ -105,7 +110,8 @@ function pedidosEntregues() {
         data: {datainicial: $('#datainicial_entregue').val(),
             datafinal: $('#datafinal_entregue').val(),
             tipo_relatorio: $('#tiposrelatorios').val(),
-            dia_mes: $('#mesdia:checked').val()},
+            //dia_mes: $('#mesdia:checked').val()},
+            dia_mes: $('.tpexibicao1:checked').val()},
         type: 'get',
         dataType: 'json',
         async: false,
@@ -115,7 +121,7 @@ function pedidosEntregues() {
             });
         }
     });
-
+    
     var grafico_formatado = [];
 
     $.each(arrayJSON, function (i, obj) {
@@ -159,7 +165,7 @@ function pedidosPorEntregador() {
         data: {datainicial: $('#datainicial_entregador').val(),
             datafinal: $('#datafinal_entregador').val(),
             tipo_relatorio: $('#tiposrelatorios').val(),
-            dia_mes: $('#mesdia:checked').val(),
+            dia_mes: $('.tpexibicao2:checked').val(),
             entregador: $('#entregador').val()},
         type: 'get',
         dataType: 'json',
@@ -171,7 +177,7 @@ function pedidosPorEntregador() {
         }
     });
 
-    console.log(arrayJSON);
+    //console.log(arrayJSON);
 
     var grafico_formatado = [];
 
@@ -226,7 +232,7 @@ function pedidosNEntregues() {
         data: {datainicial: $('#datainicial_nao_entregue').val(),
             datafinal: $('#datafinal_nao_entregue').val(),
             tipo_relatorio: $('#tiposrelatorios').val(),
-            dia_mes: $('#mesdia:checked').val()},
+            dia_mes: $('.tpexibicao3:checked').val()},
         type: 'get',
         dataType: 'json',
         async: false,
@@ -282,7 +288,7 @@ function prejuizoGerado() {
         data: {datainicial: $('#datainicial_pgerado').val(),
             datafinal: $('#datafinal_pgerado').val(),
             tipo_relatorio: $('#tiposrelatorios').val(),
-            dia_mes: $('#mesdia:checked').val()},
+            dia_mes: $('.tpexibicao4:checked').val()},
         type: 'get',
         dataType: 'json',
         async: false,
@@ -292,6 +298,7 @@ function prejuizoGerado() {
             });
         }
     });
+    
 
     var grafico_formatado = [];
 
