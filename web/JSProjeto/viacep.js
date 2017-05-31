@@ -25,6 +25,7 @@
                     })
                 } else {
                     alert('Por gentileza informe ao Cliente, que endere\u00e7o est\u00e1 fora da area de entrega')
+                    $('.inputcep').val('');
                 }
             }
         });

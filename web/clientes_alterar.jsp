@@ -92,7 +92,7 @@
                                         <dl><label for="cep">CEP: </label></dl>
                                     </td>
                                     <td align="left">
-                                        <dl><input type="text" name="cep" size="8" value="${cliente.cep}" required></dl>
+                                        <dl><input type="text" class="inputcep" name="cep" size="8" value="${cliente.cep}" required></dl>
                                     </td>
                                 </tr>    
                                 <tr>
