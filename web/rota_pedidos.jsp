@@ -65,11 +65,11 @@
                                         <dl><select name="${cont}">
                                                 <option selected value="entregue"></option>
                                                 <option value="não encontrou endereço">Não Encontrado Endereço</option> 
-                                                <option value="responsavel não encontrado">Responsável Não Encontrado</option> 
+                                                <option value="responsável não encontrado">Responsável Não Encontrado</option> 
                                                 <option value="recusou pedido por demora">Recusou Pedido Por Demora</option> 
                                                 <option value="recusou por erro no pedido">Recusou Por Erro No Pedido</option> 
                                                 <option value="avaria no pedido">Avaria No Pedido</option>
-                                                <option value="ausencia de nota fiscal">Ausência De Nota Fiscal</option> 
+                                                <option value="ausência de nota fiscal">Ausência De Nota Fiscal</option> 
                                                 <option value="problemas com pagamento">Problemas Com Pagamento</option>  
                                         </select></dl>
                                     </td>
