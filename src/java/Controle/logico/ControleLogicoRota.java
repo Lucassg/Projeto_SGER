@@ -536,7 +536,7 @@ public class ControleLogicoRota implements ControleLogico {
 
         // colocando a lista na sessão
         request.getSession().setAttribute("ListaRotaFinal", ListaRotaFinal);
-        entregador_rota(ListaRotaFinal.size(), QtdePedidoPorRota, request, response);
+        entregador_rota(QtdePedidoPorRota, request, response);
     }
 
     public void gravar_rota(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -597,13 +597,13 @@ public class ControleLogicoRota implements ControleLogico {
         }
     }
 
-    public void entregador_rota(int qtderotas, List<Integer> QtdePedidoPorRota, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void entregador_rota(List<Integer> QtdePedidoPorRota, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         List<Funcionario> ListaEntregares;
         ListaEntregares = acessohibernatefuncionario.consultaEntregadores(Funcionario.class);
         request.getServletContext().setAttribute("QtdePedidoPorRota", QtdePedidoPorRota);
         request.getServletContext().setAttribute("ListaEntregares", ListaEntregares);
-        request.getServletContext().setAttribute("qtderotas", qtderotas);
+        //request.getServletContext().setAttribute("qtderotas", qtderotas);
         request.getRequestDispatcher("rotas_inf_entregador").forward(request, response);
 
     }
