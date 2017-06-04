@@ -1,34 +1,47 @@
 package teste;
 
 import dao.DaoArea_Entrega;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import model.Area_Entrega;
 
 public class Main {
 
-    public static void main(String[] args){
+    Date data;
 
-        DaoArea_Entrega acessohibernateareaentrega;
-        Area_Entrega area_entrega;
-        acessohibernateareaentrega = new DaoArea_Entrega();
-        area_entrega = new Area_Entrega();
-               
-        area_entrega = (Area_Entrega) acessohibernateareaentrega.verificaAreaEntrega("13060702");
-        
-        if (area_entrega == null){
-            System.out.println("false");
-        } else{
-            System.out.println("verdadeiro");
-        }
-      
-        List<Area_Entrega> ceps = new ArrayList<>();
-        ceps = acessohibernateareaentrega.carregarTudoOrdenado(Area_Entrega.class, "cep");
-        
-        
-//        for (int i = 0; i <= ceps.size(); i++) {
-//            System.out.println("CEP: " + ceps.get(i).getCep());
-//        }
+    public static void main(String[] args) {
 
+        GregorianCalendar gci = new GregorianCalendar();
+        gci.add(Calendar.MONTH, 0);
+        gci.set(Calendar.DAY_OF_MONTH, 1);
+        System.out.println(gci.getTime());
+
+        GregorianCalendar gcf = new GregorianCalendar();
+        gcf.add(Calendar.MONTH, 0);
+        gcf.set(Calendar.DAY_OF_MONTH, gcf.getActualMaximum(Calendar.DAY_OF_MONTH));
+        System.out.println(gcf.getTime());
+        
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.add(Calendar.MONTH, 0);
+        System.out.println(gc.getTime());
+        
+        SimpleDateFormat formatoi = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatadai = formatoi.format(gci.getTime());
+        System.out.println(dataFormatadai);
+
+        SimpleDateFormat formatof = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatadaf = formatof.format(gcf.getTime());
+        System.out.println(dataFormatadaf);
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = formato.format(gc.getTime());
+        System.out.println(dataFormatada);
+        
+        
     }
 }
