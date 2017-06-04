@@ -26,6 +26,10 @@ public class Main {
         gcf.set(Calendar.DAY_OF_MONTH, gcf.getActualMaximum(Calendar.DAY_OF_MONTH));
         System.out.println(gcf.getTime());
         
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.add(Calendar.MONTH, 0);
+        System.out.println(gc.getTime());
+        
         SimpleDateFormat formatoi = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatadai = formatoi.format(gci.getTime());
         System.out.println(dataFormatadai);
@@ -33,6 +37,11 @@ public class Main {
         SimpleDateFormat formatof = new SimpleDateFormat("dd/MM/yyyy");
         String dataFormatadaf = formatof.format(gcf.getTime());
         System.out.println(dataFormatadaf);
+
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatada = formato.format(gc.getTime());
+        System.out.println(dataFormatada);
+        
         
     }
 }
