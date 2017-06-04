@@ -30,15 +30,15 @@ public class Main {
         gc.add(Calendar.MONTH, 0);
         System.out.println(gc.getTime());
         
-        SimpleDateFormat formatoi = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatoi = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String dataFormatadai = formatoi.format(gci.getTime());
         System.out.println(dataFormatadai);
 
-        SimpleDateFormat formatof = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formatof = new SimpleDateFormat("yyyy-MM-dd 23:59:59");
         String dataFormatadaf = formatof.format(gcf.getTime());
         System.out.println(dataFormatadaf);
 
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        SimpleDateFormat formato = new SimpleDateFormat("yyyy-MM-dd 23:59:99");
         String dataFormatada = formato.format(gc.getTime());
         System.out.println(dataFormatada);
         

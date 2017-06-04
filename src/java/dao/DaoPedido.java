@@ -1,5 +1,6 @@
 package dao;
 
+import java.util.Date;
 import java.util.List;
 import model.Cliente;
 import model.Pedido;
@@ -75,12 +76,13 @@ public class DaoPedido extends DaoGenerico {
         session.close();
         return lista;
     }
-    public List carregarPedidosFechados() throws HibernateException {
+    public List carregarPedidosFechados(Date datainicio, Date datafinal) throws HibernateException {
         Session session = hibernateConfiguracao.openSession();
         Criteria criteria = session.createCriteria(Pedido.class);
         criteria.add(Restrictions.or(Restrictions.eq("status", "Entregue"), 
                 Restrictions.eq("status", "Não Entregue"),
                 Restrictions.eq("status", "Cancelado")));
+        criteria.add(Restrictions.between("data_hora_pedido", datainicio, datafinal));
         List lista = criteria.list();
         session.close();
         return lista;

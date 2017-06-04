@@ -28,6 +28,7 @@ function drawChart1() {
         legend: 'top',
         pieSliceText: 'value',
         pieSliceText: 'percentage',
+        is3D: true,
         colors:['#F44336','#00796B','#1565C0']
     };
 
@@ -58,6 +59,7 @@ function drawChart2() {
         legend: 'top',
         pieSliceText: 'value',
         pieSliceText: 'percentage',
+        is3D: true,
         colors:['#00796B','#1565C0']
     };
     var chart = new google.visualization.PieChart(document.getElementById('chart2'));
