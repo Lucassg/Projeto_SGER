@@ -48,7 +48,7 @@
                         </thead>
                         <tbody>
                             <c:set var="cont" value="0"/>
-                            <c:forEach var="i" begin="1" end="${qtderotas}">
+                            <%--<c:forEach var="i" begin="1" end="${qtderotas}">--%>
                                 <c:forEach items="${QtdePedidoPorRota}" var="Qtde">
                                 <tr>
                                     <td>${cont = cont + 1}</td>
@@ -65,7 +65,7 @@
                                     </td>
                                 </tr>
                                 </c:forEach>
-                            </c:forEach> 
+                            <%--</c:forEach>--%> 
                         </tbody>
                     </table>    
                 </div>

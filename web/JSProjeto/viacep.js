@@ -1,6 +1,6 @@
 (function () {
 
-    $('input[name="cep"]').blur(function (e) {
+    $('input[name="cep"]').blur(function(e) {
         var cep = $('input[name="cep"]').val() || ''
 
         if (!cep) {
