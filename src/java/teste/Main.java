@@ -5,18 +5,34 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import model.Area_Entrega;
 
 public class Main {
 
-    public static void main(String[] args){
+    Date data;
 
-        Calendar c = Calendar.getInstance();
-	c.set(Calendar.MONTH,Calendar.FEBRUARY);
-        System.out.println();
-	DateFormat df  = new SimpleDateFormat("dd/MM/yyyy");
-	System.out.println("Maior dia de Fevereiro:" + c.getActualMaximum(Calendar.DAY_OF_MONTH));
+    public static void main(String[] args) {
 
+        GregorianCalendar gci = new GregorianCalendar();
+        gci.add(Calendar.MONTH, 0);
+        gci.set(Calendar.DAY_OF_MONTH, 1);
+        System.out.println(gci.getTime());
+
+        GregorianCalendar gcf = new GregorianCalendar();
+        gcf.add(Calendar.MONTH, 0);
+        gcf.set(Calendar.DAY_OF_MONTH, gcf.getActualMaximum(Calendar.DAY_OF_MONTH));
+        System.out.println(gcf.getTime());
+        
+        SimpleDateFormat formatoi = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatadai = formatoi.format(gci.getTime());
+        System.out.println(dataFormatadai);
+
+        SimpleDateFormat formatof = new SimpleDateFormat("dd/MM/yyyy");
+        String dataFormatadaf = formatof.format(gcf.getTime());
+        System.out.println(dataFormatadaf);
+        
     }
 }
